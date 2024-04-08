@@ -14,7 +14,7 @@
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
-.logo.react:hover {
+.logo.leasing:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
@@ -28,7 +28,10 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
+  .logo-wrapper:nth-of-type(1) .logo {
+    animation: logo-spin infinite 20s linear reverse;
+  }
+  .logo-wrapper:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
