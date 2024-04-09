@@ -1,5 +1,4 @@
-import React from 'react'
-import {grey} from "@mui/material/colors"
+import React from "react";
 import {Paper, Typography} from "@mui/material"
 
 type PaperWrapperProps = {
@@ -13,12 +12,7 @@ const PaperWrapper = ({ children, image, title }: PaperWrapperProps) => {
     <Paper
       elevation={3}
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "2rem",
-        backgroundColor: grey[400],
+        padding: "20px",
       }}
     >
       {image && <img src={image} className="logo" alt="" />}
@@ -30,6 +24,6 @@ const PaperWrapper = ({ children, image, title }: PaperWrapperProps) => {
       {children}
     </Paper>
   );
-}
+};
 
-export default PaperWrapper
+export default PaperWrapper;

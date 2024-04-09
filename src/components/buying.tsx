@@ -1,5 +1,5 @@
 import NumberFields from "./numberFields.tsx";
-import { TextFieldProps, Typography } from "@mui/material";
+import {Stack, TextFieldProps, Typography} from "@mui/material"
 import { getAdornment, getPercentageAdornment } from "../helpers.tsx";
 
 function Buying() {
@@ -63,7 +63,7 @@ function Buying() {
     },
   ];
   return (
-    <>
+    <Stack spacing={1} paddingBottom={2}>
       <Typography variant="h4">Initial</Typography>
       <NumberFields inputs={general} />
       <Typography variant="h4">Yearly costs</Typography>
@@ -72,7 +72,7 @@ function Buying() {
       <NumberFields inputs={mortgage} />
       <Typography variant="h4">Buying And Selling Costs</Typography>
       <NumberFields inputs={buyAndSell} />
-    </>
+    </Stack>
   );
 }
 
