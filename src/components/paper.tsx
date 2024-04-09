@@ -17,9 +17,8 @@ const PaperWrapper = ({ children, image, title }: PaperWrapperProps) => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        padding: "1rem",
-        margin: "1rem",
-        backgroundColor: grey[700],
+        padding: "2rem",
+        backgroundColor: grey[400],
       }}
     >
       {image && <img src={image} className="logo" alt="" />}
