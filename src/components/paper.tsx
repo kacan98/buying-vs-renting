@@ -24,7 +24,7 @@ const PaperWrapper = ({ children, image, title }: PaperWrapperProps) => {
     >
       {image && <img src={image} className="logo" alt="" />}
       {title && (
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h3" gutterBottom>
           {title}
         </Typography>
       )}
