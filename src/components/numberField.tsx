@@ -1,18 +1,21 @@
 import { TextField, TextFieldProps } from "@mui/material";
+import DollarInput from "./maskedInput.tsx";
 
-function NumberField(
-  props: TextFieldProps
-) {
-  return (
-    <TextField
-      placeholder={"0"}
-      type="number"
-      variant="outlined"
-      // InputLabelProps={{
-      //   shrink: true,
-      // }}
-      {...props}
-    />
+export type NumberFieldProps = TextFieldProps & { formatAsCurrency?: boolean };
+
+function NumberField(props: NumberFieldProps) {
+  const { formatAsCurrency, ...otherProps } = props;
+  const textFieldProps: TextFieldProps = {
+    placeholder: "0",
+    variant: "outlined",
+    size: "medium",
+    ...otherProps,
+  };
+
+  return formatAsCurrency ? (
+    <DollarInput {...textFieldProps} />
+  ) : (
+    <TextField {...textFieldProps} />
   );
 }
 

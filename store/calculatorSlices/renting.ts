@@ -1,12 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface RentingState {
-  monthlyRent?: number;
-  initialInvestment?: number;
-  yearlyRentGrowth?: number;
+  monthlyRent: number;
+  initialInvestment: number;
+  yearlyRentGrowth: number;
 }
 
-const initialState: RentingState = {};
+const initialState: RentingState = {
+  monthlyRent: 1500,
+  initialInvestment: 3000,
+  yearlyRentGrowth: 3,
+};
 
 export const rentingSlice = createSlice({
   name: "renting",

@@ -1,16 +1,16 @@
-import {Typography} from "@mui/material"
-import NumberField from "./numberField.tsx"
-import {getAdornment} from "../helpers.tsx"
+import { Typography } from "@mui/material";
+import NumberField from "./numberField.tsx";
+import { getAdornment } from "../helpers.tsx";
 
 const IntroBlock = () => {
   return (
     <>
-      <Typography variant={"h1"}>
+      <Typography variant={"h2"} component={"h1"}>
         Property Investment Calculator
       </Typography>
       <Typography variant={"body1"}>
-        This calculator is designed to help you make an informed decision
-        about whether to rent or buy a property.
+        This calculator is designed to help you make an informed decision about
+        whether to rent or buy a property.
       </Typography>
       <Typography variant={"body1"}>
         How long do you plan to stay in the property?
@@ -23,7 +23,7 @@ const IntroBlock = () => {
         })}
       />
     </>
-  )
-}
+  );
+};
 
-export default IntroBlock
+export default IntroBlock;

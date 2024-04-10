@@ -1,9 +1,9 @@
-import {Box, TextFieldProps} from "@mui/material"
-import NumberField from "./numberField.tsx"
+import {Box} from "@mui/material"
+import NumberField, {NumberFieldProps} from "./numberField.tsx"
 
 
 export type NumberFieldsProps = {
-  inputs: TextFieldProps[]
+  inputs: NumberFieldProps[]
 }
 
 function NumberFields({inputs}: NumberFieldsProps) {
