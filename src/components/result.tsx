@@ -6,7 +6,7 @@ import { RentingState } from "../../store/calculatorSlices/renting.ts";
 import {calculateRent} from "../helpers/financialFcs.ts"
 
 function Result() {
-  const { monthlyRent, yearlyRentGrowth }: RentingState = useSelector(
+  const { monthlyRent, yearlyRentGrowth, initialInvestment }: RentingState = useSelector(
     (state: RootState) => state.renting,
   );
   const { yearsStaying }: FuturePredictionsState = useSelector(
@@ -21,12 +21,13 @@ function Result() {
   };
 
   const rentingRows: [string, string][] = [
-    ["Rent", calculateRent({
+    ["Rent", -1*calculateRent({
       startingMonthlyRent: monthlyRent,
       increaseRate: yearlyRentGrowth/100,
       yearsStaying,
     })],
-  ];
+    ['Deposit', -1*initialInvestment],
+  ]
 
   return (
     <Box
@@ -35,11 +36,11 @@ function Result() {
       }}
     >
       <Typography variant={"h5"}>{`Renting for ${yearsStaying} year${
-        yearsStaying !== 1 ? "s" : ""
+        yearsStaying != 1 ? "s" : ""
       }`}</Typography>
       <Stack>
         {rentingRows.map(([label, value]) => (
-          <Typography key={label} variant={"body1"} color={"success"}>
+          <Typography key={label} variant={"body1"} color={value < 0 ? 'error': undefined}>
             {label}: {toLocaleString(value)}
           </Typography>
         ))}

@@ -23,7 +23,7 @@ const NumericFormatCustom = React.forwardRef<NumericFormatProps, CustomProps>(
           onChange({
             target: {
               name: props.name,
-              value: values.value,
+              value: +values.value,
             },
           });
         }}

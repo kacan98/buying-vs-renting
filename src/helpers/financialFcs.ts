@@ -1,5 +1,4 @@
-export function calculateRent({ startingMonthlyRent, increaseRate, yearsStaying }) {
-  console.log("calculateRent", { startingMonthlyRent, increaseRate, yearsStaying })
+export function calculateRent({ startingMonthlyRent, increaseRate, yearsStaying }):number {
   let totalPaid = 0;
   let annualRent = startingMonthlyRent * 12; // Initial annual rent
 
