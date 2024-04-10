@@ -1,42 +1,34 @@
-import { TextFieldProps } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import {setRentingValue} from "../../../store/calculatorSlices/renting.ts"
-import NumberFields from "../numberFields.tsx"
-import {RootState} from "../../../store"
+import NumberFields from "../numberFields.tsx";
+import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
+import { NumberFieldProps } from "../numberField.tsx";
+import {getInputProps} from "../adornments.tsx"
 
 const Renting = () => {
-  const rentingState = useSelector((state: RootState) => state.renting);
-  const dispatch = useDispatch();
+  const { stateSlice: rentingState, createStateUpdateFc } =
+    useCalculatorSlice("renting");
 
-  const inputs: TextFieldProps[] = [
+  const inputs: NumberFieldProps[] = [
     {
       label: "Monthly Rent",
-      placeholder: "1000",
       value: rentingState.monthlyRent,
-      onChange: (e) =>
-        dispatch(
-          setRentingValue({ value: parseInt(e.target.value), key: "monthlyRent"}),
-        ),
+      onChange: createStateUpdateFc("monthlyRent"),
+      formatAsCurrency: true,
     },
     {
       label: "Initial investment",
-      placeholder: "2000",
-      helperText: "e.g. deposit",
       value: rentingState.initialInvestment,
-      onChange: (e) =>
-        dispatch(
-          setRentingValue({ value: parseInt(e.target.value), key: "initialInvestment"}),
-        ),
+      onChange: createStateUpdateFc("initialInvestment"),
+      helperText: "e.g. deposit",
+      formatAsCurrency: true,
     },
     {
-      label: "Yearly Rent Growth",
-      placeholder: "3",
-      helperText: "per year, in percentage",
+      label: "Rent Growth",
       value: rentingState.yearlyRentGrowth,
-      onChange: (e) =>
-        dispatch(
-          setRentingValue({ value: parseInt(e.target.value), key: "yearlyRentGrowth"}),
-        ),
+      onChange: createStateUpdateFc("yearlyRentGrowth"),
+      InputProps: getInputProps({
+        endAdornment: '% per year',
+      }),
+      step: 0.1,
     },
   ];
 

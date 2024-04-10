@@ -4,12 +4,14 @@ export interface FuturePredictionsState {
   propertyValueGrowth: number;
   alternativeInvestmentReturn: number;
   inflationRate: number;
+  yearsStaying: number;
 }
 
 const initialState: FuturePredictionsState = {
-  propertyValueGrowth: 0,
-  alternativeInvestmentReturn: 0,
-  inflationRate: 0,
+  propertyValueGrowth: 3,
+  alternativeInvestmentReturn: 7,
+  inflationRate: 2,
+  yearsStaying: 5,
 };
 
 export const futurePredictionsSlice = createSlice({

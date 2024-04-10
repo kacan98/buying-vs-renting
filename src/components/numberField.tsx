@@ -9,13 +9,13 @@ function NumberField(props: NumberFieldProps) {
     placeholder: "0",
     variant: "outlined",
     size: "medium",
-    ...otherProps,
+    ...otherProps
   };
 
   return formatAsCurrency ? (
     <DollarInput {...textFieldProps} />
   ) : (
-    <TextField {...textFieldProps} />
+    <TextField {...textFieldProps} type="number" />
   );
 }
 

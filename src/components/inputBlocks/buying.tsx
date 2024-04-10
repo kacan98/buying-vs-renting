@@ -1,63 +1,45 @@
-import {useDispatch, useSelector} from "react-redux"
-import {BuyingState, setBuyingValue} from "../../../store/calculatorSlices/buying.ts"
-import {RootState} from "../../../store"
-import {getAdornment, getPercentageAdornment} from "./../adornment.tsx"
-import React from "react"
-import {Stack, Typography} from "@mui/material"
-import NumberFields from "../numberFields.tsx"
-import DollarInput from "../maskedInput.tsx"
-
+import { getInputProps, getPercentageAdornment } from "./../adornments.tsx";
+import { Stack, Typography } from "@mui/material";
+import NumberFields from "../numberFields.tsx";
+import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
 
 function Buying() {
-  const buyingState: BuyingState = useSelector(
-    (state: RootState) => state.buying,
-  );
-  const dispatch = useDispatch();
-
-  const createStateUpdateFc =
-    (fieldName: keyof BuyingState) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      dispatch(
-        setBuyingValue({ value: parseInt(e.target.value || '0'), key: fieldName }),
-      );
-    };
-
-  const currencySign = "$";
-
-  const getCurrencyAdornment = () =>
-    getAdornment({
-      position: "start",
-      adornmentString: currencySign,
-    });
-
+  const { stateSlice: buyingState, createStateUpdateFc } =
+    useCalculatorSlice("buying");
+  
   return (
     <Stack spacing={1} paddingBottom={2}>
-      <DollarInput
-        label="Property Price"
-        InputProps={getCurrencyAdornment()}
-        value={buyingState.propertyPrice}
-        onChange={createStateUpdateFc("propertyPrice")}
+      <NumberFields
+        inputs={[
+          {
+            label: "Property Price",
+            value: buyingState.propertyPrice,
+            onChange: createStateUpdateFc("propertyPrice"),
+            formatAsCurrency: true,
+          },
+        ]}
       />
       <Typography variant="h4">Mortgage</Typography>
       <NumberFields
         inputs={[
           {
             label: "Loan Term",
-            helperText: "years",
             value: buyingState.loanTerm,
             onChange: createStateUpdateFc("loanTerm"),
+            InputProps: getInputProps({
+              endAdornment: "years",
+            }),
           },
           {
-            formatAsCurrency:true,
+            formatAsCurrency: true,
             label: "Deposit",
-            InputProps: getCurrencyAdornment(),
             value: buyingState.deposit,
             onChange: createStateUpdateFc("deposit"),
+            formatAsCurrency: true,
           },
           {
             label: "Interest Rate",
-            helperText: "per year",
-            InputProps: getPercentageAdornment(),
+            InputProps: getPercentageAdornment(true),
             value: buyingState.interestRate,
             onChange: createStateUpdateFc("interestRate"),
           },
@@ -71,12 +53,15 @@ function Buying() {
             InputProps: getPercentageAdornment(),
             value: buyingState.buyingCosts,
             onChange: createStateUpdateFc("buyingCosts"),
+            helperText: String(buyingState.propertyPrice * (buyingState.buyingCosts/100)),
+            step: 0.1,
           },
           {
             label: "Selling costs",
             InputProps: getPercentageAdornment(),
             value: buyingState.sellingCosts,
             onChange: createStateUpdateFc("sellingCosts"),
+            helperText: String(buyingState.propertyPrice * (buyingState.sellingCosts/100))
           },
         ]}
       />
@@ -86,15 +71,10 @@ function Buying() {
           {
             label: "Ownership costs",
             helperText: "Property taxes, maintenance, homeowners insurance...",
-            InputProps: {
-              ...getCurrencyAdornment(),
-              ...getAdornment({
-                position: "end",
-                adornmentString: "per year",
-              }),
-            },
+            InputProps: getPercentageAdornment(true),
             value: buyingState.ownershipCosts,
             onChange: createStateUpdateFc("ownershipCosts"),
+            formatAsCurrency: true,
           },
         ]}
       />

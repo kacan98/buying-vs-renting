@@ -1,26 +1,32 @@
 import { TextFieldProps } from "@mui/material";
-import {getPercentageAdornment} from "../adornment.tsx"
+import {getPercentageAdornment} from "../adornments.tsx"
 import NumberFields from "../numberFields.tsx"
+import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts"
 
 const FuturePredictions = () => {
+  const {
+    stateSlice: futureState,
+    createStateUpdateFc,
+  } = useCalculatorSlice("futurePredictions");
+  
   const inputs: TextFieldProps[] = [
     {
       label: "Property Value Growth",
-      placeholder: "3",
-      helperText: "per year",
-      InputProps: getPercentageAdornment(),
+      value: futureState.propertyValueGrowth,
+      onChange: createStateUpdateFc("propertyValueGrowth"),
+      InputProps: getPercentageAdornment(true),
     },
     {
       label: "Alternative investment return",
-      placeholder: "7",
-      helperText: "per year",
-      InputProps: getPercentageAdornment(),
+      InputProps: getPercentageAdornment(true),
+      value: futureState.alternativeInvestmentReturn,
+      onChange: createStateUpdateFc("alternativeInvestmentReturn"),
     },
     {
       label: "Inflation Rate",
-      placeholder: "2",
-      helperText: "per year",
-      InputProps: getPercentageAdornment(),
+      InputProps: getPercentageAdornment('true'),
+      value: futureState.inflationRate,
+      onChange: createStateUpdateFc("inflationRate"),
     },
   ];
 

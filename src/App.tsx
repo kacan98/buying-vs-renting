@@ -3,7 +3,7 @@ import { Grid, ThemeProvider } from "@mui/material";
 import customTheme from "./theme.tsx";
 import PaperWrapper from "./components/paper.tsx";
 import CalculatorInputs from "./components/calculatorInputs.tsx";
-import Summary from "./components/summary.tsx";
+import Result from "./components/result.tsx";
 import IntroBlock from "./components/inputBlocks/introBlock.tsx";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
         </Grid>
         <Grid item sm={12} md={4}>
           <PaperWrapper>
-            <Summary />
+            <Result />
           </PaperWrapper>
         </Grid>
       </Grid>
