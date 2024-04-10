@@ -8,9 +8,11 @@ import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import {Provider} from "react-redux"
 import {store} from "../store"
+import {CssBaseline} from "@mui/material"
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
+    <CssBaseline />
     <Provider store={store}>
     <App />
     </Provider>

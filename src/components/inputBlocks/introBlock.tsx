@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
-import NumberField from "./numberField.tsx";
-import { getAdornment } from "../helpers.tsx";
+import NumberField from "../numberField.tsx"
+import {getAdornment} from "../adornment.tsx"
 
 const IntroBlock = () => {
   return (

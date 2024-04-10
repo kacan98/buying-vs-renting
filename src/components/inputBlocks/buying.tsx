@@ -1,13 +1,12 @@
-import NumberFields from "./numberFields.tsx";
-import { Stack, Typography } from "@mui/material";
-import { getAdornment, getPercentageAdornment } from "../helpers.tsx";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
-import {
-  BuyingState,
-  setBuyingValue,
-} from "../../store/calculatorSlices/buying.ts";
-import FormattedInput from "./maskedInput.tsx";
+import {useDispatch, useSelector} from "react-redux"
+import {BuyingState, setBuyingValue} from "../../../store/calculatorSlices/buying.ts"
+import {RootState} from "../../../store"
+import {getAdornment, getPercentageAdornment} from "./../adornment.tsx"
+import React from "react"
+import {Stack, Typography} from "@mui/material"
+import NumberFields from "../numberFields.tsx"
+import DollarInput from "../maskedInput.tsx"
+
 
 function Buying() {
   const buyingState: BuyingState = useSelector(
@@ -19,7 +18,7 @@ function Buying() {
     (fieldName: keyof BuyingState) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
       dispatch(
-        setBuyingValue({ value: parseInt(e.target.value), key: fieldName }),
+        setBuyingValue({ value: parseInt(e.target.value || '0'), key: fieldName }),
       );
     };
 
@@ -33,29 +32,11 @@ function Buying() {
 
   return (
     <Stack spacing={1} paddingBottom={2}>
-      <FormattedInput
+      <DollarInput
         label="Property Price"
         InputProps={getCurrencyAdornment()}
         value={buyingState.propertyPrice}
         onChange={createStateUpdateFc("propertyPrice")}
-      />
-      <Typography variant="h4">Yearly costs</Typography>
-      <NumberFields
-        inputs={[
-          {
-            label: "Ownership costs",
-            helperText: "Property taxes, maintenance, homeowners insurance...",
-            InputProps: {
-              ...getCurrencyAdornment(),
-              ...getAdornment({
-                position: "end",
-                adornmentString: "per year",
-              }),
-            },
-            value: buyingState.ownershipCosts,
-            onChange: createStateUpdateFc("ownershipCosts"),
-          },
-        ]}
       />
       <Typography variant="h4">Mortgage</Typography>
       <NumberFields
@@ -96,6 +77,24 @@ function Buying() {
             InputProps: getPercentageAdornment(),
             value: buyingState.sellingCosts,
             onChange: createStateUpdateFc("sellingCosts"),
+          },
+        ]}
+      />
+      <Typography variant="h4">Yearly costs</Typography>
+      <NumberFields
+        inputs={[
+          {
+            label: "Ownership costs",
+            helperText: "Property taxes, maintenance, homeowners insurance...",
+            InputProps: {
+              ...getCurrencyAdornment(),
+              ...getAdornment({
+                position: "end",
+                adornmentString: "per year",
+              }),
+            },
+            value: buyingState.ownershipCosts,
+            onChange: createStateUpdateFc("ownershipCosts"),
           },
         ]}
       />

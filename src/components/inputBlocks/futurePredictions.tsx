@@ -1,6 +1,6 @@
-import NumberFields from "./numberFields.tsx";
 import { TextFieldProps } from "@mui/material";
-import { getPercentageAdornment} from "../helpers.tsx"
+import {getPercentageAdornment} from "../adornment.tsx"
+import NumberFields from "../numberFields.tsx"
 
 const FuturePredictions = () => {
   const inputs: TextFieldProps[] = [

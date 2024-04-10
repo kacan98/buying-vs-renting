@@ -4,7 +4,7 @@ import customTheme from "./theme.tsx";
 import PaperWrapper from "./components/paper.tsx";
 import CalculatorInputs from "./components/calculatorInputs.tsx";
 import Summary from "./components/summary.tsx";
-import IntroBlock from "./components/introBlock.tsx";
+import IntroBlock from "./components/inputBlocks/introBlock.tsx";
 
 function App() {
   return (
@@ -12,10 +12,11 @@ function App() {
       <Grid
         container
         spacing={2}
+        justifyContent={"center"}
         sx={{
-          margin: "auto",
           maxWidth: "1300px",
           textAlign: "center",
+          margin: "auto",
         }}
       >
         <Grid item xs={12}>

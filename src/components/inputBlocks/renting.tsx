@@ -1,8 +1,8 @@
-import NumberFields from "./numberFields.tsx";
 import { TextFieldProps } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setRentingValue} from "../../store/calculatorSlices/renting.ts"
-import {RootState} from "../../store"
+import {setRentingValue} from "../../../store/calculatorSlices/renting.ts"
+import NumberFields from "../numberFields.tsx"
+import {RootState} from "../../../store"
 
 const Renting = () => {
   const rentingState = useSelector((state: RootState) => state.renting);

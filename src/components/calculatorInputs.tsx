@@ -1,9 +1,9 @@
-import FuturePredictions from "./futurePredictions.tsx";
-import Renting from "./renting.tsx";
+import FuturePredictions from "./inputBlocks/futurePredictions.tsx";
+import Renting from "./inputBlocks/renting.tsx";
 import PaperWrapper from "./paper.tsx";
 import leasing from "/leasing.png";
 import buying from "/buying.png";
-import Buying from "./buying.tsx";
+import Buying from "./inputBlocks/buying.tsx";
 import {Stack} from "@mui/material"
 
 function CalculatorInputs() {
