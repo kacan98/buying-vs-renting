@@ -28,7 +28,6 @@ const Renting = () => {
       InputProps: getInputProps({
         endAdornment: '% per year',
       }),
-      step: 0.1,
     },
   ];
 

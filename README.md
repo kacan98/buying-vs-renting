@@ -1,30 +1,19 @@
-# React + TypeScript + Vite
+# [Rental vs. Buy Calculator](https://kacan98.github.io/buying-vs-renting/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Try it out here](https://kacan98.github.io/buying-vs-renting/)
 
-Currently, two official plugins are available:
+## About
+This calculator provides a detailed comparison between the costs of renting and buying a property over a specified period. It's designed to help users make informed decisions about housing based on their unique circumstances and financial goals.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- **Cost Calculation**: Input your data to see the total cost of renting vs. buying for any period.
+- **Graphical Comparisons**: Visualize the cost differences with clear, easy-to-understand graphs.
+- **Mortgage Details**: Calculates the potential mortgage payments involved in buying a property.
+- **Decision Assistance**: Analyzes the data to suggest the better financial decision based on the number of years you plan to stay in the home.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+# Stack
+- **React**
+- **Redux Toolkit**
+- **MUI**
+- **Vite**
+- **TypeScript**

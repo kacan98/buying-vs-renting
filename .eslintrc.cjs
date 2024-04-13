@@ -5,9 +5,15 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/jsx-runtime'
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: ['./tsconfig.json'],
+  },
   plugins: ['react-refresh'],
   rules: {
     "@typescript-eslint/no-explicit-any": "warn",
@@ -15,5 +21,6 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'react/react-in-jsx-scope': 'off',
   },
 }

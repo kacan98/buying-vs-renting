@@ -1,7 +1,7 @@
 {
   "name": "buying-vs-renting",
-  "private": true,
-  "version": "0.0.0",
+  "homepage": "/buying-vs-renting/",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -24,10 +24,11 @@
   "devDependencies": {
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "typescript": "^5.2.2",
