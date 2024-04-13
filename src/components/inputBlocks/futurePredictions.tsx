@@ -21,13 +21,7 @@ const FuturePredictions = () => {
       InputProps: getPercentageAdornment(true),
       value: futureState.alternativeInvestmentReturn,
       onChange: createStateUpdateFc("alternativeInvestmentReturn"),
-    },
-    {
-      label: "Inflation Rate",
-      InputProps: getPercentageAdornment('true'),
-      value: futureState.inflationRate,
-      onChange: createStateUpdateFc("inflationRate"),
-    },
+    }
   ];
 
   return (

@@ -1,8 +1,8 @@
 import {InputAdornment} from "@mui/material"
 
 type getAdornmentProps = {
-  startAdornment: string
-  endAdornment: string
+  startAdornment?: string
+  endAdornment?: string
 }
 
 export function getInputProps ({startAdornment, endAdornment}: getAdornmentProps): {
@@ -21,6 +21,6 @@ export function getInputProps ({startAdornment, endAdornment}: getAdornmentProps
 
 export function getPercentageAdornment(perYear=false){
   return getInputProps({
-  endAdornment: `%${perYear? ' per year': ''}`,
+    endAdornment: `%${perYear? ' per year': ''}`,
 })
 }

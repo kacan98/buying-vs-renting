@@ -1,15 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {buyingSlice} from "./calculatorSlices/buying.ts"
-import {futurePredictionsSlice} from "./calculatorSlices/futurePreditions.ts"
-import {rentingSlice} from "./calculatorSlices/renting.ts"
+import { buyingSlice } from "./calculatorSlices/buying.ts";
+import { futurePredictionsSlice } from "./calculatorSlices/futurePreditions.ts";
+import { rentingSlice } from "./calculatorSlices/renting.ts";
+
+const reducer = {
+  buying: buyingSlice.reducer,
+  renting: rentingSlice.reducer,
+  futurePredictions: futurePredictionsSlice.reducer,
+};
 
 export const store = configureStore({
-  reducer: {
-    buying: buyingSlice.reducer,
-    renting: rentingSlice.reducer,
-    futurePredictions: futurePredictionsSlice.reducer,
-  },
+  reducer,
 });
+
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

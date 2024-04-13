@@ -5,6 +5,12 @@ import React from "react";
 import { setRentingValue } from "./renting.ts";
 import { setFuturePredictionsValue } from "./futurePreditions.ts";
 
+const createAction = {
+  buying: setBuyingValue,
+  renting: setRentingValue,
+  futurePredictions: setFuturePredictionsValue,
+};
+
 export default function useCalculatorSlice<T extends keyof RootState>(
   sliceName: T,
 ) {
@@ -12,25 +18,19 @@ export default function useCalculatorSlice<T extends keyof RootState>(
     (state: RootState) => state[sliceName],
   );
   const dispatch = useDispatch();
-  
-  const createAction = {
-    buying: setBuyingValue,
-    renting: setRentingValue,
-    futurePredictions: setFuturePredictionsValue,
+
+  const createStateUpdateFc = (fieldName: keyof RootState[T]) => {
+    return (e: React.ChangeEvent<HTMLInputElement>) => {
+      const action = createAction[sliceName];
+      const value = e.target.value || "";
+      dispatch(
+        action({
+          key: fieldName as keyof RootState[T],
+          value: value as RootState[T][keyof RootState[T]],
+        } as any),
+      );
+    };
   };
-  
-  const createStateUpdateFc =
-    (fieldName: keyof RootState[T]) =>
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        const action = createAction[sliceName];
-        const value = e.target.value || ""
-        dispatch(
-          action({
-            key: fieldName as keyof RootState[T],
-            value,
-          }),
-        );
-      };
-  
+
   return { stateSlice, createStateUpdateFc, dispatch };
 }

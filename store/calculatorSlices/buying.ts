@@ -3,21 +3,21 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface BuyingState {
   propertyPrice: number;
   deposit: number;
-  ownershipCosts: number;
+  yearlyOwnershipCost: number;
   loanTerm: number;
   interestRate: number;
-  buyingCosts: number;
-  sellingCosts: number;
+  buyingCostsPercentage: number;
+  sellingCostsPercentage: number;
 }
 
 const initialState: BuyingState = {
   propertyPrice: 1000000,
   deposit: 200000,
-  ownershipCosts: 2500,
+  yearlyOwnershipCost: 2500,
   loanTerm: 30,
   interestRate: 4.5,
-  buyingCosts: 1,
-  sellingCosts: 1
+  buyingCostsPercentage: 1,
+  sellingCostsPercentage: 1
 };
 
 export const buyingSlice = createSlice({

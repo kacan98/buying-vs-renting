@@ -3,7 +3,7 @@ import { Grid, ThemeProvider } from "@mui/material";
 import customTheme from "./theme.tsx";
 import PaperWrapper from "./components/paper.tsx";
 import CalculatorInputs from "./components/calculatorInputs.tsx";
-import Result from "./components/result.tsx";
+import Result from "./components/result/result.tsx";
 import IntroBlock from "./components/inputBlocks/introBlock.tsx";
 
 function App() {

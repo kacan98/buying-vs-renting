@@ -1,11 +1,6 @@
-export function calculateRent({ startingMonthlyRent, increaseRate, yearsStaying }):number {
-  let totalPaid = 0;
-  let annualRent = startingMonthlyRent * 12; // Initial annual rent
-
-  for (let i = 0; i < yearsStaying; i++) {
-    totalPaid += annualRent;
-    annualRent *= 1 + increaseRate; // Increase by the rate for the next year
-  }
-
-  return totalPaid;
-}
+export const toLocaleCurrencyString = (value: number) => {
+  return value.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+};

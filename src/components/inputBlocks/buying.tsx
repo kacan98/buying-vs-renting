@@ -2,10 +2,20 @@ import { getInputProps, getPercentageAdornment } from "./../adornments.tsx";
 import { Stack, Typography } from "@mui/material";
 import NumberFields from "../numberFields.tsx";
 import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
+import {toLocaleCurrencyString} from "../../helpers/financialFcs.ts"
+import {getMonthlyMortgagePayment} from "../../helpers/buying/buying.service.ts"
+import {PieChart} from "@mui/x-charts"
 
 function Buying() {
   const { stateSlice: buyingState, createStateUpdateFc } =
     useCalculatorSlice("buying");
+  
+  const monthlyPayment = getMonthlyMortgagePayment({
+    propertyPrice: buyingState.propertyPrice,
+    deposit: buyingState.deposit,
+    loanTerm: buyingState.loanTerm,
+    interestRate: buyingState.interestRate,
+  })
   
   return (
     <Stack spacing={1} paddingBottom={2}>
@@ -31,7 +41,6 @@ function Buying() {
             }),
           },
           {
-            formatAsCurrency: true,
             label: "Deposit",
             value: buyingState.deposit,
             onChange: createStateUpdateFc("deposit"),
@@ -45,23 +54,38 @@ function Buying() {
           },
         ]}
       />
+      <PieChart
+        series={[
+          {
+            data: [
+              { id: 0, value: 10, label: 'series A' },
+              { id: 1, value: 15, label: 'series B' },
+              { id: 2, value: 20, label: 'series C' },
+            ],
+          },
+        ]}
+        width={400}
+        height={200}
+      />
+      <Typography variant="body1">
+        {`${toLocaleCurrencyString(monthlyPayment)} per month.`}
+      </Typography>
       <Typography variant="h4">Buying And Selling Costs</Typography>
       <NumberFields
         inputs={[
           {
             label: "Buying costs",
             InputProps: getPercentageAdornment(),
-            value: buyingState.buyingCosts,
-            onChange: createStateUpdateFc("buyingCosts"),
-            helperText: String(buyingState.propertyPrice * (buyingState.buyingCosts/100)),
-            step: 0.1,
+            value: buyingState.buyingCostsPercentage,
+            onChange: createStateUpdateFc("buyingCostsPercentage"),
+            helperText: toLocaleCurrencyString(buyingState.propertyPrice * (buyingState.buyingCostsPercentage/100))
           },
           {
             label: "Selling costs",
             InputProps: getPercentageAdornment(),
-            value: buyingState.sellingCosts,
-            onChange: createStateUpdateFc("sellingCosts"),
-            helperText: String(buyingState.propertyPrice * (buyingState.sellingCosts/100))
+            value: buyingState.sellingCostsPercentage,
+            onChange: createStateUpdateFc("sellingCostsPercentage"),
+            helperText: toLocaleCurrencyString(buyingState.propertyPrice * (buyingState.sellingCostsPercentage/100))
           },
         ]}
       />
@@ -72,8 +96,8 @@ function Buying() {
             label: "Ownership costs",
             helperText: "Property taxes, maintenance, homeowners insurance...",
             InputProps: getPercentageAdornment(true),
-            value: buyingState.ownershipCosts,
-            onChange: createStateUpdateFc("ownershipCosts"),
+            value: buyingState.yearlyOwnershipCost,
+            onChange: createStateUpdateFc("yearlyOwnershipCost"),
             formatAsCurrency: true,
           },
         ]}

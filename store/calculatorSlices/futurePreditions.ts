@@ -3,14 +3,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface FuturePredictionsState {
   propertyValueGrowth: number;
   alternativeInvestmentReturn: number;
-  inflationRate: number;
   yearsStaying: number;
 }
 
 const initialState: FuturePredictionsState = {
   propertyValueGrowth: 3,
   alternativeInvestmentReturn: 7,
-  inflationRate: 2,
   yearsStaying: 5,
 };
 
