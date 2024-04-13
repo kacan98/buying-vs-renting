@@ -9,12 +9,7 @@ type PaperWrapperProps = {
 
 const PaperWrapper = ({ children, image, title }: PaperWrapperProps) => {
   return (
-    <Paper
-      elevation={3}
-      sx={{
-        padding: "20px",
-      }}
-    >
+    <Paper>
       {image && <img src={image} className="logo" alt="" />}
       {title && (
         <Typography variant="h3" gutterBottom>

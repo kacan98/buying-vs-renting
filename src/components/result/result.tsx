@@ -53,14 +53,15 @@ function Result() {
     yearsStaying,
   })
   
-  const totalRenting = - (rentTotal + initialInvestment);
+  const totalRenting = - (rentTotal + initialInvestment) + initialInvestment;
   const rentingRows: ResultBlockProps["rows"] = [
+    { label: "Deposit", value: -1 * initialInvestment },
     {
       label: "Rent",
       value:
         -1 * rentTotal
     },
-    { label: "Deposit", value: -1 * initialInvestment },
+    { label: "Deposit returned", value: initialInvestment },
     'divider',
     { label: "Total", value: totalRenting },
   ];

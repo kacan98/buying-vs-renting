@@ -1,5 +1,5 @@
 import { getInputProps, getPercentageAdornment } from "./../adornments.tsx";
-import { Stack, Typography } from "@mui/material";
+import {Grid, Stack, Typography} from "@mui/material"
 import NumberFields from "../numberFields.tsx";
 import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
 import { toLocaleCurrencyString } from "../../helpers/financialFcs.ts";
@@ -60,7 +60,11 @@ function Buying() {
 
 
   return (
-    <Stack spacing={1} paddingBottom={2}>
+    <Stack spacing={2} paddingBottom={2} sx={
+      {
+        textAlign: 'left'
+      }
+    }>
       <NumberFields
         inputs={[
           {
@@ -96,23 +100,32 @@ function Buying() {
           },
         ]}
       />
+      <Typography variant="body1">
+        {`You would pay ${toLocaleCurrencyString(monthlyPayment)} per month.`}
+      </Typography>
+      <Grid container justifyContent={'center'}>
+      
+     
       {totalPrincipalPaid && totalInterestPaid && (
         <PieChart
+          colors={["#0088FE", "orange"]}
           series={[
             {
               data: [
                 { id: 0, value: totalPrincipalPaid, label: "Total principal paid" },
                 { id: 1, value: totalInterestPaid, label: "Total interest paid" },
               ],
+              innerRadius: 50,
+              outerRadius: 100,
+              paddingAngle: 5,
+              cornerRadius: 5,
             },
           ]}
           width={500}
           height={200}
         />
       )}
-      <Typography variant="body1">
-        {`You pay ${toLocaleCurrencyString(monthlyPayment)} per month.`}
-      </Typography>
+      </Grid>
       <Typography variant="h4">Buying And Selling Costs</Typography>
       <NumberFields
         inputs={[
