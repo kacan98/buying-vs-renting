@@ -2,28 +2,70 @@ import { getInputProps, getPercentageAdornment } from "./../adornments.tsx";
 import { Stack, Typography } from "@mui/material";
 import NumberFields from "../numberFields.tsx";
 import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
-import {toLocaleCurrencyString} from "../../helpers/financialFcs.ts"
-import {getMonthlyMortgagePayment} from "../../helpers/buying/buying.service.ts"
-import {PieChart} from "@mui/x-charts"
+import { toLocaleCurrencyString } from "../../helpers/financialFcs.ts";
+import {
+  getLoanAmount,
+  getMonthlyMortgagePayment,
+  simulateTimePassage,
+} from "../../services/buying/buying.service.ts"
+import { PieChart } from "@mui/x-charts";
+import {useSelector} from "react-redux"
+import {RootState} from "../../../store"
 
 function Buying() {
   const { stateSlice: buyingState, createStateUpdateFc } =
     useCalculatorSlice("buying");
+
+  const {
+    propertyPrice,
+    deposit,
+    loanTerm,
+    interestRate,
+    buyingCostsPercentage,
+    sellingCostsPercentage,
+    yearlyOwnershipCost,
+  } = buyingState;
   
   const monthlyPayment = getMonthlyMortgagePayment({
-    propertyPrice: buyingState.propertyPrice,
-    deposit: buyingState.deposit,
-    loanTerm: buyingState.loanTerm,
-    interestRate: buyingState.interestRate,
-  })
+    initialPropertyValue: propertyPrice,
+    deposit: deposit,
+    loanTerm: loanTerm,
+    interestRate: interestRate,
+  });
   
+  const yearsStaying = useSelector((state: RootState) => state.futurePredictions.yearsStaying);
+  const propertyValueGrowth = useSelector((state: RootState) => state.futurePredictions.propertyValueGrowth);
+  const loanAmount = getLoanAmount({
+    deposit,
+    initialPropertyValue: propertyPrice
+  })
+
+  const { totalPrincipalPaid, totalInterestPaid } = simulateTimePassage({
+    initialPropertyValue: propertyPrice,
+    deposit,
+    yearlyOwnershipCost,
+
+    yearsStaying,
+    loanTerm,
+
+    interestRate,
+    loanAmount,
+    propertyValueGrowth,
+    buyingCostsPercentage,
+    sellingCostsPercentage,
+    
+    mortgagePerMonth: monthlyPayment
+  });
+
+
+
   return (
     <Stack spacing={1} paddingBottom={2}>
       <NumberFields
         inputs={[
           {
             label: "Property Price",
-            value: buyingState.propertyPrice,
+            value: propertyPrice,
             onChange: createStateUpdateFc("propertyPrice"),
             formatAsCurrency: true,
           },
@@ -34,7 +76,7 @@ function Buying() {
         inputs={[
           {
             label: "Loan Term",
-            value: buyingState.loanTerm,
+            value: loanTerm,
             onChange: createStateUpdateFc("loanTerm"),
             InputProps: getInputProps({
               endAdornment: "years",
@@ -42,33 +84,34 @@ function Buying() {
           },
           {
             label: "Deposit",
-            value: buyingState.deposit,
+            value: deposit,
             onChange: createStateUpdateFc("deposit"),
             formatAsCurrency: true,
           },
           {
             label: "Interest Rate",
             InputProps: getPercentageAdornment(true),
-            value: buyingState.interestRate,
+            value: interestRate,
             onChange: createStateUpdateFc("interestRate"),
           },
         ]}
       />
-      <PieChart
-        series={[
-          {
-            data: [
-              { id: 0, value: 10, label: 'series A' },
-              { id: 1, value: 15, label: 'series B' },
-              { id: 2, value: 20, label: 'series C' },
-            ],
-          },
-        ]}
-        width={400}
-        height={200}
-      />
+      {totalPrincipalPaid && totalInterestPaid && (
+        <PieChart
+          series={[
+            {
+              data: [
+                { id: 0, value: totalPrincipalPaid, label: "Total principal paid" },
+                { id: 1, value: totalInterestPaid, label: "Total interest paid" },
+              ],
+            },
+          ]}
+          width={500}
+          height={200}
+        />
+      )}
       <Typography variant="body1">
-        {`${toLocaleCurrencyString(monthlyPayment)} per month.`}
+        {`You pay ${toLocaleCurrencyString(monthlyPayment)} per month.`}
       </Typography>
       <Typography variant="h4">Buying And Selling Costs</Typography>
       <NumberFields
@@ -76,16 +119,20 @@ function Buying() {
           {
             label: "Buying costs",
             InputProps: getPercentageAdornment(),
-            value: buyingState.buyingCostsPercentage,
+            value: buyingCostsPercentage,
             onChange: createStateUpdateFc("buyingCostsPercentage"),
-            helperText: toLocaleCurrencyString(buyingState.propertyPrice * (buyingState.buyingCostsPercentage/100))
+            helperText: toLocaleCurrencyString(
+              propertyPrice * (buyingCostsPercentage / 100),
+            ),
           },
           {
             label: "Selling costs",
             InputProps: getPercentageAdornment(),
-            value: buyingState.sellingCostsPercentage,
+            value: sellingCostsPercentage,
             onChange: createStateUpdateFc("sellingCostsPercentage"),
-            helperText: toLocaleCurrencyString(buyingState.propertyPrice * (buyingState.sellingCostsPercentage/100))
+            helperText: toLocaleCurrencyString(
+              propertyPrice * (sellingCostsPercentage / 100),
+            ),
           },
         ]}
       />
@@ -96,7 +143,7 @@ function Buying() {
             label: "Ownership costs",
             helperText: "Property taxes, maintenance, homeowners insurance...",
             InputProps: getPercentageAdornment(true),
-            value: buyingState.yearlyOwnershipCost,
+            value: yearlyOwnershipCost,
             onChange: createStateUpdateFc("yearlyOwnershipCost"),
             formatAsCurrency: true,
           },

@@ -7,14 +7,17 @@ const IntroBlock = () => {
   const { stateSlice: introState, createStateUpdateFc } = useCalculatorSlice('futurePredictions');
   return (
     <>
-      <Typography variant={"h2"} component={"h1"}>
+      <Typography variant={"h2"} component={"h1"} gutterBottom>
         Property Investment Calculator
       </Typography>
-      <Typography variant={"body1"}>
+      <Typography variant={"body1"} gutterBottom>
         This calculator is designed to help you make an informed decision about
         whether to rent or buy a property.
       </Typography>
-      <Typography variant={"body1"}>
+      <Typography variant={"body1"} gutterBottom>
+        Remember that similar properties should be compared, otherwise the results may be misleading.
+      </Typography>
+      <Typography variant={"body1"} gutterBottom>
         How long do you plan to stay in the property?
       </Typography>
       <NumberField

@@ -1,7 +1,11 @@
 import { LineChart } from "@mui/x-charts";
-import {BuyingDetails} from "../../helpers/buying/buying.model.ts"
+import { BuyingDetails } from "../../services/buying/buying.model.ts";
 
-function BuyingChart({graphData}: {graphData: BuyingDetails['monthValueChanges'] }) {
+function BuyingChart({
+  graphData,
+}: {
+  graphData: BuyingDetails["monthValueChanges"];
+}) {
   const keyToLabel: { [key: string]: string } = {
     interestPaidThisMonth: "Interest Paid This Month",
     principalPaidThisMonth: "Principal Paid This Month",
@@ -24,6 +28,7 @@ function BuyingChart({graphData}: {graphData: BuyingDetails['monthValueChanges']
     stackingOrder: "descending",
   };
 
+  if (graphData.length === 0) return <></>;
   return (
     <LineChart
       xAxis={[

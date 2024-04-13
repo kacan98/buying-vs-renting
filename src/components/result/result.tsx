@@ -6,8 +6,8 @@ import { RentingState } from "../../../store/calculatorSlices/renting.ts";
 import { BuyingState } from "../../../store/calculatorSlices/buying.ts";
 import ResultBlock, { ResultBlockProps } from "./resultBlock.tsx";
 import BuyingChart from "./buyingChart.tsx";
-import { calculateRent } from "../../helpers/renting/renting.service.ts";
-import { calculateMortgageDetails } from "../../helpers/buying/buying.service.ts";
+import { calculateRent } from "../../services/renting/renting.service.ts";
+import { calculateMortgageDetails } from "../../services/buying/buying.service.ts";
 import {toLocaleCurrencyString} from "../../helpers/financialFcs.ts"
 
 function Result() {
@@ -34,16 +34,15 @@ function Result() {
     monthValueChanges,
     buyingCost,
     sellingCost,
-    total: totalBuying,
-    totalMortgagePaid
+    totalBuying,
   } = calculateMortgageDetails({
     yearsStaying,
-    propertyPrice,
+    initialPropertyValue: propertyPrice,
     deposit,
     yearlyOwnershipCost,
     loanTerm,
     interestRate,
-    annualAppreciationRate: propertyValueGrowth,
+    propertyValueGrowth: propertyValueGrowth,
     buyingCostsPercentage,
     sellingCostsPercentage,
   });
@@ -54,7 +53,7 @@ function Result() {
     yearsStaying,
   })
   
-  const totalRenting = rentTotal + initialInvestment;
+  const totalRenting = - (rentTotal + initialInvestment);
   const rentingRows: ResultBlockProps["rows"] = [
     {
       label: "Rent",
@@ -63,12 +62,11 @@ function Result() {
     },
     { label: "Deposit", value: -1 * initialInvestment },
     'divider',
-    { label: "Total", value: -1 * (totalRenting) },
+    { label: "Total", value: totalRenting },
   ];
   
   const mortgageDetails: ResultBlockProps["rows"] = [
-    { label: "Remaining debt", value: -1 * remainingBalance },
-    { label: "Total Interest Paid", value: -1 * totalInterestPaid },
+    { label: "Remaining debt at the end", value: -1 * remainingBalance },
   ]
   
   const buyingAndSellingDetails: ResultBlockProps["rows"] = [
@@ -85,16 +83,13 @@ function Result() {
   ]
   
   //TODO: this should probably be generalized for all tooltips
-  const capitalFromSale = capitalFromSaleDetails.reduce((acc, row) => {
-    if(row === 'divider') return acc;
-    return acc + row.value;
-  }, 0);
+  const capitalFromSale =  propertyPrice + totalPropertyValueIncrease  - deposit - remainingBalance - totalInterestPaid
 
   const buyingRows: ResultBlockProps["rows"] = [
-    { label: "Mortgage paid", value: - totalMortgagePaid, tooltip: <ResultBlock rows={mortgageDetails} heading={'Mortgage details:'}/>},
+    { label: "Interest on mortgage paid", value: - totalInterestPaid, tooltip: <ResultBlock rows={mortgageDetails} heading={'Mortgage details:'}/>},
     { label: "Buying and selling costs", value: -1 * (buyingCost + sellingCost), tooltip: <ResultBlock rows={buyingAndSellingDetails} heading={'Buying and selling details:'}/> },
     { label: "Total ownership costs", value: -1 * totalOwnershipCosts, tooltip: <div>Simply ownership cost over the time of staying</div> },
-    { label: "Capital from selling", value: capitalFromSale, tooltip: <ResultBlock heading={'Capital from selling details'} rows={capitalFromSaleDetails} />},
+    { label: "Capital from buying and selling", value: capitalFromSale, tooltip: <ResultBlock heading={'Capital from selling details'} rows={capitalFromSaleDetails} />},
     'divider',
     { label: "Total", value: totalBuying },
   ];
@@ -103,10 +98,11 @@ function Result() {
     return `${label} for ${years} year${years != 1 ? "s" : ""}`;
   };
   
-  const difference = totalBuying - totalRenting;
+  const buyingIsBetter = totalBuying > totalRenting;
+  const difference = buyingIsBetter ? totalRenting - totalBuying : totalBuying - totalRenting;
   
   const result = <Typography variant={'h3'} gutterBottom>
-    {difference > 0 ? "Buying is better" : "Renting is better"}
+    {buyingIsBetter ? "Buying is better" : "Renting is better"}
     {` by ${toLocaleCurrencyString(Math.abs(difference))}`}
   </Typography>
 
