@@ -11,10 +11,10 @@ export function useAlternativeInvestmentReturns() {
     alternativeInvestmentReturnPercentage,
     initialInvestment: rentDeposit,
     investDifference,
-  } = useSelector((state: RootState) => state.renting);
+  } = useSelector((state: RootState) => state.calculator.renting);
 
   const yearsStaying = useSelector(
-    (state: RootState) => state.futurePredictions.yearsStaying,
+    (state: RootState) => state.calculator.futurePredictions.yearsStaying,
   );
 
   const initialCash =

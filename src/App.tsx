@@ -47,7 +47,7 @@ function App() {
                 <Result />
               </PaperWrapper>
             </Grid>
-            <Grid item sm={12}>
+            <Grid item sm={12} mt={0}>
               <Button
                 fullWidth
                 sx={{ mb: 2 }}

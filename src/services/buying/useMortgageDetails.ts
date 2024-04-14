@@ -5,13 +5,17 @@ import { getMonthlyMortgagePayment } from "./buying.service.ts";
 export function useMortgageDetails() {
   const mortgageDetails = {
     initialPropertyValue: useSelector(
-      (state: RootState) => state.buying.propertyPrice,
+      (state: RootState) => state.calculator.buying.propertyPrice,
     ),
     depositPercentage: useSelector(
-      (state: RootState) => state.buying.depositPercentage,
+      (state: RootState) => state.calculator.buying.depositPercentage,
     ),
-    loanTerm: useSelector((state: RootState) => state.buying.loanTerm),
-    interestRate: useSelector((state: RootState) => state.buying.interestRate),
+    loanTerm: useSelector(
+      (state: RootState) => state.calculator.buying.loanTerm,
+    ),
+    interestRate: useSelector(
+      (state: RootState) => state.calculator.buying.interestRate,
+    ),
   };
 
   const mortgageDeposit =

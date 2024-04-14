@@ -1,7 +1,6 @@
-import { setBuyingValue } from "./buying";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../index";
-import React from "react";
+import { CalculatorState, RootState } from "../index";
+import { setBuyingValue } from "./buying.ts";
 import { setRentingValue } from "./renting.ts";
 import { setFuturePredictionsValue } from "./futurePreditions.ts";
 
@@ -11,18 +10,14 @@ const createAction = {
   futurePredictions: setFuturePredictionsValue,
 };
 
-export default function useCalculatorSlice<T extends keyof RootState>(
+export default function useCalculatorSlice<T extends keyof CalculatorState>(
   sliceName: T,
 ) {
-  const stateSlice: RootState[T] = useSelector(
-    (state: RootState) => state[sliceName],
+  const stateSlice: CalculatorState[T] = useSelector(
+    (state: RootState) => state.calculator[sliceName],
   );
-  const dispatch = useDispatch();
 
-  /**
-   * Only works for floats for now
-   * */
-  const createFloatStateUpdateFc = (fieldName: keyof RootState[T]) => {
+  const createFloatStateUpdateFc = (fieldName: keyof CalculatorState[T]) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       const action = createAction[sliceName];
       const value = parseFloat(e.target.value || "0");
@@ -34,6 +29,7 @@ export default function useCalculatorSlice<T extends keyof RootState>(
       );
     };
   };
+  const dispatch = useDispatch();
 
   return {
     stateSlice,

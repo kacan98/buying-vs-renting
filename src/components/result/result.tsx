@@ -16,10 +16,10 @@ function Result() {
     useLocaleCurrencyFormatter();
 
   const { initialInvestment: rentDeposit }: RentingState = useSelector(
-    (state: RootState) => state.renting,
+    (state: RootState) => state.calculator.renting,
   );
   const { yearsStaying }: FuturePredictionsState = useSelector(
-    (state: RootState) => state.futurePredictions,
+    (state: RootState) => state.calculator.futurePredictions,
   );
 
   const {
@@ -31,7 +31,7 @@ function Result() {
     buyingCostsPercentage,
     sellingCostsPercentage,
     propertyValueGrowthPercentage,
-  }: BuyingState = useSelector((state: RootState) => state.buying);
+  }: BuyingState = useSelector((state: RootState) => state.calculator.buying);
 
   const {
     totalInterestPaid,

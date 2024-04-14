@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { CurrencyExchange } from "@mui/icons-material";
+import { CurrencyExchange, RestartAltRounded } from "@mui/icons-material";
 import React, { useState } from "react";
 import { OptionsModal } from "./optionsModal.tsx";
 import { supportedCurrencies } from "../../store/settings/supportedLocales.ts";
@@ -22,39 +22,55 @@ export interface SimpleDialogProps {
 
 export function SettingsDialog(props: SimpleDialogProps) {
   const { onClose, open } = props;
-  const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
+  const [currencyDialogOpen, toggleCurrencyDialog] = useState(false);
   const dispatch = useDispatch();
 
-  const handleListItemClick = (name: string) => {
-    switch (name) {
-      case "Language":
-        //TODO
-        break;
-      case "Currency":
-        setConfirmationDialogOpen(true);
-        break;
-    }
-  };
-
-  const handleCurrencyModalClose = () => (value?: string) => {
-    if (value) {
-      dispatch(setCurrency(value));
-    }
-    setConfirmationDialogOpen(false);
-  };
   const currentLocale = useSelector(
     (state: RootState) => state.settings.locale,
   );
   const currency = useSelector((state: RootState) => state.settings.currency);
 
+  const handleCurrencyModalClose = () => (value?: string) => {
+    if (value) {
+      dispatch(setCurrency(value));
+
+      if (currentLocale) {
+        onClose();
+      }
+    }
+    toggleCurrencyDialog(false);
+  };
+
   const settings: {
-    name: string;
+    name: "Language" | "Currency" | "Start over";
     icon: React.ReactNode;
-    value: string;
+    value?: string;
+    hide?: boolean;
   }[] = [
     // { name: "Language", value: locale, icon: <Language /> }, //TODO
-    { name: "Currency", value: currency || "USD", icon: <CurrencyExchange /> },
+    { name: "Currency", value: currency, icon: <CurrencyExchange /> },
+    {
+      name: "Start over",
+      icon: <RestartAltRounded />,
+      hide: !currency || !currentLocale,
+    },
   ];
+
+  const handleListItemClick = (name: (typeof settings)[number]["name"]) => {
+    switch (name) {
+      case "Language":
+        //TODO
+        break;
+      case "Currency":
+        toggleCurrencyDialog(true);
+        break;
+      case "Start over":
+        localStorage.removeItem("state");
+        //refresh page
+        window.location.reload();
+        break;
+    }
+  };
 
   return (
     <Dialog
@@ -68,14 +84,17 @@ export function SettingsDialog(props: SimpleDialogProps) {
     >
       <DialogTitle>Settings</DialogTitle>
       <List sx={{ pt: 0 }}>
-        {settings.map(({ name, value, icon }) => (
-          <ListItem disableGutters key={name}>
-            <ListItemButton onClick={() => handleListItemClick(name)}>
-              <ListItemAvatar>{icon}</ListItemAvatar>
-              <ListItemText primary={name} secondary={value} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {settings.map(
+          ({ name, value, icon, hide }) =>
+            !hide && (
+              <ListItem disableGutters key={name}>
+                <ListItemButton onClick={() => handleListItemClick(name)}>
+                  <ListItemAvatar>{icon}</ListItemAvatar>
+                  <ListItemText primary={name} secondary={value} />
+                </ListItemButton>
+              </ListItem>
+            ),
+        )}
       </List>
 
       <OptionsModal
@@ -83,7 +102,7 @@ export function SettingsDialog(props: SimpleDialogProps) {
         keepMounted={false}
         value={currency}
         title={"Select currency"}
-        open={confirmationDialogOpen}
+        open={currencyDialogOpen}
         onClose={handleCurrencyModalClose()}
         options={supportedCurrencies.map(
           ({ locale, abbreviation, prefix, suffix }) => ({

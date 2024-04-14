@@ -6,11 +6,11 @@ import { FuturePredictionsState } from "../../../store/calculatorSlices/futurePr
 
 export const useRentDetails = () => {
   const { monthlyRent, yearlyRentGrowth }: RentingState = useSelector(
-    (state: RootState) => state.renting,
+    (state: RootState) => state.calculator.renting,
   );
 
   const { yearsStaying }: FuturePredictionsState = useSelector(
-    (state: RootState) => state.futurePredictions,
+    (state: RootState) => state.calculator.futurePredictions,
   );
 
   const rentTotal = calculateRent({

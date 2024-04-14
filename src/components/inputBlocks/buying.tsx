@@ -13,7 +13,7 @@ import { useMortgageDetails } from "../../services/buying/useMortgageDetails.ts"
 import { useLocaleCurrencyFormatter } from "../../../store/settings/useLocale.ts";
 
 function Buying() {
-  const { stateSlice: buyingState, createStateUpdateFc } =
+  const { createStateUpdateFc, stateSlice: buyingState } =
     useCalculatorSlice("buying");
 
   const {
@@ -35,7 +35,7 @@ function Buying() {
   const { paymentPerMonth: mortgagePerMonth } = useMortgageDetails();
 
   const yearsStaying = useSelector(
-    (state: RootState) => state.futurePredictions.yearsStaying,
+    (state: RootState) => state.calculator.futurePredictions.yearsStaying,
   );
 
   const loanAmount = getLoanAmount({
