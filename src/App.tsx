@@ -1,4 +1,4 @@
-import { Box, Grid, ThemeProvider } from "@mui/material";
+import { Box, ThemeProvider } from "@mui/material";
 import customTheme from "./theme.ts";
 import PaperWrapper from "./components/paper.tsx";
 import CalculatorInputs from "./components/calculatorInputs.tsx";
@@ -10,6 +10,7 @@ import { RootState } from "../store";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { SettingsDialog } from "./components/settingsDialog.tsx";
+import Grid2 from "@mui/material/Unstable_Grid2";
 
 function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -25,7 +26,7 @@ function App() {
             backgroundColor: "#e3dede",
           }}
         >
-          <Grid
+          <Grid2
             container
             spacing={2}
             justifyContent={"center"}
@@ -34,20 +35,20 @@ function App() {
               margin: "0 auto",
             }}
           >
-            <Grid item xs={12}>
+            <Grid2 xs={12}>
               <PaperWrapper>
                 <IntroBlock />
               </PaperWrapper>
-            </Grid>
-            <Grid item sm={12} lg={8}>
+            </Grid2>
+            <Grid2 sm={12} lg={8}>
               <CalculatorInputs />
-            </Grid>
-            <Grid item sm={12} lg={4}>
+            </Grid2>
+            <Grid2 sm={12} lg={4}>
               <PaperWrapper>
                 <Result />
               </PaperWrapper>
-            </Grid>
-            <Grid item sm={12} mt={0}>
+            </Grid2>
+            <Grid2 sm={12} mt={0}>
               <Button
                 fullWidth
                 sx={{ mb: 2 }}
@@ -57,8 +58,8 @@ function App() {
               >
                 Settings
               </Button>
-            </Grid>
-          </Grid>
+            </Grid2>
+          </Grid2>
         </Box>
       )}
 
