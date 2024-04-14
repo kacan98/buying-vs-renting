@@ -5,12 +5,12 @@ import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSli
 import { toLocaleCurrencyString } from "../../helpers/financialFcs.ts";
 import {
   getLoanAmount,
-  getMonthlyMortgagePayment,
   simulateTimePassage,
 } from "../../services/buying/buying.service.ts";
 import { PieChart } from "@mui/x-charts";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
+import { useMortgageDetails } from "../../services/buying/useMortgageDetails.ts";
 
 function Buying() {
   const { stateSlice: buyingState, createStateUpdateFc } =
@@ -18,6 +18,7 @@ function Buying() {
 
   const {
     propertyPrice,
+    propertyValueGrowthPercentage,
     loanTerm,
     interestRate,
     buyingCostsPercentage,
@@ -28,19 +29,12 @@ function Buying() {
 
   const deposit = propertyPrice * (depositPercentage / 100);
 
-  const monthlyPayment = getMonthlyMortgagePayment({
-    initialPropertyValue: propertyPrice,
-    deposit: deposit,
-    loanTerm,
-    interestRate,
-  });
+  const { paymentPerMonth: mortgagePerMonth } = useMortgageDetails();
 
   const yearsStaying = useSelector(
     (state: RootState) => state.futurePredictions.yearsStaying,
   );
-  const propertyValueGrowth = useSelector(
-    (state: RootState) => state.futurePredictions.propertyValueGrowth,
-  );
+
   const loanAmount = getLoanAmount({
     deposit,
     initialPropertyValue: propertyPrice,
@@ -56,11 +50,11 @@ function Buying() {
 
     interestRate,
     loanAmount,
-    propertyValueGrowth,
+    propertyValueGrowthPercentage,
     buyingCostsPercentage,
     sellingCostsPercentage,
 
-    mortgagePerMonth: monthlyPayment,
+    mortgagePerMonth,
   });
 
   return (
@@ -78,6 +72,12 @@ function Buying() {
             value: propertyPrice,
             onChange: createStateUpdateFc("propertyPrice"),
             formatAsCurrency: true,
+          },
+          {
+            label: "Property Value Growth",
+            value: propertyValueGrowthPercentage,
+            onChange: createStateUpdateFc("propertyValueGrowthPercentage"),
+            InputProps: getPercentageAdornment(true),
           },
         ]}
       />
@@ -110,7 +110,7 @@ function Buying() {
         ]}
       />
       <Typography variant="body1">
-        {`You would pay ${toLocaleCurrencyString(monthlyPayment)} per month.`}
+        {`You would pay ${toLocaleCurrencyString(mortgagePerMonth)} per month.`}
       </Typography>
       <Grid container justifyContent={"center"}>
         {totalPrincipalPaid !== 0 && totalInterestPaid && (

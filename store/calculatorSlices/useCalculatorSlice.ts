@@ -19,10 +19,13 @@ export default function useCalculatorSlice<T extends keyof RootState>(
   );
   const dispatch = useDispatch();
 
-  const createStateUpdateFc = (fieldName: keyof RootState[T]) => {
+  /**
+   * Only works for floats for now
+   * */
+  const createFloatStateUpdateFc = (fieldName: keyof RootState[T]) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       const action = createAction[sliceName];
-      const value = e.target.value || "";
+      const value = parseFloat(e.target.value || "");
       dispatch(
         action({
           key: fieldName,
@@ -32,5 +35,9 @@ export default function useCalculatorSlice<T extends keyof RootState>(
     };
   };
 
-  return { stateSlice, createStateUpdateFc, dispatch };
+  return {
+    stateSlice,
+    createStateUpdateFc: createFloatStateUpdateFc,
+    dispatch,
+  };
 }

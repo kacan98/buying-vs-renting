@@ -7,7 +7,7 @@ export interface MortgageDetailsParams {
   loanTerm: number;
 
   interestRate: number;
-  propertyValueGrowth: number;
+  propertyValueGrowthPercentage: number;
   buyingCostsPercentage: number;
   sellingCostsPercentage: number;
 }

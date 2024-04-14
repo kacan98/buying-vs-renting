@@ -1,7 +1,7 @@
 import {
   BuyingDetails,
-  PeriodValueChange,
   MortgageDetailsParams,
+  PeriodValueChange,
 } from "./buying.model.ts";
 
 export function calculateLoanDetails({
@@ -14,10 +14,7 @@ export function calculateLoanDetails({
   mortgagePerMonth: number;
   deposit: number;
 } {
-  console.log("initialPropertyValue", initialPropertyValue);
-  console.log(depositPercentage);
   const deposit = initialPropertyValue * (depositPercentage / 100);
-  console.log("deposit", deposit);
   const loanAmount = initialPropertyValue - deposit;
   const mortgagePerMonth = getMonthlyMortgagePayment({
     initialPropertyValue,
@@ -36,7 +33,7 @@ export function calculateLoanDetails({
 export function simulateTimePassage({
   yearsStaying,
   yearlyOwnershipCost,
-  propertyValueGrowth,
+  propertyValueGrowthPercentage,
   loanAmount,
   mortgagePerMonth,
   interestRate,
@@ -71,7 +68,7 @@ export function simulateTimePassage({
     //These will happen even though the loan is paid off
     totalOwnershipCosts += yearlyOwnershipCost / 12;
     const thisMonthPropertyValueIncrease =
-      currentPropertyValue * (propertyValueGrowth / 100 / 12);
+      currentPropertyValue * (propertyValueGrowthPercentage / 100 / 12);
     totalPropertyValueIncrease += thisMonthPropertyValueIncrease;
     currentPropertyValue += thisMonthPropertyValueIncrease;
 
@@ -129,7 +126,6 @@ export function calculateCosts({
 export function calculateMortgageDetails(
   params: MortgageDetailsParams,
 ): BuyingDetails {
-  console.log("depositPercentage", params.depositPercentage);
   //check for 0s
   if (params.loanTerm === 0 || params.yearsStaying === 0) {
     return {
@@ -171,14 +167,6 @@ export function calculateMortgageDetails(
     endPropertyValue,
     monthValueChanges,
   });
-  console.log(
-    buyingCost,
-    deposit,
-    totalMortgagePaid,
-    remainingBalance,
-    totalOwnershipCosts,
-    sellingCost,
-  );
 
   const totalCosts =
     buyingCost +
@@ -208,7 +196,6 @@ export function calculateMortgageDetails(
     },
     [] as PeriodValueChange[],
   );
-  console.log(monthValueChanges);
 
   return {
     totalInterestPaid,

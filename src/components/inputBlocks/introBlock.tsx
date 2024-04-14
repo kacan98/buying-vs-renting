@@ -16,10 +16,6 @@ const IntroBlock = () => {
         whether to rent or buy a property.
       </Typography>
       <Typography variant={"body1"} gutterBottom>
-        Remember that similar properties should be compared, otherwise the
-        results may be misleading.
-      </Typography>
-      <Typography variant={"body1"} gutterBottom>
         How long do you plan to stay in the property?
       </Typography>
       <NumberField

@@ -8,6 +8,7 @@ export interface BuyingState {
   interestRate: number;
   buyingCostsPercentage: number;
   sellingCostsPercentage: number;
+  propertyValueGrowthPercentage: number;
 }
 
 const initialState: BuyingState = {
@@ -18,6 +19,7 @@ const initialState: BuyingState = {
   interestRate: 4.5,
   buyingCostsPercentage: 1,
   sellingCostsPercentage: 1,
+  propertyValueGrowthPercentage: 3,
 };
 
 export const buyingSlice = createSlice({

@@ -1,4 +1,3 @@
-import FuturePredictions from "./inputBlocks/futurePredictions.tsx";
 import Renting from "./inputBlocks/renting.tsx";
 import PaperWrapper from "./paper.tsx";
 import Buying from "./inputBlocks/buying.tsx";
@@ -12,9 +11,6 @@ function CalculatorInputs() {
       </PaperWrapper>
       <PaperWrapper title={"Buying"}>
         <Buying />
-      </PaperWrapper>
-      <PaperWrapper title={"The future"}>
-        <FuturePredictions />
       </PaperWrapper>
       <br />
     </Stack>
