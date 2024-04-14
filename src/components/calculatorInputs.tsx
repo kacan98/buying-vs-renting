@@ -13,7 +13,7 @@ function CalculatorInputs() {
       <PaperWrapper title={"Buying"}>
         <Buying />
       </PaperWrapper>
-      <PaperWrapper title={"Future Predictions"}>
+      <PaperWrapper title={"The future"}>
         <FuturePredictions />
       </PaperWrapper>
       <br />

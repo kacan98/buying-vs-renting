@@ -1,10 +1,11 @@
 import { Typography } from "@mui/material";
-import NumberField from "../numberField.tsx"
-import {getInputProps} from "../adornments.tsx"
-import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts"
+import NumberField from "../numberField.tsx";
+import { getInputProps } from "../adornments.tsx";
+import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
 
 const IntroBlock = () => {
-  const { stateSlice: introState, createStateUpdateFc } = useCalculatorSlice('futurePredictions');
+  const { stateSlice: predictionsState, createStateUpdateFc } =
+    useCalculatorSlice("futurePredictions");
   return (
     <>
       <Typography variant={"h2"} component={"h1"} gutterBottom>
@@ -15,13 +16,14 @@ const IntroBlock = () => {
         whether to rent or buy a property.
       </Typography>
       <Typography variant={"body1"} gutterBottom>
-        Remember that similar properties should be compared, otherwise the results may be misleading.
+        Remember that similar properties should be compared, otherwise the
+        results may be misleading.
       </Typography>
       <Typography variant={"body1"} gutterBottom>
         How long do you plan to stay in the property?
       </Typography>
       <NumberField
-        value={introState.yearsStaying}
+        value={predictionsState.yearsStaying}
         InputProps={getInputProps({
           endAdornment: "years",
         })}

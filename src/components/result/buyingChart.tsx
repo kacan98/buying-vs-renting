@@ -1,57 +1,87 @@
 import { LineChart } from "@mui/x-charts";
-import { BuyingDetails } from "../../services/buying/buying.model.ts";
+import { PeriodValueChange } from "../../services/buying/buying.model.ts";
 
-function BuyingChart({
-  graphData,
-}: {
-  graphData: BuyingDetails["monthValueChanges"];
-}) {
-  const keyToLabel: { [key: string]: string } = {
-    interestPaidThisMonth: "Interest Paid This Month",
-    principalPaidThisMonth: "Principal Paid This Month",
-    increaseInPropertyValue: "Increase In Property Value",
-    monthlyOwnershipCost: "Monthly Ownership Cost",
-    buyingCosts: "Buying Costs",
-    sellingCosts: "Selling Costs",
-  };
+function BuyingChart({ graphData }: { graphData: PeriodValueChange[] }) {
+  if (graphData.length === 0) return <></>;
+  const labelObjects = (
+    Object.keys(graphData[0]) as (keyof PeriodValueChange)[]
+  ).reduce(
+    (sum, key) => {
+      if (!isNegativeFc(key)) return sum;
 
-  const stackStrategy = {
-    // stack: 'total',
-    // area: true,
-    stackOffset: "none", // To stack 0 on top of others
-  } as const;
+      const label = {
+        id: key,
+        label: labelNameMap[key],
+        data: graphData.map((data) => {
+          return data[key];
+        }),
+        stack: "total",
+        area: true,
+        showMark: false,
+      };
+      sum.push(label);
+      return sum;
+    },
+    [] as {
+      id: string;
+      label: string;
+      data: number[];
+      stack: string;
+      area: boolean;
+      showMark: boolean;
+    }[],
+  );
 
   const customize = {
-    height: 300,
+    height: 250,
     legend: { hidden: true },
     margin: { top: 5 },
-    stackingOrder: "descending",
   };
+
+  const years: number[] = graphData.map((_, index) => {
+    const year = new Date(
+      new Date().setFullYear(new Date().getFullYear() + index),
+    );
+    return year.getFullYear();
+  });
 
   if (graphData.length === 0) return <></>;
   return (
     <LineChart
       xAxis={[
         {
-          dataKey: "month",
           valueFormatter: (value) => value.toString(),
-          min: 0,
-          max: graphData.length,
+          data: years,
         },
       ]}
-      series={Object.keys(keyToLabel).map((key) => ({
-        dataKey: key,
-        label: keyToLabel[key],
-        showMark: false,
-        ...stackStrategy,
-      }))}
-      dataset={graphData.map((data, index) => ({
-        ...data,
-        month: index + 1,
-      }))}
+      series={labelObjects}
       {...customize}
     />
   );
 }
 
 export default BuyingChart;
+
+const isNegativeFc = (key: keyof PeriodValueChange) => {
+  switch (key) {
+    case "interestPaid":
+    case "ownershipCost":
+    case "buyingCosts":
+    case "sellingCosts":
+    case "principalPaid":
+      return true;
+    case "increaseInPropertyValue":
+      return false;
+    default:
+      throw new Error("Invalid key");
+  }
+};
+
+const labelNameMap = {
+  interestPaid: "Interest paid",
+  principalPaid: "Principal paid",
+  increaseInPropertyValue: "Increase in property value",
+  ownershipCost: "Ownership cost",
+  buyingCosts: "Buying costs",
+  sellingCosts: "Selling costs",
+};

@@ -1,7 +1,7 @@
 import NumberFields from "../numberFields.tsx";
 import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
 import { NumberFieldProps } from "../numberField.tsx";
-import {getInputProps} from "../adornments.tsx"
+import { getInputProps } from "../adornments.tsx";
 
 const Renting = () => {
   const { stateSlice: rentingState, createStateUpdateFc } =
@@ -15,10 +15,9 @@ const Renting = () => {
       formatAsCurrency: true,
     },
     {
-      label: "Initial investment",
+      label: "Deposit",
       value: rentingState.initialInvestment,
       onChange: createStateUpdateFc("initialInvestment"),
-      helperText: "e.g. deposit",
       formatAsCurrency: true,
     },
     {
@@ -26,7 +25,7 @@ const Renting = () => {
       value: rentingState.yearlyRentGrowth,
       onChange: createStateUpdateFc("yearlyRentGrowth"),
       InputProps: getInputProps({
-        endAdornment: '% per year',
+        endAdornment: "% per year",
       }),
     },
   ];

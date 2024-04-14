@@ -1,18 +1,23 @@
 import {
   BuyingDetails,
-  MonthValueChange,
+  PeriodValueChange,
   MortgageDetailsParams,
 } from "./buying.model.ts";
 
 export function calculateLoanDetails({
   initialPropertyValue,
-  deposit,
+  depositPercentage,
   loanTerm,
   interestRate,
 }: MortgageDetailsParams): {
   loanAmount: number;
   mortgagePerMonth: number;
+  deposit: number;
 } {
+  console.log("initialPropertyValue", initialPropertyValue);
+  console.log(depositPercentage);
+  const deposit = initialPropertyValue * (depositPercentage / 100);
+  console.log("deposit", deposit);
   const loanAmount = initialPropertyValue - deposit;
   const mortgagePerMonth = getMonthlyMortgagePayment({
     initialPropertyValue,
@@ -24,6 +29,7 @@ export function calculateLoanDetails({
   return {
     loanAmount,
     mortgagePerMonth,
+    deposit,
   };
 }
 
@@ -42,12 +48,12 @@ export function simulateTimePassage({
   let remainingBalance = loanAmount;
   let totalMortgagePaid = 0;
   let totalInterestPaid = 0;
-  let totalPrincipalPaid = 0
+  let totalPrincipalPaid = 0;
   let currentPropertyValue = initialPropertyValue;
   let totalPropertyValueIncrease = 0;
   let totalOwnershipCosts = 0;
   let currentMonth = 0;
-  const monthValueChanges: MonthValueChange[] = [];
+  const monthValueChanges: PeriodValueChange[] = [];
 
   while (currentMonth < yearsStaying * 12) {
     let interestPaidThisMonth = 0;
@@ -58,7 +64,7 @@ export function simulateTimePassage({
       principalPaidThisMonth = mortgagePerMonth - interestPaidThisMonth;
       remainingBalance -= principalPaidThisMonth;
       totalInterestPaid += interestPaidThisMonth;
-      totalPrincipalPaid += principalPaidThisMonth
+      totalPrincipalPaid += principalPaidThisMonth;
       totalMortgagePaid += mortgagePerMonth;
     }
 
@@ -69,11 +75,11 @@ export function simulateTimePassage({
     totalPropertyValueIncrease += thisMonthPropertyValueIncrease;
     currentPropertyValue += thisMonthPropertyValueIncrease;
 
-    const monthValueChange: MonthValueChange = {
-      interestPaidThisMonth,
-      principalPaidThisMonth,
+    const monthValueChange: PeriodValueChange = {
+      interestPaid: interestPaidThisMonth,
+      principalPaid: principalPaidThisMonth,
       increaseInPropertyValue: thisMonthPropertyValueIncrease,
-      monthlyOwnershipCost: yearlyOwnershipCost / 12,
+      ownershipCost: yearlyOwnershipCost / 12,
       buyingCosts: 0,
       sellingCosts: 0,
     };
@@ -107,7 +113,7 @@ export function calculateCosts({
 }: MortgageDetailsParams & {
   initialPropertyValue: number;
   endPropertyValue: number;
-  monthValueChanges: MonthValueChange[];
+  monthValueChanges: PeriodValueChange[];
 }) {
   const buyingCost = initialPropertyValue * (buyingCostsPercentage / 100);
   const sellingCost = endPropertyValue * (sellingCostsPercentage / 100);
@@ -123,7 +129,29 @@ export function calculateCosts({
 export function calculateMortgageDetails(
   params: MortgageDetailsParams,
 ): BuyingDetails {
-  const { loanAmount, mortgagePerMonth } = calculateLoanDetails(params);
+  console.log("depositPercentage", params.depositPercentage);
+  //check for 0s
+  if (params.loanTerm === 0 || params.yearsStaying === 0) {
+    return {
+      totalInterestPaid: 0,
+      remainingBalance: 0,
+      totalPropertyValueIncrease: 0,
+      totalOwnershipCosts: 0,
+      monthValueChanges: [],
+      yearValueChanges: [],
+      buyingCost: 0,
+      sellingCost: 0,
+      totalCosts: 0,
+      totalBuying: 0,
+      totalMortgagePaid: 0,
+      totalPrincipalPaid: 0,
+      mortgagePerMonth: 0,
+      deposit: 0,
+    };
+  }
+
+  const { loanAmount, mortgagePerMonth, deposit } =
+    calculateLoanDetails(params);
   const {
     remainingBalance,
     totalMortgagePaid,
@@ -132,7 +160,7 @@ export function calculateMortgageDetails(
     totalOwnershipCosts,
     monthValueChanges,
     endPropertyValue,
-    totalPrincipalPaid
+    totalPrincipalPaid,
   } = simulateTimePassage({
     ...params,
     loanAmount,
@@ -143,10 +171,18 @@ export function calculateMortgageDetails(
     endPropertyValue,
     monthValueChanges,
   });
+  console.log(
+    buyingCost,
+    deposit,
+    totalMortgagePaid,
+    remainingBalance,
+    totalOwnershipCosts,
+    sellingCost,
+  );
 
   const totalCosts =
     buyingCost +
-    params.deposit +
+    deposit +
     totalMortgagePaid +
     remainingBalance +
     totalOwnershipCosts +
@@ -154,18 +190,40 @@ export function calculateMortgageDetails(
   const total =
     totalPropertyValueIncrease + params.initialPropertyValue - totalCosts;
 
+  const yearValueChanges: PeriodValueChange[] = monthValueChanges.reduce(
+    (acc, monthValueChange, i) => {
+      if (i % 12 === 0) {
+        //we don't want to modify the original object
+        acc.push(structuredClone(monthValueChange));
+      } else {
+        acc[acc.length - 1].interestPaid += monthValueChange.interestPaid;
+        acc[acc.length - 1].principalPaid += monthValueChange.principalPaid;
+        acc[acc.length - 1].increaseInPropertyValue +=
+          monthValueChange.increaseInPropertyValue;
+        acc[acc.length - 1].ownershipCost += monthValueChange.ownershipCost;
+        acc[acc.length - 1].buyingCosts += monthValueChange.buyingCosts;
+        acc[acc.length - 1].sellingCosts += monthValueChange.sellingCosts;
+      }
+      return acc;
+    },
+    [] as PeriodValueChange[],
+  );
+  console.log(monthValueChanges);
+
   return {
     totalInterestPaid,
     remainingBalance,
     totalPropertyValueIncrease,
     totalOwnershipCosts,
     monthValueChanges,
+    yearValueChanges,
     buyingCost,
     sellingCost,
     totalCosts,
     totalMortgagePaid,
     totalPrincipalPaid,
     mortgagePerMonth,
+    deposit,
 
     totalBuying: total,
   };
@@ -178,7 +236,7 @@ export function getLoanAmount({
   deposit: number;
   initialPropertyValue: number;
 }) {
-  return initialPropertyValue-deposit
+  return initialPropertyValue - deposit;
 }
 
 export function getMonthlyMortgagePayment({
@@ -194,8 +252,8 @@ export function getMonthlyMortgagePayment({
 }) {
   const loanAmount = getLoanAmount({
     deposit,
-    initialPropertyValue
-  })
+    initialPropertyValue,
+  });
   const monthlyInterestRate = interestRate / 100 / 12;
   const totalPayments = loanTerm * 12;
 

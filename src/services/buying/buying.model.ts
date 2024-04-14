@@ -1,28 +1,29 @@
 export interface MortgageDetailsParams {
   initialPropertyValue: number;
-  deposit: number;
   yearlyOwnershipCost: number;
-  
+  depositPercentage: number;
+
   yearsStaying: number;
   loanTerm: number;
-  
+
   interestRate: number;
   propertyValueGrowth: number;
   buyingCostsPercentage: number;
   sellingCostsPercentage: number;
 }
 
-export interface MonthValueChange {
-  interestPaidThisMonth: number;
-  principalPaidThisMonth: number;
+export interface PeriodValueChange {
+  interestPaid: number;
+  principalPaid: number;
   increaseInPropertyValue: number;
   buyingCosts: number;
   sellingCosts: number;
-  monthlyOwnershipCost: number;
+  ownershipCost: number;
 }
 [];
 
 export interface BuyingDetails {
+  deposit: number;
   totalInterestPaid: number;
   remainingBalance: number;
   totalMortgagePaid: number;
@@ -30,11 +31,12 @@ export interface BuyingDetails {
   mortgagePerMonth: number;
   totalPropertyValueIncrease: number;
   totalOwnershipCosts: number;
-  
-  monthValueChanges: MonthValueChange[];
+
+  monthValueChanges: PeriodValueChange[];
+  yearValueChanges: PeriodValueChange[];
   buyingCost: number;
   sellingCost: number;
-  
+
   totalCosts: number;
   totalBuying: number;
 }

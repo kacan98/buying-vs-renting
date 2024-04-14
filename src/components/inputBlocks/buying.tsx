@@ -1,5 +1,5 @@
 import { getInputProps, getPercentageAdornment } from "./../adornments.tsx";
-import {Grid, Stack, Typography} from "@mui/material"
+import { Grid, Stack, Typography } from "@mui/material";
 import NumberFields from "../numberFields.tsx";
 import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
 import { toLocaleCurrencyString } from "../../helpers/financialFcs.ts";
@@ -7,10 +7,10 @@ import {
   getLoanAmount,
   getMonthlyMortgagePayment,
   simulateTimePassage,
-} from "../../services/buying/buying.service.ts"
+} from "../../services/buying/buying.service.ts";
 import { PieChart } from "@mui/x-charts";
-import {useSelector} from "react-redux"
-import {RootState} from "../../../store"
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
 
 function Buying() {
   const { stateSlice: buyingState, createStateUpdateFc } =
@@ -18,31 +18,37 @@ function Buying() {
 
   const {
     propertyPrice,
-    deposit,
     loanTerm,
     interestRate,
     buyingCostsPercentage,
     sellingCostsPercentage,
     yearlyOwnershipCost,
+    depositPercentage,
   } = buyingState;
-  
+
+  const deposit = propertyPrice * (depositPercentage / 100);
+
   const monthlyPayment = getMonthlyMortgagePayment({
     initialPropertyValue: propertyPrice,
     deposit: deposit,
-    loanTerm: loanTerm,
-    interestRate: interestRate,
+    loanTerm,
+    interestRate,
   });
-  
-  const yearsStaying = useSelector((state: RootState) => state.futurePredictions.yearsStaying);
-  const propertyValueGrowth = useSelector((state: RootState) => state.futurePredictions.propertyValueGrowth);
+
+  const yearsStaying = useSelector(
+    (state: RootState) => state.futurePredictions.yearsStaying,
+  );
+  const propertyValueGrowth = useSelector(
+    (state: RootState) => state.futurePredictions.propertyValueGrowth,
+  );
   const loanAmount = getLoanAmount({
     deposit,
-    initialPropertyValue: propertyPrice
-  })
+    initialPropertyValue: propertyPrice,
+  });
 
   const { totalPrincipalPaid, totalInterestPaid } = simulateTimePassage({
     initialPropertyValue: propertyPrice,
-    deposit,
+    depositPercentage,
     yearlyOwnershipCost,
 
     yearsStaying,
@@ -53,18 +59,18 @@ function Buying() {
     propertyValueGrowth,
     buyingCostsPercentage,
     sellingCostsPercentage,
-    
-    mortgagePerMonth: monthlyPayment
+
+    mortgagePerMonth: monthlyPayment,
   });
 
-
-
   return (
-    <Stack spacing={2} paddingBottom={2} sx={
-      {
-        textAlign: 'left'
-      }
-    }>
+    <Stack
+      spacing={2}
+      paddingBottom={2}
+      sx={{
+        textAlign: "left",
+      }}
+    >
       <NumberFields
         inputs={[
           {
@@ -87,10 +93,13 @@ function Buying() {
             }),
           },
           {
-            label: "Deposit",
-            value: deposit,
-            onChange: createStateUpdateFc("deposit"),
-            formatAsCurrency: true,
+            label: "Deposit percentage",
+            helperText: toLocaleCurrencyString(
+              propertyPrice * (depositPercentage / 100),
+            ),
+            value: depositPercentage,
+            onChange: createStateUpdateFc("depositPercentage"),
+            InputProps: getPercentageAdornment(),
           },
           {
             label: "Interest Rate",
@@ -103,28 +112,34 @@ function Buying() {
       <Typography variant="body1">
         {`You would pay ${toLocaleCurrencyString(monthlyPayment)} per month.`}
       </Typography>
-      <Grid container justifyContent={'center'}>
-      
-     
-      {totalPrincipalPaid && totalInterestPaid && (
-        <PieChart
-          colors={["#0088FE", "orange"]}
-          series={[
-            {
-              data: [
-                { id: 0, value: totalPrincipalPaid, label: "Total principal paid" },
-                { id: 1, value: totalInterestPaid, label: "Total interest paid" },
-              ],
-              innerRadius: 50,
-              outerRadius: 100,
-              paddingAngle: 5,
-              cornerRadius: 5,
-            },
-          ]}
-          width={500}
-          height={200}
-        />
-      )}
+      <Grid container justifyContent={"center"}>
+        {totalPrincipalPaid !== 0 && totalInterestPaid && (
+          <PieChart
+            colors={["#0088FE", "orange"]}
+            series={[
+              {
+                data: [
+                  {
+                    id: 0,
+                    value: totalPrincipalPaid,
+                    label: "Total principal paid",
+                  },
+                  {
+                    id: 1,
+                    value: totalInterestPaid,
+                    label: "Total interest paid",
+                  },
+                ],
+                innerRadius: 50,
+                outerRadius: 100,
+                paddingAngle: 5,
+                cornerRadius: 5,
+              },
+            ]}
+            width={500}
+            height={200}
+          />
+        )}
       </Grid>
       <Typography variant="h4">Buying And Selling Costs</Typography>
       <NumberFields

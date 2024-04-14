@@ -25,9 +25,9 @@ export default function useCalculatorSlice<T extends keyof RootState>(
       const value = e.target.value || "";
       dispatch(
         action({
-          key: fieldName as keyof RootState[T],
-          value: value as RootState[T][keyof RootState[T]],
-        } as any),
+          key: fieldName,
+          value: value,
+        } as never),
       );
     };
   };
