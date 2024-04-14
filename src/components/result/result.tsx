@@ -10,8 +10,10 @@ import { calculateMortgageDetails } from "../../services/buying/buying.service.t
 import { useRentDetails } from "../../services/renting/useRentDetails.ts";
 import { useAlternativeInvestmentReturns } from "../../services/useAlternativeInvestment.ts";
 import { useLocaleCurrencyFormatter } from "../../../store/settings/useLocale.ts";
+import { useTranslation } from "react-i18next";
 
 function Result() {
+  const { t } = useTranslation();
   const formatAsCurrency: (value: number) => string =
     useLocaleCurrencyFormatter();
 
@@ -65,12 +67,12 @@ function Result() {
     -(rentTotal + rentDeposit) + rentDeposit + alternativeInvestment.valueAdded;
 
   const capitalFromSaleDetails: ResultBlockProps["rows"] = [
-    { label: "Original property value", value: propertyPrice },
+    { label: t("Original property value"), value: propertyPrice },
     {
-      label: "Total property value increase",
+      label: t("Total property value increase"),
       value: totalPropertyValueIncrease,
     },
-    { label: "Paying off remaining debt", value: -1 * remainingBalance },
+    { label: t("Paying off remaining debt"), value: -1 * remainingBalance },
   ];
 
   const capitalFromSale = capitalFromSaleDetails.reduce((acc, row) => {
@@ -78,8 +80,12 @@ function Result() {
     return acc + row.value;
   }, 0);
 
-  const makeLabel = (label: "Renting" | "Buying", years: number) => {
-    return `${label} for ${years} year${years != 1 ? "s" : ""}`;
+  const makeLabel = (label: "Renting" | "Buying", numberOfYears: number) => {
+    return t("labelForYears", {
+      rentingOrBuying: t(label),
+      yearsNumber: numberOfYears,
+      yearOrYears: numberOfYears !== 1 ? t("yearsPlural") : t("yearSingular"),
+    });
   };
 
   const buyingIsBetter = totalBuying > totalRenting;
@@ -94,44 +100,46 @@ function Result() {
       }}
     >
       <Typography variant={"h3"} gutterBottom>
-        {buyingIsBetter ? "Buying is better" : "Renting is better"}
-        {` by ${formatAsCurrency(Math.abs(difference))}`}
+        {t("Buying/renting is better by", {
+          buyingOrRenting: t(buyingIsBetter ? "Buying" : "Renting"),
+          difference: formatAsCurrency(Math.abs(difference)),
+        })}
       </Typography>
       <ResultBlock
         heading={makeLabel("Renting", yearsStaying)}
         rows={[
-          { label: "Deposit", value: -1 * rentDeposit },
+          { label: t("Deposit"), value: -1 * rentDeposit },
           {
-            label: "Rent",
+            label: t("Rent"),
             value: -1 * rentTotal,
           },
           {
-            label: "Investment returns",
+            label: t("Investment returns"),
             value: alternativeInvestment.valueAdded,
             tooltip: (
               <ResultBlock
-                heading={"Alternative investment"}
+                heading={t("Alternative investment")}
                 rows={[
                   {
-                    label: "Initial investment",
+                    label: t("Initial investment"),
                     value: -1 * alternativeInvestment.initialCash,
                   },
                   {
-                    label: "All monthly investments",
+                    label: t("All monthly investments"),
                     value: -1 * alternativeInvestment.allMonthlyInvestment,
                   },
                   "divider",
                   {
-                    label: "Total at the end",
+                    label: t("Total at the end"),
                     value: alternativeInvestment.totalAtTheEnd,
                   },
                 ]}
               />
             ),
           },
-          { label: "Deposit returned", value: rentDeposit },
+          { label: t("Deposit returned"), value: rentDeposit },
           "divider",
-          { label: "Total", value: totalRenting },
+          { label: t("Total"), value: totalRenting },
         ]}
       />
       <br />
@@ -139,56 +147,58 @@ function Result() {
         chart={<BuyingChart graphData={yearValueChanges} />}
         heading={makeLabel("Buying", yearsStaying)}
         rows={[
-          { label: "Deposit", value: -1 * deposit },
+          { label: t("Deposit"), value: -1 * deposit },
           {
-            label: "Mortgage paid",
+            label: t("Mortgage paid"),
             value: -totalMortgagePaid,
             tooltip: (
               <ResultBlock
                 rows={[
                   {
-                    label: "Total interest paid",
+                    label: t("Total interest paid"),
                     value: -1 * totalInterestPaid,
                   },
                   {
-                    label: "Total principal paid",
+                    label: t("Total principal paid"),
                     value: -1 * totalPrincipalPaid,
                   },
                 ]}
-                heading={"Mortgage details:"}
+                heading={t("Mortgage details")}
               />
             ),
           },
           {
-            label: "Buying and selling costs",
+            label: t("Buying and selling costs"),
             value: -1 * (buyingCost + sellingCost),
             tooltip: (
               <ResultBlock
                 rows={[
-                  { label: "Buying costs", value: -1 * buyingCost },
-                  { label: "Selling costs", value: -1 * sellingCost },
+                  { label: t("Buying costs"), value: -1 * buyingCost },
+                  { label: t("Selling costs"), value: -1 * sellingCost },
                 ]}
-                heading={"Buying and selling details:"}
+                heading={t("Buying and selling details")}
               />
             ),
           },
           {
-            label: "Total ownership costs",
+            label: t("Total ownership costs"),
             value: -1 * totalOwnershipCosts,
-            tooltip: <div>Simply ownership cost over the time of staying</div>,
+            tooltip: (
+              <div>{t("Simply ownership cost over the time of staying")}</div>
+            ),
           },
           {
-            label: "Capital from selling",
+            label: t("Capital from selling"),
             value: capitalFromSale,
             tooltip: (
               <ResultBlock
-                heading={"Capital from selling details"}
+                heading={t("Capital from selling details")}
                 rows={capitalFromSaleDetails}
               />
             ),
           },
           "divider",
-          { label: "Total", value: totalBuying },
+          { label: t("Total"), value: totalBuying },
         ]}
       />
       <br />

@@ -21,7 +21,7 @@
     "noFallthroughCasesInSwitch": true
   },
 
-  "include": ["src", "vite.config.ts", "store"],
+  "include": ["src", "vite.config.ts", "store", "i18next-scanner.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "parserOptions": {
     "ecmaVersion": "latest",

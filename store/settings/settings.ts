@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface BuyingState {
-  locale: string;
+  locale?: string;
   currency?: string;
 }
 
 const initialState: BuyingState = {
-  locale: "en-US",
+  locale: undefined,
   currency: undefined,
 };
 
@@ -14,7 +14,7 @@ export const settingsSlice = createSlice({
   name: "settings",
   initialState,
   reducers: {
-    setLanguage: (state: BuyingState, action: PayloadAction<string>) => {
+    setLocale: (state: BuyingState, action: PayloadAction<string>) => {
       state.locale = action.payload;
     },
     setCurrency: (state: BuyingState, action: PayloadAction<string>) => {
@@ -23,6 +23,6 @@ export const settingsSlice = createSlice({
   },
 });
 
-export const { setLanguage, setCurrency } = settingsSlice.actions;
+export const { setLocale, setCurrency } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

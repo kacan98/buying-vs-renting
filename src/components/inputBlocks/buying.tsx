@@ -1,4 +1,4 @@
-import { getInputProps, getPercentageAdornment } from "./../adornments.tsx";
+import { getInputProps, usePercentageAdornment } from "./../adornments.tsx";
 import { Grid, Stack, Typography } from "@mui/material";
 import NumberFields from "../numberFields.tsx";
 import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
@@ -11,8 +11,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { useMortgageDetails } from "../../services/buying/useMortgageDetails.ts";
 import { useLocaleCurrencyFormatter } from "../../../store/settings/useLocale.ts";
+import { useTranslation } from "react-i18next";
 
 function Buying() {
+  const { t } = useTranslation();
+  const getPercentageAdornment = usePercentageAdornment();
   const { createStateUpdateFc, stateSlice: buyingState } =
     useCalculatorSlice("buying");
 
@@ -71,24 +74,24 @@ function Buying() {
       <NumberFields
         inputs={[
           {
-            label: "Property Price",
+            label: t("Property Price"),
             value: propertyPrice,
             onChange: createStateUpdateFc("propertyPrice"),
             formatAsCurrency: true,
           },
           {
-            label: "Property Value Growth",
+            label: t("Property Value Growth"),
             value: propertyValueGrowthPercentage,
             onChange: createStateUpdateFc("propertyValueGrowthPercentage"),
             InputProps: getPercentageAdornment(true),
           },
         ]}
       />
-      <Typography variant="h4">Mortgage</Typography>
+      <Typography variant="h4">{t("Mortgage")}</Typography>
       <NumberFields
         inputs={[
           {
-            label: "Loan Term",
+            label: t("Loan Term"),
             value: loanTerm,
             onChange: createStateUpdateFc("loanTerm"),
             InputProps: getInputProps({
@@ -96,7 +99,7 @@ function Buying() {
             }),
           },
           {
-            label: "Deposit percentage",
+            label: t("Deposit percentage"),
             helperText: formatAsCurrency(
               propertyPrice * (depositPercentage / 100),
             ),
@@ -105,7 +108,7 @@ function Buying() {
             InputProps: getPercentageAdornment(),
           },
           {
-            label: "Interest Rate",
+            label: t("Interest Rate"),
             InputProps: getPercentageAdornment(true),
             value: interestRate,
             onChange: createStateUpdateFc("interestRate"),
@@ -113,11 +116,20 @@ function Buying() {
         ]}
       />
       <Typography variant="body1">
-        {`You would pay ${formatAsCurrency(mortgagePerMonth)} per month.`}
+        {t(`You would pay {amount} per month`, {
+          amount: formatAsCurrency(mortgagePerMonth),
+        })}
       </Typography>
       <Grid container justifyContent={"center"}>
         {totalPrincipalPaid !== 0 && totalInterestPaid && (
           <PieChart
+            slotProps={{
+              legend: {
+                direction: "column",
+                position: { vertical: "top", horizontal: "right" },
+                padding: 0,
+              },
+            }}
             colors={["#0088FE", "orange"]}
             series={[
               {
@@ -125,12 +137,12 @@ function Buying() {
                   {
                     id: 0,
                     value: totalPrincipalPaid,
-                    label: "Total principal paid",
+                    label: t("Total principal paid"),
                   },
                   {
                     id: 1,
                     value: totalInterestPaid,
-                    label: "Total interest paid",
+                    label: t("Total interest paid"),
                   },
                 ],
                 innerRadius: 50,
@@ -144,11 +156,11 @@ function Buying() {
           />
         )}
       </Grid>
-      <Typography variant="h4">Buying And Selling Costs</Typography>
+      <Typography variant="h4">{t("Buying And Selling Costs")}</Typography>
       <NumberFields
         inputs={[
           {
-            label: "Buying costs",
+            label: t("Buying costs"),
             InputProps: getPercentageAdornment(),
             value: buyingCostsPercentage,
             onChange: createStateUpdateFc("buyingCostsPercentage"),
@@ -157,7 +169,7 @@ function Buying() {
             ),
           },
           {
-            label: "Selling costs",
+            label: t("Selling costs"),
             InputProps: getPercentageAdornment(),
             value: sellingCostsPercentage,
             onChange: createStateUpdateFc("sellingCostsPercentage"),
@@ -167,12 +179,12 @@ function Buying() {
           },
         ]}
       />
-      <Typography variant="h4">Yearly costs</Typography>
+      <Typography variant="h4">{t("Yearly costs")}</Typography>
       <NumberFields
         inputs={[
           {
-            label: "Ownership costs",
-            helperText: "Property taxes, maintenance, homeowners insurance...",
+            label: t("Ownership costs"),
+            helperText: t("helperText under ownership costs"),
             InputProps: getPercentageAdornment(true),
             value: yearlyOwnershipCost,
             onChange: createStateUpdateFc("yearlyOwnershipCost"),

@@ -11,8 +11,10 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { SettingsDialog } from "./components/settingsDialog.tsx";
 import Grid2 from "@mui/material/Unstable_Grid2";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const { t } = useTranslation();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const locale = useSelector((state: RootState) => state.settings.locale);
   const currency = useSelector((state: RootState) => state.settings.currency);
@@ -56,7 +58,7 @@ function App() {
                 variant="outlined"
                 endIcon={<Settings />}
               >
-                Settings
+                {t("Settings")}
               </Button>
             </Grid2>
           </Grid2>

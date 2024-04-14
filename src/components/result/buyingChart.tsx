@@ -1,7 +1,18 @@
 import { LineChart } from "@mui/x-charts";
 import { PeriodValueChange } from "../../services/buying/buying.model.ts";
+import { useTranslation } from "react-i18next";
 
 function BuyingChart({ graphData }: { graphData: PeriodValueChange[] }) {
+  const { t } = useTranslation();
+  const labelNameMap = {
+    interestPaid: t("Interest paid"),
+    principalPaid: t("Principal paid"),
+    increaseInPropertyValue: t("Increase in property value"),
+    ownershipCost: t("Ownership cost"),
+    buyingCosts: t("Buying costs"),
+    sellingCosts: t("Selling costs"),
+  };
+
   if (graphData.length === 0) return <></>;
   const labelObjects = (
     Object.keys(graphData[0]) as (keyof PeriodValueChange)[]
@@ -75,13 +86,4 @@ const isNegativeFc = (key: keyof PeriodValueChange) => {
     default:
       throw new Error("Invalid key");
   }
-};
-
-const labelNameMap = {
-  interestPaid: "Interest paid",
-  principalPaid: "Principal paid",
-  increaseInPropertyValue: "Increase in property value",
-  ownershipCost: "Ownership cost",
-  buyingCosts: "Buying costs",
-  sellingCosts: "Selling costs",
 };
