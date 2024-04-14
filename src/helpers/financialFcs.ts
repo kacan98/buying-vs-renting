@@ -7,12 +7,12 @@ export const toLocaleCurrencyString = (value: number) => {
 
 export function calculateInvestmentReturns({
   initialInvestment,
-  monthlyInvestment,
+  investmentPerPeriod,
   numberOfPeriods,
   appreciationRate,
 }: {
   initialInvestment: number;
-  monthlyInvestment: number;
+  investmentPerPeriod: number;
   numberOfPeriods: number;
   appreciationRate: number;
 }): {
@@ -24,11 +24,11 @@ export function calculateInvestmentReturns({
   const monthlyValues: number[] = [];
   let totalReturn = initialInvestment;
   let valueAdded = 0;
-  let allMonthlyInvestment = 0;
+  let allRepeatedInvestments = 0;
 
   for (let i = 1; i <= numberOfPeriods; i++) {
-    allMonthlyInvestment += monthlyInvestment;
-    totalReturn += monthlyInvestment;
+    allRepeatedInvestments += investmentPerPeriod;
+    totalReturn += investmentPerPeriod;
     const previousTotal = totalReturn;
     totalReturn = totalReturn * (1 + appreciationRate);
     valueAdded += totalReturn - previousTotal;
@@ -39,6 +39,6 @@ export function calculateInvestmentReturns({
     totalAtTheEnd: totalReturn,
     monthlyValues,
     valueAdded,
-    allMonthlyInvestment,
+    allMonthlyInvestment: allRepeatedInvestments,
   };
 }

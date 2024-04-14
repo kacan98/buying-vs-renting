@@ -53,9 +53,9 @@ export function SettingsDialog(props: SimpleDialogProps) {
     if (value) {
       i18n.changeLanguage(value);
       dispatch(setLocale(value));
-      toggleLanguageDialog(false);
       onClose();
     }
+    toggleLanguageDialog(false);
   };
 
   const settings: {
@@ -95,6 +95,7 @@ export function SettingsDialog(props: SimpleDialogProps) {
         break;
       case "startOver":
         localStorage.removeItem("state");
+        localStorage.removeItem("i18nextLng");
         //refresh page
         window.location.reload();
         break;

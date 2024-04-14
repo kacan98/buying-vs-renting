@@ -1,6 +1,7 @@
 import { LineChart } from "@mui/x-charts";
 import { PeriodValueChange } from "../../services/buying/buying.model.ts";
 import { useTranslation } from "react-i18next";
+import { Typography } from "@mui/material";
 
 function BuyingChart({ graphData }: { graphData: PeriodValueChange[] }) {
   const { t } = useTranslation();
@@ -58,16 +59,21 @@ function BuyingChart({ graphData }: { graphData: PeriodValueChange[] }) {
 
   if (graphData.length === 0) return <></>;
   return (
-    <LineChart
-      xAxis={[
-        {
-          valueFormatter: (value) => value.toString(),
-          data: years,
-        },
-      ]}
-      series={labelObjects}
-      {...customize}
-    />
+    <>
+      <Typography variant={"caption"}>
+        {t("Monthly costs of buying")}:
+      </Typography>
+      <LineChart
+        xAxis={[
+          {
+            valueFormatter: (value) => value.toString(),
+            data: years,
+          },
+        ]}
+        series={labelObjects}
+        {...customize}
+      />
+    </>
   );
 }
 

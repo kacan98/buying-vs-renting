@@ -38,7 +38,7 @@ export function useAlternativeInvestmentReturns() {
   const { totalAtTheEnd, monthlyValues, valueAdded, allMonthlyInvestment } =
     calculateInvestmentReturns({
       initialInvestment: initialCash,
-      monthlyInvestment: moneyAvailablePerMonth,
+      investmentPerPeriod: moneyAvailablePerMonth * 12,
       numberOfPeriods: yearsStaying,
       appreciationRate: alternativeInvestmentReturnPercentage / 100,
     });
