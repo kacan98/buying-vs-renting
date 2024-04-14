@@ -2,7 +2,6 @@ import { getInputProps, getPercentageAdornment } from "./../adornments.tsx";
 import { Grid, Stack, Typography } from "@mui/material";
 import NumberFields from "../numberFields.tsx";
 import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
-import { toLocaleCurrencyString } from "../../helpers/financialFcs.ts";
 import {
   getLoanAmount,
   simulateTimePassage,
@@ -11,6 +10,7 @@ import { PieChart } from "@mui/x-charts";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { useMortgageDetails } from "../../services/buying/useMortgageDetails.ts";
+import { useLocaleCurrencyFormatter } from "../../../store/settings/useLocale.ts";
 
 function Buying() {
   const { stateSlice: buyingState, createStateUpdateFc } =
@@ -26,6 +26,9 @@ function Buying() {
     yearlyOwnershipCost,
     depositPercentage,
   } = buyingState;
+
+  const formatAsCurrency: (value: number) => string =
+    useLocaleCurrencyFormatter();
 
   const deposit = propertyPrice * (depositPercentage / 100);
 
@@ -94,7 +97,7 @@ function Buying() {
           },
           {
             label: "Deposit percentage",
-            helperText: toLocaleCurrencyString(
+            helperText: formatAsCurrency(
               propertyPrice * (depositPercentage / 100),
             ),
             value: depositPercentage,
@@ -110,7 +113,7 @@ function Buying() {
         ]}
       />
       <Typography variant="body1">
-        {`You would pay ${toLocaleCurrencyString(mortgagePerMonth)} per month.`}
+        {`You would pay ${formatAsCurrency(mortgagePerMonth)} per month.`}
       </Typography>
       <Grid container justifyContent={"center"}>
         {totalPrincipalPaid !== 0 && totalInterestPaid && (
@@ -149,7 +152,7 @@ function Buying() {
             InputProps: getPercentageAdornment(),
             value: buyingCostsPercentage,
             onChange: createStateUpdateFc("buyingCostsPercentage"),
-            helperText: toLocaleCurrencyString(
+            helperText: formatAsCurrency(
               propertyPrice * (buyingCostsPercentage / 100),
             ),
           },
@@ -158,7 +161,7 @@ function Buying() {
             InputProps: getPercentageAdornment(),
             value: sellingCostsPercentage,
             onChange: createStateUpdateFc("sellingCostsPercentage"),
-            helperText: toLocaleCurrencyString(
+            helperText: formatAsCurrency(
               propertyPrice * (sellingCostsPercentage / 100),
             ),
           },

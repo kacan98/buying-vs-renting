@@ -6,6 +6,7 @@ import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSli
 const IntroBlock = () => {
   const { stateSlice: predictionsState, createStateUpdateFc } =
     useCalculatorSlice("futurePredictions");
+
   return (
     <>
       <Typography variant={"h2"} component={"h1"} gutterBottom>

@@ -7,8 +7,8 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { toLocaleCurrencyString } from "../../helpers/financialFcs.ts";
 import * as React from "react";
+import { useLocaleCurrencyFormatter } from "../../../store/settings/useLocale.ts";
 
 export type ResultBlockProps = {
   heading: string;
@@ -21,6 +21,8 @@ export type ResultBlockProps = {
 };
 
 function ResultBlock({ rows, heading, description, chart }: ResultBlockProps) {
+  const formatAsCurrency: (value: number) => string =
+    useLocaleCurrencyFormatter();
   const theme = useTheme();
   const isBigScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
@@ -41,7 +43,7 @@ function ResultBlock({ rows, heading, description, chart }: ResultBlockProps) {
               variant={"body1"}
               color={value < 0 ? "error" : undefined}
             >
-              {label}: {toLocaleCurrencyString(value || 0)}
+              {label}: {formatAsCurrency(value || 0)}
             </Typography>
           );
           return (

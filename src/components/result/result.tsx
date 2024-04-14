@@ -7,11 +7,14 @@ import { BuyingState } from "../../../store/calculatorSlices/buying.ts";
 import ResultBlock, { ResultBlockProps } from "./resultBlock.tsx";
 import BuyingChart from "./buyingChart.tsx";
 import { calculateMortgageDetails } from "../../services/buying/buying.service.ts";
-import { toLocaleCurrencyString } from "../../helpers/financialFcs.ts";
 import { useRentDetails } from "../../services/renting/useRentDetails.ts";
 import { useAlternativeInvestmentReturns } from "../../services/useAlternativeInvestment.ts";
+import { useLocaleCurrencyFormatter } from "../../../store/settings/useLocale.ts";
 
 function Result() {
+  const formatAsCurrency: (value: number) => string =
+    useLocaleCurrencyFormatter();
+
   const { initialInvestment: rentDeposit }: RentingState = useSelector(
     (state: RootState) => state.renting,
   );
@@ -92,7 +95,7 @@ function Result() {
     >
       <Typography variant={"h3"} gutterBottom>
         {buyingIsBetter ? "Buying is better" : "Renting is better"}
-        {` by ${toLocaleCurrencyString(Math.abs(difference))}`}
+        {` by ${formatAsCurrency(Math.abs(difference))}`}
       </Typography>
       <ResultBlock
         heading={makeLabel("Renting", yearsStaying)}

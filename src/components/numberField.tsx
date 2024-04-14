@@ -1,5 +1,5 @@
 import { TextField, TextFieldProps } from "@mui/material";
-import DollarInput from "./maskedInput.tsx";
+import CurrencyInput from "./maskedInput.tsx";
 
 export type NumberFieldProps = TextFieldProps & { formatAsCurrency?: boolean };
 
@@ -9,11 +9,11 @@ function NumberField(props: NumberFieldProps) {
     placeholder: "0",
     variant: "outlined",
     size: "medium",
-    ...otherProps
+    ...otherProps,
   };
 
   return formatAsCurrency ? (
-    <DollarInput {...textFieldProps} />
+    <CurrencyInput {...textFieldProps} />
   ) : (
     <TextField {...textFieldProps} type="number" />
   );

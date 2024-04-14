@@ -6,7 +6,7 @@ import { Checkbox, FormControlLabel, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { toggleInvestDifference } from "../../../store/calculatorSlices/renting.ts";
 import { useMortgageDetails } from "../../services/buying/useMortgageDetails.ts";
-import { toLocaleCurrencyString } from "../../helpers/financialFcs.ts";
+import { useLocaleCurrencyFormatter } from "../../../store/settings/useLocale.ts";
 
 const Renting = () => {
   const { stateSlice: rentingState, createStateUpdateFc } =
@@ -16,6 +16,8 @@ const Renting = () => {
     useMortgageDetails();
 
   const dispatch = useDispatch();
+  const formatAsCurrency: (value: number) => string =
+    useLocaleCurrencyFormatter();
 
   const inputs: NumberFieldProps[] = [
     {
@@ -70,7 +72,7 @@ const Renting = () => {
                     component="span"
                     fontWeight="bold"
                   >
-                    {toLocaleCurrencyString(monthlyDifference)}
+                    {formatAsCurrency(monthlyDifference)}
                   </Typography>{" "}
                   higher.
                 </Typography>
@@ -83,9 +85,7 @@ const Renting = () => {
                     component="span"
                     fontWeight="bold"
                   >
-                    {toLocaleCurrencyString(
-                      differenceBetweenRentAndMortgageDeposit,
-                    )}
+                    {formatAsCurrency(differenceBetweenRentAndMortgageDeposit)}
                   </Typography>{" "}
                 </Typography>
               )}

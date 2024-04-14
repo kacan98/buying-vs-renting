@@ -3,11 +3,13 @@ import { buyingSlice } from "./calculatorSlices/buying.ts";
 import { futurePredictionsSlice } from "./calculatorSlices/futurePreditions.ts";
 import { rentingSlice } from "./calculatorSlices/renting.ts";
 import { loadFromLocalStorage, saveToLocalStorage } from "./localStorage.ts";
+import { settingsSlice } from "./settings/settings.ts";
 
 const reducer = combineReducers({
   buying: buyingSlice.reducer,
   renting: rentingSlice.reducer,
   futurePredictions: futurePredictionsSlice.reducer,
+  settings: settingsSlice.reducer,
 });
 
 const persistedState = loadFromLocalStorage();
