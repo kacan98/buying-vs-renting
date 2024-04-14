@@ -21,7 +21,7 @@
     "noFallthroughCasesInSwitch": true
   },
 
-  "include": ["src", "vite.config.ts"],
+  "include": ["src", "vite.config.ts", "store"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "parserOptions": {
     "ecmaVersion": "latest",
