@@ -5,7 +5,7 @@ export interface RentingState {
   initialInvestment: number;
   yearlyRentGrowth: number;
   investDifference: boolean;
-  alternativeInvestmentReturn: number;
+  alternativeInvestmentReturnPercentage: number;
 }
 
 const initialState: RentingState = {
@@ -13,7 +13,7 @@ const initialState: RentingState = {
   initialInvestment: 3000,
   yearlyRentGrowth: 3,
   investDifference: true,
-  alternativeInvestmentReturn: 7,
+  alternativeInvestmentReturnPercentage: 7,
 };
 
 export const rentingSlice = createSlice({

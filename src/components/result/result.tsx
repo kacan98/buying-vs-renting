@@ -6,13 +6,15 @@ import { RentingState } from "../../../store/calculatorSlices/renting.ts";
 import { BuyingState } from "../../../store/calculatorSlices/buying.ts";
 import ResultBlock, { ResultBlockProps } from "./resultBlock.tsx";
 import BuyingChart from "./buyingChart.tsx";
-import { calculateRent } from "../../services/renting/renting.service.ts";
 import { calculateMortgageDetails } from "../../services/buying/buying.service.ts";
 import { toLocaleCurrencyString } from "../../helpers/financialFcs.ts";
+import { useRentDetails } from "../../services/renting/useRentDetails.ts";
+import { useAlternativeInvestmentReturns } from "../../services/useAlternativeInvestment.ts";
 
 function Result() {
-  const { monthlyRent, yearlyRentGrowth, initialInvestment }: RentingState =
-    useSelector((state: RootState) => state.renting);
+  const { initialInvestment: rentDeposit }: RentingState = useSelector(
+    (state: RootState) => state.renting,
+  );
   const { yearsStaying }: FuturePredictionsState = useSelector(
     (state: RootState) => state.futurePredictions,
   );
@@ -52,13 +54,12 @@ function Result() {
     sellingCostsPercentage,
   });
 
-  const rentTotal = calculateRent({
-    startingMonthlyRent: monthlyRent,
-    increaseRate: yearlyRentGrowth / 100,
-    yearsStaying,
-  });
+  const { rentTotal } = useRentDetails();
 
-  const totalRenting = -(rentTotal + initialInvestment) + initialInvestment;
+  const alternativeInvestment = useAlternativeInvestmentReturns();
+
+  const totalRenting =
+    -(rentTotal + rentDeposit) + rentDeposit + alternativeInvestment.valueAdded;
 
   const capitalFromSaleDetails: ResultBlockProps["rows"] = [
     { label: "Original property value", value: propertyPrice },
@@ -96,12 +97,36 @@ function Result() {
       <ResultBlock
         heading={makeLabel("Renting", yearsStaying)}
         rows={[
-          { label: "Deposit", value: -1 * initialInvestment },
+          { label: "Deposit", value: -1 * rentDeposit },
           {
             label: "Rent",
             value: -1 * rentTotal,
           },
-          { label: "Deposit returned", value: initialInvestment },
+          {
+            label: "Investment returns",
+            value: alternativeInvestment.valueAdded,
+            tooltip: (
+              <ResultBlock
+                heading={"Alternative investment"}
+                rows={[
+                  {
+                    label: "Initial investment",
+                    value: -1 * alternativeInvestment.initialCash,
+                  },
+                  {
+                    label: "All monthly investments",
+                    value: -1 * alternativeInvestment.allMonthlyInvestment,
+                  },
+                  "divider",
+                  {
+                    label: "Total at the end",
+                    value: alternativeInvestment.totalAtTheEnd,
+                  },
+                ]}
+              />
+            ),
+          },
+          { label: "Deposit returned", value: rentDeposit },
           "divider",
           { label: "Total", value: totalRenting },
         ]}

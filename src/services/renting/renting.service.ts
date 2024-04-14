@@ -1,18 +1,19 @@
 export function calculateRent({
   startingMonthlyRent,
-  increaseRate,
+  yearlyRentGrowth,
   yearsStaying,
 }: {
   startingMonthlyRent: number;
-  increaseRate: number;
+  yearlyRentGrowth: number;
   yearsStaying: number;
 }): number {
+  const yearlyRentGrowthPercentage = yearlyRentGrowth / 100;
   let totalPaid = 0;
   let annualRent = startingMonthlyRent * 12; // Initial annual rent
 
   for (let i = 0; i < yearsStaying; i++) {
     totalPaid += annualRent;
-    annualRent *= 1 + increaseRate; // Increase by the rate for the next year
+    annualRent *= 1 + yearlyRentGrowthPercentage; // Increase by the rate for the next year
   }
 
   return totalPaid;

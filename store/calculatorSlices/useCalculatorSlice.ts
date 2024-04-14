@@ -25,7 +25,7 @@ export default function useCalculatorSlice<T extends keyof RootState>(
   const createFloatStateUpdateFc = (fieldName: keyof RootState[T]) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       const action = createAction[sliceName];
-      const value = parseFloat(e.target.value || "");
+      const value = parseFloat(e.target.value || "0");
       dispatch(
         action({
           key: fieldName,

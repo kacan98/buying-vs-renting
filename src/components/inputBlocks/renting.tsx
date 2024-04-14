@@ -98,9 +98,9 @@ const Renting = () => {
                   {
                     label: "Alternative investment return",
                     InputProps: getPercentageAdornment(true),
-                    value: rentingState.alternativeInvestmentReturn,
+                    value: rentingState.alternativeInvestmentReturnPercentage,
                     onChange: createStateUpdateFc(
-                      "alternativeInvestmentReturn",
+                      "alternativeInvestmentReturnPercentage",
                     ),
                   },
                 ]}
