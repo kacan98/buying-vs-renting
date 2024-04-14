@@ -17,17 +17,19 @@ export function useAlternativeInvestmentReturns() {
     (state: RootState) => state.futurePredictions.yearsStaying,
   );
 
-  const initialCash = mortgageDeposit - rentDeposit;
-  const moneyAvailablePerMonth = mortgagePerMonth - monthlyRent;
+  const initialCash =
+    mortgageDeposit - rentDeposit > 0 ? mortgageDeposit - rentDeposit : 0;
+  const moneyAvailablePerMonth =
+    mortgagePerMonth - monthlyRent > 0 ? mortgagePerMonth - monthlyRent : 0;
   const returnObj = {
     investDifference,
     totalAtTheEnd: 0,
     valueAdded: 0,
     allMonthlyInvestment: 0,
+    initialCash: 0,
     monthlyValues: [] as ReturnType<
       typeof calculateInvestmentReturns
     >["monthlyValues"],
-    initialCash,
     moneyAvailablePerMonth,
   };
 
@@ -45,6 +47,7 @@ export function useAlternativeInvestmentReturns() {
   returnObj.monthlyValues = monthlyValues;
   returnObj.valueAdded = valueAdded;
   returnObj.allMonthlyInvestment = allMonthlyInvestment;
+  returnObj.initialCash = initialCash;
 
   return returnObj;
 }
