@@ -11,7 +11,7 @@ export type ResultBlockProps = {
 function ResultBlock({ rows, heading, description }: ResultBlockProps) {
   
   const theme = useTheme();
-  const isBigScreen = useMediaQuery(theme.breakpoints.up('md'))
+  const isBigScreen = useMediaQuery(theme.breakpoints.up('lg'))
   
   return (
     <>

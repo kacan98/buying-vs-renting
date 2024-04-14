@@ -35,6 +35,8 @@ function Result() {
     buyingCost,
     sellingCost,
     totalBuying,
+    totalMortgagePaid,
+    totalPrincipalPaid
   } = calculateMortgageDetails({
     yearsStaying,
     initialPropertyValue: propertyPrice,
@@ -67,7 +69,8 @@ function Result() {
   ];
   
   const mortgageDetails: ResultBlockProps["rows"] = [
-    { label: "Remaining debt at the end", value: -1 * remainingBalance },
+    { label: "Total interest paid", value: -1 * totalInterestPaid },
+    { label: "Total principal paid", value: -1 * totalPrincipalPaid },
   ]
   
   const buyingAndSellingDetails: ResultBlockProps["rows"] = [
@@ -76,21 +79,23 @@ function Result() {
   ]
   
   const capitalFromSaleDetails: ResultBlockProps["rows"] = [
-    { label: "Deposit", value: -1 * deposit },
-    { label: "Remaining debt", value: -1 * remainingBalance },
-    { label: "Total interest paid", value: -1 * totalInterestPaid },
     { label: "Original property value", value: propertyPrice },
     { label: "Total property value increase", value: totalPropertyValueIncrease },
+    { label: "Paying off remaining debt", value: -1 * remainingBalance },
   ]
   
   //TODO: this should probably be generalized for all tooltips
-  const capitalFromSale =  propertyPrice + totalPropertyValueIncrease  - deposit - remainingBalance - totalInterestPaid
+  const capitalFromSale = capitalFromSaleDetails.reduce((acc, row) => {
+    if(row === 'divider') return acc;
+    return acc + row.value;
+  }, 0);
 
   const buyingRows: ResultBlockProps["rows"] = [
-    { label: "Interest on mortgage paid", value: - totalInterestPaid, tooltip: <ResultBlock rows={mortgageDetails} heading={'Mortgage details:'}/>},
+    { label: "Deposit", value: -1 * deposit },
+    { label: "Mortgage paid", value: - totalMortgagePaid, tooltip: <ResultBlock rows={mortgageDetails} heading={'Mortgage details:'}/>},
     { label: "Buying and selling costs", value: -1 * (buyingCost + sellingCost), tooltip: <ResultBlock rows={buyingAndSellingDetails} heading={'Buying and selling details:'}/> },
     { label: "Total ownership costs", value: -1 * totalOwnershipCosts, tooltip: <div>Simply ownership cost over the time of staying</div> },
-    { label: "Capital from buying and selling", value: capitalFromSale, tooltip: <ResultBlock heading={'Capital from selling details'} rows={capitalFromSaleDetails} />},
+    { label: "Capital from selling", value: capitalFromSale, tooltip: <ResultBlock heading={'Capital from selling details'} rows={capitalFromSaleDetails} />},
     'divider',
     { label: "Total", value: totalBuying },
   ];
