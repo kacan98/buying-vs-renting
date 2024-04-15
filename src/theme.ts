@@ -27,6 +27,28 @@ const customTheme = createTheme({
         },
       },
     },
+    MuiTypography: {
+      styleOverrides: {
+        h1: {
+          wordBreak: "break-word",
+        },
+        h2: {
+          wordBreak: "break-word",
+        },
+        h3: {
+          wordBreak: "break-word",
+        },
+        h4: {
+          wordBreak: "break-word",
+        },
+        h5: {
+          wordBreak: "break-word",
+        },
+        h6: {
+          wordBreak: "break-word",
+        },
+      },
+    },
   },
 });
 

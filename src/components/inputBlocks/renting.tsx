@@ -2,12 +2,14 @@ import NumberFields from "../numberFields.tsx";
 import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
 import { NumberFieldProps } from "../numberField.tsx";
 import { getInputProps, usePercentageAdornment } from "../adornments.tsx";
-import { Checkbox, FormControlLabel, Typography } from "@mui/material";
+import { Checkbox, FormControlLabel, Grid, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { toggleInvestDifference } from "../../../store/calculatorSlices/renting.ts";
 import { useMortgageDetails } from "../../services/buying/useMortgageDetails.ts";
 import { useLocaleCurrencyFormatter } from "../../../store/settings/useLocale.ts";
 import { useTranslation } from "react-i18next";
+import { PieChart } from "@mui/x-charts";
+import { useAlternativeInvestmentReturns } from "../../services/useAlternativeInvestment.ts";
 
 const Renting = () => {
   const { t } = useTranslation();
@@ -22,6 +24,8 @@ const Renting = () => {
     useLocaleCurrencyFormatter();
 
   const getPercentageAdornment = usePercentageAdornment();
+
+  const alternativeInvestment = useAlternativeInvestmentReturns();
 
   const inputs: NumberFieldProps[] = [
     {
@@ -113,6 +117,44 @@ const Renting = () => {
                   },
                 ]}
               ></NumberFields>
+              <Grid container justifyContent={"center"}>
+                <PieChart
+                  slotProps={{
+                    legend: {
+                      direction: "row",
+                      position: { vertical: "top", horizontal: "right" },
+                    },
+                  }}
+                  colors={["yellow", "orange", "green"]}
+                  series={[
+                    {
+                      data: [
+                        {
+                          id: 0,
+                          value: alternativeInvestment.allMonthlyInvestment,
+                          label: t("All monthly investments"),
+                        },
+                        {
+                          id: 1,
+                          value: alternativeInvestment.initialCash,
+                          label: t("Initial investment"),
+                        },
+                        {
+                          id: 2,
+                          value: alternativeInvestment.valueAdded,
+                          label: t("Interest"),
+                        },
+                      ],
+                      innerRadius: 50,
+                      outerRadius: 100,
+                      paddingAngle: 5,
+                      cornerRadius: 5,
+                    },
+                  ]}
+                  width={500}
+                  height={300}
+                />
+              </Grid>
             </>
           )}
         </>

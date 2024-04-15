@@ -8,11 +8,11 @@ function CalculatorInputs() {
   const { t } = useTranslation();
   return (
     <Stack spacing={3}>
-      <PaperWrapper title={t("Renting")}>
-        <Renting />
-      </PaperWrapper>
       <PaperWrapper title={t("Buying")}>
         <Buying />
+      </PaperWrapper>
+      <PaperWrapper title={t("Renting")}>
+        <Renting />
       </PaperWrapper>
       <br />
     </Stack>

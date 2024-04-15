@@ -106,44 +106,6 @@ function Result() {
         })}
       </Typography>
       <ResultBlock
-        heading={makeLabel("Renting", yearsStaying)}
-        rows={[
-          { label: t("Deposit"), value: -1 * rentDeposit },
-          {
-            label: t("Rent"),
-            value: -1 * rentTotal,
-          },
-          {
-            label: t("Investment returns"),
-            value: alternativeInvestment.valueAdded,
-            tooltip: (
-              <ResultBlock
-                heading={t("Alternative investment")}
-                rows={[
-                  {
-                    label: t("Initial investment"),
-                    value: -1 * alternativeInvestment.initialCash,
-                  },
-                  {
-                    label: t("All monthly investments"),
-                    value: -1 * alternativeInvestment.allMonthlyInvestment,
-                  },
-                  "divider",
-                  {
-                    label: t("Total at the end"),
-                    value: alternativeInvestment.totalAtTheEnd,
-                  },
-                ]}
-              />
-            ),
-          },
-          { label: t("Deposit returned"), value: rentDeposit },
-          "divider",
-          { label: t("Total"), value: totalRenting },
-        ]}
-      />
-      <br />
-      <ResultBlock
         chart={<BuyingChart graphData={yearValueChanges} />}
         heading={makeLabel("Buying", yearsStaying)}
         rows={[
@@ -199,6 +161,44 @@ function Result() {
           },
           "divider",
           { label: t("Total"), value: totalBuying },
+        ]}
+      />
+      <br />
+      <ResultBlock
+        heading={makeLabel("Renting", yearsStaying)}
+        rows={[
+          { label: t("Deposit"), value: -1 * rentDeposit },
+          {
+            label: t("Rent"),
+            value: -1 * rentTotal,
+          },
+          {
+            label: t("Investment returns"),
+            value: alternativeInvestment.valueAdded,
+            tooltip: (
+              <ResultBlock
+                heading={t("Alternative investment")}
+                rows={[
+                  {
+                    label: t("Initial investment"),
+                    value: -1 * alternativeInvestment.initialCash,
+                  },
+                  {
+                    label: t("All monthly investments"),
+                    value: -1 * alternativeInvestment.allMonthlyInvestment,
+                  },
+                  "divider",
+                  {
+                    label: t("Total at the end"),
+                    value: alternativeInvestment.totalAtTheEnd,
+                  },
+                ]}
+              />
+            ),
+          },
+          { label: t("Deposit returned"), value: rentDeposit },
+          "divider",
+          { label: t("Total"), value: totalRenting },
         ]}
       />
       <br />

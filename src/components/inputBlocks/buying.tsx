@@ -125,7 +125,7 @@ function Buying() {
           <PieChart
             slotProps={{
               legend: {
-                direction: "column",
+                direction: "row",
                 position: { vertical: "top", horizontal: "right" },
                 padding: 0,
               },
@@ -152,7 +152,7 @@ function Buying() {
               },
             ]}
             width={500}
-            height={200}
+            height={300}
           />
         )}
       </Grid>
