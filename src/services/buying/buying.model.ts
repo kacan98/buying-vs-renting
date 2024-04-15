@@ -22,7 +22,8 @@ export interface PeriodValueChange {
 }
 [];
 
-export interface BuyingDetails {
+export interface MortgageDetails {
+  initialPropertyValue: number;
   deposit: number;
   totalInterestPaid: number;
   remainingBalance: number;

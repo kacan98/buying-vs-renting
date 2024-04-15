@@ -60,10 +60,15 @@
   "Capital from selling": "Kapitál z prodeje",
   "Capital from selling details": "Detaily kapitálu z prodeje",
   "Currency": "Měna",
-  "Start over": "Začít znovu",
+  "Start over": "Začít od začátku",
   "Select currency": "Vyberte měnu",
   "Language": "Jazyk",
   "Select language": "Vyberte jazyk",
   "Monthly costs of buying": "Měsíční náklady na koupi",
-  "Interest": "Úrok"
+  "Interest": "Úrok",
+  "Interest income": "Příjem z úroků",
+  "Mode": "Režim",
+  "Auto": "Automatický",
+  "Light": "Světlý",
+  "Dark": "Tmavý"
 }

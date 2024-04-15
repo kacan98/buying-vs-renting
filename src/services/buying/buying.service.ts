@@ -1,5 +1,5 @@
 import {
-  BuyingDetails,
+  MortgageDetails,
   MortgageDetailsParams,
   PeriodValueChange,
 } from "./buying.model.ts";
@@ -125,7 +125,7 @@ export function calculateCosts({
 
 export function calculateMortgageDetails(
   params: MortgageDetailsParams,
-): BuyingDetails {
+): MortgageDetails {
   //check for 0s
   if (params.loanTerm === 0 || params.yearsStaying === 0) {
     return {
@@ -143,6 +143,7 @@ export function calculateMortgageDetails(
       totalPrincipalPaid: 0,
       mortgagePerMonth: 0,
       deposit: 0,
+      initialPropertyValue: params.initialPropertyValue,
     };
   }
 
@@ -211,6 +212,7 @@ export function calculateMortgageDetails(
     totalPrincipalPaid,
     mortgagePerMonth,
     deposit,
+    initialPropertyValue: params.initialPropertyValue,
 
     totalBuying: total,
   };

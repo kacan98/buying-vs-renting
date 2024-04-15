@@ -65,5 +65,10 @@
   "Language": "Sprog",
   "Select language": "Vælg sprog",
   "Monthly costs of buying": "Månedlige omkostninger ved køb",
-  "Interest": "Rente"
+  "Interest": "Rente",
+  "Interest income": "Renteindtægter",
+  "Mode": "Tilstand",
+  "Auto": "Auto",
+  "Light": "Lys",
+  "Dark": "Mørk"
 }

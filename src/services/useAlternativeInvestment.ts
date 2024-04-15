@@ -4,8 +4,7 @@ import { calculateInvestmentReturns } from "../helpers/financialFcs.ts";
 import { RootState } from "../../store";
 
 export function useAlternativeInvestmentReturns() {
-  const { paymentPerMonth: mortgagePerMonth, deposit: mortgageDeposit } =
-    useMortgageDetails();
+  const { mortgagePerMonth, deposit: mortgageDeposit } = useMortgageDetails();
   const {
     monthlyRent,
     alternativeInvestmentReturnPercentage,

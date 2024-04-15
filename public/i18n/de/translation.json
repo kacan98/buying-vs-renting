@@ -65,5 +65,10 @@
   "Language": "Sprache",
   "Select language": "Sprache auswählen",
   "Monthly costs of buying": "Monatliche Kosten des Kaufens",
-  "Interest": "Zinsen"
+  "Interest": "Zinsen",
+  "Interest income": "Zinseinkommen",
+  "Mode": "Modus",
+  "Auto": "Auto",
+  "Light": "Hell",
+  "Dark": "Dunkel"
 }

@@ -65,5 +65,10 @@
   "Language": "Language",
   "Select language": "Select Language",
   "Monthly costs of buying": "Monthly Costs of Buying",
-  "Interest": "Interest"
+  "Interest": "Interest",
+  "Interest income": "Interest income",
+  "Mode": "Mode",
+  "Auto": "Auto",
+  "Light": "Light",
+  "Dark": "Dark"
 }

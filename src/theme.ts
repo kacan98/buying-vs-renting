@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material";
 
-const customTheme = createTheme({
+export const lightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
@@ -19,7 +19,7 @@ const customTheme = createTheme({
       fontSize: "4rem",
       fontWeight: 100,
     },
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "Jost, sans-serif",
     h2: {
       fontSize: "6rem",
@@ -104,4 +104,22 @@ const customTheme = createTheme({
   },
 });
 
-export default customTheme;
+export const darkTheme = createTheme({
+  ...lightTheme,
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#094fec",
+    },
+    secondary: {
+      main: "#2f2f2f",
+    },
+    error: {
+      main: "#b60f0f",
+    },
+    background: {
+      default: "#121212",
+      paper: "#1e1e1e",
+    },
+  },
+});

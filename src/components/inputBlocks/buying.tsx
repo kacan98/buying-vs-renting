@@ -36,7 +36,7 @@ function Buying() {
 
   const deposit = propertyPrice * (depositPercentage / 100);
 
-  const { paymentPerMonth: mortgagePerMonth } = useMortgageDetails();
+  const { mortgagePerMonth, sellingCost, buyingCost } = useMortgageDetails();
 
   const yearsStaying = useSelector(
     (state: RootState) => state.calculator.futurePredictions.yearsStaying,
@@ -131,19 +131,19 @@ function Buying() {
                 padding: 0,
               },
             }}
-            colors={[theme.palette.primary.main, theme.palette.secondary.main]}
+            colors={[theme.palette.secondary.main, theme.palette.primary.main]}
             series={[
               {
                 data: [
                   {
-                    id: 0,
-                    value: totalPrincipalPaid,
-                    label: t("Total principal paid"),
+                    id: 1,
+                    value: Math.round(totalInterestPaid),
+                    label: t("Total interest paid"),
                   },
                   {
-                    id: 1,
-                    value: totalInterestPaid,
-                    label: t("Total interest paid"),
+                    id: 0,
+                    value: Math.round(totalPrincipalPaid),
+                    label: t("Total principal paid"),
                   },
                 ],
                 innerRadius: 50,
@@ -165,18 +165,14 @@ function Buying() {
             InputProps: getPercentageAdornment(),
             value: buyingCostsPercentage,
             onChange: createStateUpdateFc("buyingCostsPercentage"),
-            helperText: formatAsCurrency(
-              propertyPrice * (buyingCostsPercentage / 100),
-            ),
+            helperText: formatAsCurrency(buyingCost),
           },
           {
             label: t("Selling costs"),
             InputProps: getPercentageAdornment(),
             value: sellingCostsPercentage,
             onChange: createStateUpdateFc("sellingCostsPercentage"),
-            helperText: formatAsCurrency(
-              propertyPrice * (sellingCostsPercentage / 100),
-            ),
+            helperText: formatAsCurrency(sellingCost),
           },
         ]}
       />

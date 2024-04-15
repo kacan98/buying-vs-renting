@@ -6,6 +6,8 @@ import {
   ListItemAvatar,
   ListItemButton,
   ListItemText,
+  ToggleButton,
+  ToggleButtonGroup,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
@@ -17,7 +19,11 @@ import {
 import React, { useState } from "react";
 import { OptionsModal } from "./optionsModal.tsx";
 import { supportedCurrencies } from "../../store/settings/supportedLocales.ts";
-import { setCurrency, setLocale } from "../../store/settings/settings.ts";
+import {
+  setCurrency,
+  setLocale,
+  setTheme,
+} from "../../store/settings/settings.ts";
 import { useTranslation } from "react-i18next";
 import { supportedLanguages } from "../../store/settings/supportedLanguages.ts";
 
@@ -29,6 +35,7 @@ export interface SimpleDialogProps {
 export function SettingsDialog(props: SimpleDialogProps) {
   const { t, i18n } = useTranslation();
   const { onClose, open } = props;
+  const theme = useSelector((state: RootState) => state.settings.theme);
   const [currencyDialogOpen, toggleCurrencyDialog] = useState(false);
   const [languageModalOpen, toggleLanguageDialog] = useState(false);
   const dispatch = useDispatch();
@@ -66,10 +73,10 @@ export function SettingsDialog(props: SimpleDialogProps) {
     key: "currency" | "startOver" | "language";
   }[] = [
     {
+      key: "language",
       name: t("Language"),
       value: currentLocale,
       icon: <Language />,
-      key: "language",
     },
     {
       key: "currency",
@@ -125,6 +132,20 @@ export function SettingsDialog(props: SimpleDialogProps) {
               </ListItem>
             ),
         )}
+        <ListItemText primary={t("Mode")} />
+        <ListItem>
+          <ToggleButtonGroup
+            color="secondary"
+            value={theme}
+            exclusive
+            onChange={(_, newValue) => dispatch(setTheme(newValue))}
+            aria-label="Platform"
+          >
+            <ToggleButton value="auto">{t("Auto")}</ToggleButton>
+            <ToggleButton value="light">{t("Light")}</ToggleButton>
+            <ToggleButton value="dark">{t("Dark")}</ToggleButton>
+          </ToggleButtonGroup>
+        </ListItem>
       </List>
 
       <OptionsModal

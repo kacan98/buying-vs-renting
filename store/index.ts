@@ -1,4 +1,4 @@
-import { combineReducers, configureStore, Store } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { buyingSlice } from "./calculatorSlices/buying.ts";
 import { futurePredictionsSlice } from "./calculatorSlices/futurePreditions.ts";
 import { rentingSlice } from "./calculatorSlices/renting.ts";
@@ -18,19 +18,10 @@ const reducer = combineReducers({
   settings: settingsSlice.reducer,
 });
 
-export let store: Store;
-
-try {
-  store = configureStore({
-    reducer,
-    preloadedState: persistedState,
-  });
-} catch (e) {
-  console.error(e);
-  store = configureStore({
-    reducer,
-  });
-}
+export const store = configureStore({
+  reducer,
+  preloadedState: persistedState,
+});
 
 store.subscribe(() => saveToLocalStorage(store.getState()));
 

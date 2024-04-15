@@ -65,5 +65,10 @@
   "Language": "Språk",
   "Select language": "Välj språk",
   "Monthly costs of buying": "Månadskostnader för köp",
-  "Interest": "Ränta"
+  "Interest": "Ränta",
+  "Interest income": "Ränteinkomst",
+  "Mode": "Läge",
+  "Auto": "Auto",
+  "Light": "Ljus",
+  "Dark": "Mörk"
 }

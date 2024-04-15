@@ -23,8 +23,7 @@ const Renting = () => {
   const { stateSlice: rentingState, createStateUpdateFc } =
     useCalculatorSlice("renting");
 
-  const { paymentPerMonth: mortgageMonthlyPayment, deposit: mortgageDeposit } =
-    useMortgageDetails();
+  const { mortgagePerMonth, deposit: mortgageDeposit } = useMortgageDetails();
 
   const dispatch = useDispatch();
   const formatAsCurrency: (value: number) => string =
@@ -57,7 +56,7 @@ const Renting = () => {
     },
   ];
 
-  const monthlyDifference = mortgageMonthlyPayment - rentingState.monthlyRent;
+  const monthlyDifference = mortgagePerMonth - rentingState.monthlyRent;
 
   const differenceBetweenRentAndMortgageDeposit =
     mortgageDeposit - rentingState.initialInvestment;
@@ -133,7 +132,7 @@ const Renting = () => {
                     },
                   }}
                   colors={[
-                    theme.palette.secondary.dark,
+                    theme.palette.secondary.main,
                     theme.palette.secondary.light,
                     theme.palette.primary.main,
                   ]}
@@ -142,18 +141,20 @@ const Renting = () => {
                       data: [
                         {
                           id: 0,
-                          value: alternativeInvestment.allMonthlyInvestment,
+                          value: Math.round(
+                            alternativeInvestment.allMonthlyInvestment,
+                          ),
                           label: t("All monthly investments"),
                         },
                         {
                           id: 1,
-                          value: alternativeInvestment.initialCash,
+                          value: Math.round(alternativeInvestment.initialCash),
                           label: t("Initial investment"),
                         },
                         {
                           id: 2,
-                          value: alternativeInvestment.valueAdded,
-                          label: t("Interest"),
+                          value: Math.round(alternativeInvestment.valueAdded),
+                          label: t("Interest income"),
                         },
                       ],
                       innerRadius: 50,

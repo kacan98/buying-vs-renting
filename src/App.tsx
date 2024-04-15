@@ -1,8 +1,6 @@
 import { Box, ThemeProvider } from "@mui/material";
-import customTheme from "./theme.ts";
 import PaperWrapper from "./components/paper.tsx";
 import CalculatorInputs from "./components/calculatorInputs.tsx";
-import Result from "./components/result/result.tsx";
 import IntroBlock from "./components/inputBlocks/introBlock.tsx";
 import Button from "@mui/material/Button";
 import { Settings } from "@mui/icons-material";
@@ -12,22 +10,37 @@ import { useState } from "react";
 import { SettingsDialog } from "./components/settingsDialog.tsx";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import { useTranslation } from "react-i18next";
+import { darkTheme, lightTheme } from "./theme.ts";
+import ResultSection from "./components/result/resultSection.tsx";
 
 function App() {
   const { t } = useTranslation();
+  const themeSettings = useSelector((state: RootState) => state.settings.theme);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const locale = useSelector((state: RootState) => state.settings.locale);
   const currency = useSelector((state: RootState) => state.settings.currency);
+
+  const prefersDarkMode =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+
   if (!settingsOpen && (!locale || !currency)) setSettingsOpen(true);
+  const themeMode =
+    themeSettings === "auto"
+      ? prefersDarkMode
+        ? "dark"
+        : "light"
+      : themeSettings;
+  const themeUsed = themeMode === "dark" ? darkTheme : lightTheme;
 
   return (
-    <ThemeProvider theme={customTheme}>
-      {locale && currency && (
-        <Box
-          sx={{
-            backgroundColor: customTheme.palette.secondary.light,
-          }}
-        >
+    <ThemeProvider theme={themeUsed}>
+      <Box
+        sx={{
+          backgroundColor: themeUsed.palette.secondary.light,
+        }}
+      >
+        {locale && currency && (
           <Grid2
             container
             spacing={2}
@@ -46,29 +59,32 @@ function App() {
               <CalculatorInputs />
             </Grid2>
             <Grid2 sm={12} lg={4}>
-              <PaperWrapper>
-                <Result />
-              </PaperWrapper>
+              <ResultSection />
             </Grid2>
             <Grid2 sm={12} mt={0}>
               <Button
                 fullWidth
                 sx={{ mb: 2 }}
                 onClick={() => setSettingsOpen(true)}
-                variant="outlined"
+                variant={
+                  themeUsed.palette.mode === "dark" ? "contained" : "outlined"
+                }
+                color={
+                  themeUsed.palette.mode === "dark" ? "secondary" : "primary"
+                }
                 endIcon={<Settings />}
               >
                 {t("Settings")}
               </Button>
             </Grid2>
           </Grid2>
-        </Box>
-      )}
+        )}
 
-      <SettingsDialog
-        open={settingsOpen}
-        onClose={() => setSettingsOpen(false)}
-      />
+        <SettingsDialog
+          open={settingsOpen}
+          onClose={() => setSettingsOpen(false)}
+        />
+      </Box>
     </ThemeProvider>
   );
 }
