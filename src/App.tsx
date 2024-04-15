@@ -25,7 +25,7 @@ function App() {
       {locale && currency && (
         <Box
           sx={{
-            backgroundColor: "#e3dede",
+            backgroundColor: customTheme.palette.secondary.light,
           }}
         >
           <Grid2

@@ -1,5 +1,5 @@
 import { getInputProps, usePercentageAdornment } from "./../adornments.tsx";
-import { Grid, Stack, Typography } from "@mui/material";
+import { Grid, Stack, Typography, useTheme } from "@mui/material";
 import NumberFields from "../numberFields.tsx";
 import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
 import {
@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 
 function Buying() {
   const { t } = useTranslation();
+  const theme = useTheme();
   const getPercentageAdornment = usePercentageAdornment();
   const { createStateUpdateFc, stateSlice: buyingState } =
     useCalculatorSlice("buying");
@@ -130,7 +131,7 @@ function Buying() {
                 padding: 0,
               },
             }}
-            colors={["#0088FE", "orange"]}
+            colors={[theme.palette.primary.main, theme.palette.secondary.main]}
             series={[
               {
                 data: [

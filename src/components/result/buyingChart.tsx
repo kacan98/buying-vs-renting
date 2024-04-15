@@ -1,17 +1,37 @@
 import { LineChart } from "@mui/x-charts";
 import { PeriodValueChange } from "../../services/buying/buying.model.ts";
 import { useTranslation } from "react-i18next";
-import { Typography } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 
 function BuyingChart({ graphData }: { graphData: PeriodValueChange[] }) {
+  const theme = useTheme();
+
   const { t } = useTranslation();
   const labelNameMap = {
-    interestPaid: t("Interest paid"),
-    principalPaid: t("Principal paid"),
-    increaseInPropertyValue: t("Increase in property value"),
-    ownershipCost: t("Ownership cost"),
-    buyingCosts: t("Buying costs"),
-    sellingCosts: t("Selling costs"),
+    interestPaid: {
+      translation: t("Interest paid"),
+      color: theme.palette.secondary.main,
+    },
+    principalPaid: {
+      translation: t("Principal paid"),
+      color: theme.palette.primary.main,
+    },
+    increaseInPropertyValue: {
+      translation: t("Increase in property value"),
+      color: theme.palette.primary.main,
+    },
+    ownershipCost: {
+      translation: t("Ownership cost"),
+      color: theme.palette.secondary.dark,
+    },
+    buyingCosts: {
+      translation: t("Buying costs"),
+      color: theme.palette.secondary.light,
+    },
+    sellingCosts: {
+      translation: t("Selling costs"),
+      color: theme.palette.secondary.light,
+    },
   };
 
   if (graphData.length === 0) return <></>;
@@ -23,13 +43,14 @@ function BuyingChart({ graphData }: { graphData: PeriodValueChange[] }) {
 
       const label = {
         id: key,
-        label: labelNameMap[key],
+        label: labelNameMap[key].translation,
         data: graphData.map((data) => {
           return data[key];
         }),
         stack: "total",
         area: true,
         showMark: false,
+        color: labelNameMap[key].color,
       };
       sum.push(label);
       return sum;

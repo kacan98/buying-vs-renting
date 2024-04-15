@@ -39,7 +39,7 @@
   "Original property value": "Ursprünglicher Immobilienwert",
   "Total property value increase": "Gesamtsteigerung des Immobilienwerts",
   "Paying off remaining debt": "Verbleibende Schulden abzahlen",
-  "labelForYears": "{{rentingOrBuying}} in {{yearsNumber}} {{yearOrYears}}",
+  "labelForYears": "{{rentingOrBuying}} für {{yearsNumber}} {{yearOrYears}}",
   "yearsPlural": "Jahre",
   "yearSingular": "Jahr",
   "Buying/renting is better by": "{{buyingOrRenting}} ist besser um {{difference}}",

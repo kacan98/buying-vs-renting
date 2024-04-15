@@ -11,7 +11,7 @@ const IntroBlock = () => {
   const { t } = useTranslation();
   return (
     <>
-      <Typography variant={"h2"} component={"h1"} gutterBottom>
+      <Typography variant={"h1"} gutterBottom>
         {t("Property Investment Calculator")}
       </Typography>
       <Typography variant={"body1"} gutterBottom>

@@ -41,7 +41,7 @@ function ResultBlock({ rows, heading, description, chart }: ResultBlockProps) {
           const typography = (
             <Typography
               variant={"body1"}
-              color={value < 0 ? "error" : undefined}
+              color={value < 0 ? theme.palette.error.main : undefined}
             >
               {label}: {formatAsCurrency(value || 0)}
             </Typography>

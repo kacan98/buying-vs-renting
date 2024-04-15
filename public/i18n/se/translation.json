@@ -39,7 +39,7 @@
   "Original property value": "Ursprungligt fastighetsvärde",
   "Total property value increase": "Total ökning av fastighetsvärdet",
   "Paying off remaining debt": "Betalning av återstående skuld",
-  "labelForYears": "{{rentingOrBuying}} för {{yearsNumber}} {{yearOrYears}}",
+  "labelForYears": "{{rentingOrBuying}} i {{yearsNumber}} {{yearOrYears}}",
   "yearsPlural": "år",
   "yearSingular": "år",
   "Buying/renting is better by": "{{buyingOrRenting}} är bättre med {{difference}}",

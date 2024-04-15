@@ -2,7 +2,13 @@ import NumberFields from "../numberFields.tsx";
 import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
 import { NumberFieldProps } from "../numberField.tsx";
 import { getInputProps, usePercentageAdornment } from "../adornments.tsx";
-import { Checkbox, FormControlLabel, Grid, Typography } from "@mui/material";
+import {
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { useDispatch } from "react-redux";
 import { toggleInvestDifference } from "../../../store/calculatorSlices/renting.ts";
 import { useMortgageDetails } from "../../services/buying/useMortgageDetails.ts";
@@ -12,6 +18,7 @@ import { PieChart } from "@mui/x-charts";
 import { useAlternativeInvestmentReturns } from "../../services/useAlternativeInvestment.ts";
 
 const Renting = () => {
+  const theme = useTheme();
   const { t } = useTranslation();
   const { stateSlice: rentingState, createStateUpdateFc } =
     useCalculatorSlice("renting");
@@ -125,7 +132,11 @@ const Renting = () => {
                       position: { vertical: "top", horizontal: "right" },
                     },
                   }}
-                  colors={["yellow", "orange", "green"]}
+                  colors={[
+                    theme.palette.secondary.dark,
+                    theme.palette.secondary.light,
+                    theme.palette.primary.main,
+                  ]}
                   series={[
                     {
                       data: [
