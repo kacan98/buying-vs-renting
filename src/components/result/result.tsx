@@ -24,7 +24,7 @@ function Result() {
       }}
     >
       <Typography variant={"h3"} gutterBottom>
-        {t("Buying/renting is better by", {
+        {t("Buying/renting is cheaper by", {
           buyingOrRenting: t(buyingIsBetter ? "Buying" : "Renting"),
           difference: formatAsCurrency(Math.abs(difference)),
         })}

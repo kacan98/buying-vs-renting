@@ -19,7 +19,6 @@ export default function useCalculatorSlice<T extends keyof CalculatorState>(
 
   const createFloatStateUpdateFc = (fieldName: keyof CalculatorState[T]) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
-      // @ts-expect-error - this is a hack to get around the fact that the type of the action is not known at compile time
       const action = createAction[sliceName];
       const value = parseFloat(e.target.value || "0");
       dispatch(

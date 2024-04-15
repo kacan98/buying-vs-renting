@@ -42,7 +42,7 @@
   "labelForYears": "{{rentingOrBuying}} po dobu {{yearsNumber}} {{yearOrYears}}",
   "yearsPlural": "roků",
   "yearSingular": "rok",
-  "Buying/renting is better by": "{{buyingOrRenting}} je lepší o {{difference}}",
+  "Buying/renting is cheaper by": "{{buyingOrRenting}} je levnější o {{difference}}",
   "Rent": "Nájem",
   "Investment returns": "Výnosy z investic",
   "Alternative investment": "Alternativní investice",

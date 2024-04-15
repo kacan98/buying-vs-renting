@@ -42,7 +42,7 @@
   "labelForYears": "{{rentingOrBuying}} i {{yearsNumber}} {{yearOrYears}}",
   "yearsPlural": "år",
   "yearSingular": "år",
-  "Buying/renting is better by": "{{buyingOrRenting}} er bedre med {{difference}}",
+  "Buying/renting is cheaper by": "{{buyingOrRenting}} er billigere med {{difference}}",
   "Rent": "Leje",
   "Investment returns": "Investeringsafkast",
   "Alternative investment": "Alternativ investering",

@@ -42,7 +42,7 @@
   "labelForYears": "{{rentingOrBuying}} pe {{yearsNumber}} de {{yearOrYears}}",
   "yearsPlural": "ani",
   "yearSingular": "an",
-  "Buying/renting is better by": "{{buyingOrRenting}} este mai bun cu {{difference}}",
+  "Buying/renting is cheaper by": "{{buyingOrRenting}} este mai ieftin cu {{difference}}",
   "Rent": "Chirie",
   "Investment returns": "Randamentele investiției",
   "Alternative investment": "Investiție alternativă",
