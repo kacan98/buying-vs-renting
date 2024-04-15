@@ -1,8 +1,8 @@
-import Renting from "./inputBlocks/renting.tsx";
-import PaperWrapper from "./paper.tsx";
-import Buying from "./inputBlocks/buying.tsx";
+import PaperWrapper from "../../paper.tsx";
 import { Stack } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import Buying from "../blocks/buying.tsx";
+import Renting from "../blocks/renting.tsx";
 
 function CalculatorInputs() {
   const { t } = useTranslation();

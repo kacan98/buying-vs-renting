@@ -1,10 +1,12 @@
-import ResultBlock, { ResultBlockProps } from "./resultBlock.tsx";
-import BuyingChart from "./buyingChart.tsx";
-import { useMortgageDetails } from "../../services/buying/useMortgageDetails.ts";
+import BuyingOrSellingResultWrapper, {
+  ResultPanelProps,
+} from "./buyingOrSellingResultWrapper.tsx";
+import BuyingChart from "./charts/buyingChart.tsx";
+import { useMortgageDetails } from "../../../services/buying/useMortgageDetails.ts";
 import { useTranslation } from "react-i18next";
-import { FuturePredictionsState } from "../../../store/calculatorSlices/futurePreditions.ts";
+import { FuturePredictionsState } from "../../../../store/calculatorSlices/futurePreditions.ts";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../store";
+import { RootState } from "../../../../store";
 
 function BuyingResultBlock() {
   const { t } = useTranslation();
@@ -26,7 +28,7 @@ function BuyingResultBlock() {
     initialPropertyValue: propertyPrice,
   } = useMortgageDetails();
 
-  const capitalFromSaleDetails: ResultBlockProps["rows"] = [
+  const capitalFromSaleDetails: ResultPanelProps["rows"] = [
     { label: t("Original property value"), value: propertyPrice },
     {
       label: t("Total property value increase"),
@@ -39,8 +41,9 @@ function BuyingResultBlock() {
     if (row === "divider") return acc;
     return acc + row.value;
   }, 0);
+  console.log(yearValueChanges);
   return (
-    <ResultBlock
+    <BuyingOrSellingResultWrapper
       chart={<BuyingChart graphData={yearValueChanges} />}
       heading={t("labelForYears", {
         rentingOrBuying: t("Buying"),
@@ -53,7 +56,7 @@ function BuyingResultBlock() {
           label: t("Mortgage paid"),
           value: -totalMortgagePaid,
           tooltip: (
-            <ResultBlock
+            <BuyingOrSellingResultWrapper
               rows={[
                 {
                   label: t("Total interest paid"),
@@ -72,7 +75,7 @@ function BuyingResultBlock() {
           label: t("Buying and selling costs"),
           value: -1 * (buyingCost + sellingCost),
           tooltip: (
-            <ResultBlock
+            <BuyingOrSellingResultWrapper
               rows={[
                 { label: t("Buying costs"), value: -1 * buyingCost },
                 { label: t("Selling costs"), value: -1 * sellingCost },
@@ -92,7 +95,7 @@ function BuyingResultBlock() {
           label: t("Capital from selling"),
           value: capitalFromSale,
           tooltip: (
-            <ResultBlock
+            <BuyingOrSellingResultWrapper
               heading={t("Capital from selling details")}
               rows={capitalFromSaleDetails}
             />

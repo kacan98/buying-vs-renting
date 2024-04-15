@@ -1,11 +1,11 @@
-import ResultBlock from "./resultBlock.tsx";
+import BuyingOrSellingResultWrapper from "./buyingOrSellingResultWrapper.tsx";
 import { useTranslation } from "react-i18next";
-import { FuturePredictionsState } from "../../../store/calculatorSlices/futurePreditions.ts";
+import { FuturePredictionsState } from "../../../../store/calculatorSlices/futurePreditions.ts";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../store";
-import { RentingState } from "../../../store/calculatorSlices/renting.ts";
-import { useAlternativeInvestmentReturns } from "../../services/useAlternativeInvestment.ts";
-import { useRentDetails } from "../../services/renting/useRentDetails.ts";
+import { RootState } from "../../../../store";
+import { RentingState } from "../../../../store/calculatorSlices/renting.ts";
+import { useAlternativeInvestmentReturns } from "../../../services/useAlternativeInvestment.ts";
+import { useRentDetails } from "../../../services/renting/useRentDetails.ts";
 
 function RentingResultBlock() {
   const { t } = useTranslation();
@@ -20,7 +20,7 @@ function RentingResultBlock() {
   const alternativeInvestment = useAlternativeInvestmentReturns();
 
   return (
-    <ResultBlock
+    <BuyingOrSellingResultWrapper
       heading={t("labelForYears", {
         rentingOrBuying: t("Renting"),
         yearsNumber: yearsStaying,
@@ -36,7 +36,7 @@ function RentingResultBlock() {
           label: t("Investment returns"),
           value: alternativeInvestment.valueAdded,
           tooltip: (
-            <ResultBlock
+            <BuyingOrSellingResultWrapper
               heading={t("Alternative investment")}
               rows={[
                 {

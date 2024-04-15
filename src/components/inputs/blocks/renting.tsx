@@ -1,7 +1,7 @@
-import NumberFields from "../numberFields.tsx";
-import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
-import { NumberFieldProps } from "../numberField.tsx";
-import { getInputProps, usePercentageAdornment } from "../adornments.tsx";
+import NumberFields from "../fields/numberFields.tsx";
+import useCalculatorSlice from "../../../../store/calculatorSlices/useCalculatorSlice.ts";
+import { NumberFieldProps } from "../fields/numberField.tsx";
+import { getInputProps, usePercentageAdornment } from "../../adornments.tsx";
 import {
   Checkbox,
   FormControlLabel,
@@ -10,12 +10,12 @@ import {
   useTheme,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { toggleInvestDifference } from "../../../store/calculatorSlices/renting.ts";
-import { useMortgageDetails } from "../../services/buying/useMortgageDetails.ts";
-import { useLocaleCurrencyFormatter } from "../../../store/settings/useLocale.ts";
+import { toggleInvestDifference } from "../../../../store/calculatorSlices/renting.ts";
+import { useMortgageDetails } from "../../../services/buying/useMortgageDetails.ts";
+import { useLocaleCurrencyFormatter } from "../../../../store/settings/useLocale.ts";
 import { useTranslation } from "react-i18next";
 import { PieChart } from "@mui/x-charts";
-import { useAlternativeInvestmentReturns } from "../../services/useAlternativeInvestment.ts";
+import { useAlternativeInvestmentReturns } from "../../../services/useAlternativeInvestment.ts";
 
 const Renting = () => {
   const theme = useTheme();

@@ -2,9 +2,9 @@ import * as React from "react";
 import { NumericFormat, NumericFormatProps } from "react-number-format";
 import TextField from "@mui/material/TextField";
 import { TextFieldProps } from "@mui/material";
-import { RootState } from "../../store";
+import { RootState } from "../../../../store";
 import { useSelector } from "react-redux";
-import { supportedCurrencies } from "../../store/settings/supportedLocales.ts";
+import { supportedCurrencies } from "../../../../store/settings/supportedLocales.ts";
 
 interface CustomProps {
   onChange: (event: { target: { name: string; value: string } }) => void;

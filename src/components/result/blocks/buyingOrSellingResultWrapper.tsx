@@ -8,9 +8,9 @@ import {
   useTheme,
 } from "@mui/material";
 import * as React from "react";
-import { useLocaleCurrencyFormatter } from "../../../store/settings/useLocale.ts";
+import { useLocaleCurrencyFormatter } from "../../../../store/settings/useLocale.ts";
 
-export type ResultBlockProps = {
+export type ResultPanelProps = {
   heading: string;
   description?: string;
   rows: (
@@ -20,7 +20,12 @@ export type ResultBlockProps = {
   chart?: React.ReactNode;
 };
 
-function ResultBlock({ rows, heading, description, chart }: ResultBlockProps) {
+function BuyingOrSellingResultWrapper({
+  rows,
+  heading,
+  description,
+  chart,
+}: ResultPanelProps) {
   const formatAsCurrency: (value: number) => string =
     useLocaleCurrencyFormatter();
   const theme = useTheme();
@@ -72,4 +77,4 @@ function ResultBlock({ rows, heading, description, chart }: ResultBlockProps) {
   );
 }
 
-export default ResultBlock;
+export default BuyingOrSellingResultWrapper;

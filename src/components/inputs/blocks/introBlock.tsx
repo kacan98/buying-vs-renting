@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
-import NumberField from "../numberField.tsx";
-import { getInputProps } from "../adornments.tsx";
-import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
+import NumberField from "../fields/numberField.tsx";
+import { getInputProps } from "../../adornments.tsx";
+import useCalculatorSlice from "../../../../store/calculatorSlices/useCalculatorSlice.ts";
 import { useTranslation } from "react-i18next";
 
 const IntroBlock = () => {

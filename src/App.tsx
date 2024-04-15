@@ -1,7 +1,6 @@
 import { Box, ThemeProvider } from "@mui/material";
 import PaperWrapper from "./components/paper.tsx";
-import CalculatorInputs from "./components/calculatorInputs.tsx";
-import IntroBlock from "./components/inputBlocks/introBlock.tsx";
+import CalculatorInputs from "./components/inputs/fields/calculatorInputs.tsx";
 import Button from "@mui/material/Button";
 import { Settings } from "@mui/icons-material";
 import { RootState } from "../store";
@@ -12,6 +11,7 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 import { useTranslation } from "react-i18next";
 import { darkTheme, lightTheme } from "./theme.ts";
 import ResultSection from "./components/result/resultSection.tsx";
+import IntroBlock from "./components/inputs/blocks/introBlock.tsx";
 
 function App() {
   const { t } = useTranslation();

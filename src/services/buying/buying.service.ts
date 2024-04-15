@@ -135,6 +135,7 @@ export function calculateMortgageDetails(
       totalOwnershipCosts: 0,
       monthValueChanges: [],
       yearValueChanges: [],
+      yearValueChangeTotals: [],
       buyingCost: 0,
       sellingCost: 0,
       totalCosts: 0,
@@ -198,6 +199,21 @@ export function calculateMortgageDetails(
     [] as PeriodValueChange[],
   );
 
+  const yearValueChangesSummary = yearValueChanges.reduce(
+    (acc, yearValueChange) => {
+      let currentYear = 0;
+      currentYear -= yearValueChange.interestPaid;
+      currentYear -= yearValueChange.principalPaid;
+      currentYear += yearValueChange.increaseInPropertyValue;
+      currentYear -= yearValueChange.ownershipCost;
+      currentYear -= yearValueChange.buyingCosts;
+      currentYear -= yearValueChange.sellingCosts;
+      acc.push(currentYear);
+      return acc;
+    },
+    [] as number[],
+  );
+
   return {
     totalInterestPaid,
     remainingBalance,
@@ -205,6 +221,7 @@ export function calculateMortgageDetails(
     totalOwnershipCosts,
     monthValueChanges,
     yearValueChanges,
+    yearValueChangeTotals: yearValueChangesSummary,
     buyingCost,
     sellingCost,
     totalCosts,

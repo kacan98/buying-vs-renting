@@ -1,10 +1,11 @@
 import { Box, Typography } from "@mui/material";
-import { useRentDetails } from "../../services/renting/useRentDetails.ts";
-import { useLocaleCurrencyFormatter } from "../../../store/settings/useLocale.ts";
+import { useRentDetails } from "../../../services/renting/useRentDetails.ts";
+import { useLocaleCurrencyFormatter } from "../../../../store/settings/useLocale.ts";
 import { useTranslation } from "react-i18next";
-import { useMortgageDetails } from "../../services/buying/useMortgageDetails.ts";
+import { useMortgageDetails } from "../../../services/buying/useMortgageDetails.ts";
+import { ResultChart } from "./charts/resultChart.tsx";
 
-function Result() {
+function ResultBlock() {
   const { t } = useTranslation();
   const formatAsCurrency: (value: number) => string =
     useLocaleCurrencyFormatter();
@@ -29,8 +30,9 @@ function Result() {
           difference: formatAsCurrency(Math.abs(difference)),
         })}
       </Typography>
+      <ResultChart />
     </Box>
   );
 }
 
-export default Result;
+export default ResultBlock;

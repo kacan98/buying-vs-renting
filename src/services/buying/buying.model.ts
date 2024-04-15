@@ -35,6 +35,7 @@ export interface MortgageDetails {
 
   monthValueChanges: PeriodValueChange[];
   yearValueChanges: PeriodValueChange[];
+  yearValueChangeTotals: number[];
   buyingCost: number;
   sellingCost: number;
 

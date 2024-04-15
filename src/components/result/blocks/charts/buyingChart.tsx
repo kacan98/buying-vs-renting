@@ -1,5 +1,5 @@
 import { LineChart } from "@mui/x-charts";
-import { PeriodValueChange } from "../../services/buying/buying.model.ts";
+import { PeriodValueChange } from "../../../../services/buying/buying.model.ts";
 import { useTranslation } from "react-i18next";
 import { Typography, useTheme } from "@mui/material";
 
@@ -22,7 +22,7 @@ function BuyingChart({ graphData }: { graphData: PeriodValueChange[] }) {
     },
     ownershipCost: {
       translation: t("Ownership cost"),
-      color: theme.palette.secondary.dark,
+      color: theme.palette.secondary.light,
     },
     buyingCosts: {
       translation: t("Buying costs"),

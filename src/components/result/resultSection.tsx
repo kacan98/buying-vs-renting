@@ -1,15 +1,15 @@
 import Grid2 from "@mui/material/Unstable_Grid2";
 import PaperWrapper from "../paper.tsx";
-import Result from "./result.tsx";
-import BuyingResultBlock from "./buyingResultBlock.tsx";
-import RentingResultBlock from "./rentingResultBlock.tsx";
+import ResultBlock from "./blocks/resultBlock.tsx";
+import BuyingResultBlock from "./blocks/buyingResultBlock.tsx";
+import RentingResultBlock from "./blocks/rentingResultBlock.tsx";
 
 function ResultSection() {
   return (
     <Grid2 container spacing={2} justifyContent={"stretch"}>
       <Grid2 xs={12}>
         <PaperWrapper>
-          <Result />
+          <ResultBlock />
         </PaperWrapper>
       </Grid2>
       <Grid2 xs={12}>

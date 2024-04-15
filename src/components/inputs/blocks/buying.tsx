@@ -1,16 +1,16 @@
-import { getInputProps, usePercentageAdornment } from "./../adornments.tsx";
+import { getInputProps, usePercentageAdornment } from "../../adornments.tsx";
 import { Grid, Stack, Typography, useTheme } from "@mui/material";
-import NumberFields from "../numberFields.tsx";
-import useCalculatorSlice from "../../../store/calculatorSlices/useCalculatorSlice.ts";
+import NumberFields from "../fields/numberFields.tsx";
+import useCalculatorSlice from "../../../../store/calculatorSlices/useCalculatorSlice.ts";
 import {
   getLoanAmount,
   simulateTimePassage,
-} from "../../services/buying/buying.service.ts";
+} from "../../../services/buying/buying.service.ts";
 import { PieChart } from "@mui/x-charts";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../store";
-import { useMortgageDetails } from "../../services/buying/useMortgageDetails.ts";
-import { useLocaleCurrencyFormatter } from "../../../store/settings/useLocale.ts";
+import { RootState } from "../../../../store";
+import { useMortgageDetails } from "../../../services/buying/useMortgageDetails.ts";
+import { useLocaleCurrencyFormatter } from "../../../../store/settings/useLocale.ts";
 import { useTranslation } from "react-i18next";
 
 function Buying() {
