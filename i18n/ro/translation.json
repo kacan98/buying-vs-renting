@@ -39,7 +39,7 @@
   "Original property value": "Valoarea originală a proprietății",
   "Total property value increase": "Creșterea totală a valorii proprietății",
   "Paying off remaining debt": "Plata datoriei rămase",
-  "labelForYears": "{{rentingOrBuying}} în {{yearsNumber}} {{yearOrYears}}",
+  "labelForYears": "{{rentingOrBuying}} pe {{yearsNumber}} de {{yearOrYears}}",
   "yearsPlural": "ani",
   "yearSingular": "an",
   "Buying/renting is better by": "{{buyingOrRenting}} este mai bun cu {{difference}}",
