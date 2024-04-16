@@ -56,7 +56,6 @@
   "Buying and selling costs": "Costuri de cumpărare și vânzare",
   "Buying and selling details": "Detalii despre cumpărare și vânzare",
   "Total ownership costs": "Costuri totale de proprietate",
-  "Simply ownership cost over the time of staying": "Simplu cost de proprietate pe durata șederii",
   "Capital from selling": "Capital din vânzare",
   "Capital from selling details": "Detalii capital din vânzare",
   "Currency": "Monedă",
@@ -71,5 +70,6 @@
   "Auto": "Auto",
   "Light": "Luminos",
   "Dark": "Întunecat",
-  "Mortgage vs Renting value": "Valoarea ipotecii vs închiriere"
+  "Mortgage vs Renting value": "Valoarea ipotecii vs închiriere",
+  "Buying and renting is equally expensive": "Cumpărarea și închirierea sunt la fel de scumpe"
 }

@@ -56,7 +56,6 @@
   "Buying and selling costs": "Kauf- und Verkaufskosten",
   "Buying and selling details": "Details zu Kauf und Verkauf",
   "Total ownership costs": "Gesamte Besitzkosten",
-  "Simply ownership cost over the time of staying": "Einfache Besitzkosten über die Zeit des Aufenthalts",
   "Capital from selling": "Kapital aus dem Verkauf",
   "Capital from selling details": "Details zum Kapital aus dem Verkauf",
   "Currency": "Währung",
@@ -71,5 +70,6 @@
   "Auto": "Auto",
   "Light": "Hell",
   "Dark": "Dunkel",
-  "Mortgage vs Renting value": "Hypothek vs Mietwert"
+  "Mortgage vs Renting value": "Hypothek vs Mietwert",
+  "Buying and renting is equally expensive": "Kaufen und Mieten ist gleich teuer"
 }

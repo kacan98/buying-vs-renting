@@ -56,7 +56,6 @@
   "Buying and selling costs": "Buying and Selling Costs",
   "Buying and selling details": "Buying and Selling Details",
   "Total ownership costs": "Total Ownership Costs",
-  "Simply ownership cost over the time of staying": "Simply Ownership Cost over the Time of Staying",
   "Capital from selling": "Capital from Selling",
   "Capital from selling details": "Details of Capital from Selling",
   "Currency": "Currency",
@@ -71,5 +70,6 @@
   "Auto": "Auto",
   "Light": "Light",
   "Dark": "Dark",
-  "Mortgage vs Renting value": "Mortgage vs Renting Value"
+  "Mortgage vs Renting value": "Mortgage vs Renting Value",
+  "Buying and renting is equally expensive": "Buying and renting is equally expensive"
 }
