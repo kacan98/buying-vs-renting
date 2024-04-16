@@ -42,7 +42,7 @@
   "labelForYears": "{{rentingOrBuying}} pe {{yearsNumber}} de {{yearOrYears}}",
   "yearsPlural": "ani",
   "yearSingular": "an",
-  "Buying/renting is better by": "{{buyingOrRenting}} este mai bun cu {{difference}}",
+  "Buying/renting is cheaper by": "{{buyingOrRenting}} este mai ieftin cu {{difference}}",
   "Rent": "Chirie",
   "Investment returns": "Randamentele investiției",
   "Alternative investment": "Investiție alternativă",
@@ -65,5 +65,11 @@
   "Language": "Limba",
   "Select language": "Selectează limba",
   "Monthly costs of buying": "Costuri lunare de cumpărare",
-  "Interest": "Dobândă"
+  "Interest": "Dobândă",
+  "Interest income": "Venit din dobândă",
+  "Mode": "Mod",
+  "Auto": "Auto",
+  "Light": "Luminos",
+  "Dark": "Întunecat",
+  "Mortgage vs Renting value": "Valoarea ipotecii vs închiriere"
 }

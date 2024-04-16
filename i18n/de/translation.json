@@ -42,7 +42,7 @@
   "labelForYears": "{{rentingOrBuying}} für {{yearsNumber}} {{yearOrYears}}",
   "yearsPlural": "Jahre",
   "yearSingular": "Jahr",
-  "Buying/renting is better by": "{{buyingOrRenting}} ist besser um {{difference}}",
+  "Buying/renting is cheaper by": "{{buyingOrRenting}} ist günstiger um {{difference}}",
   "Rent": "Miete",
   "Investment returns": "Investitionsrenditen",
   "Alternative investment": "Alternative Investition",
@@ -65,5 +65,11 @@
   "Language": "Sprache",
   "Select language": "Sprache auswählen",
   "Monthly costs of buying": "Monatliche Kosten des Kaufens",
-  "Interest": "Zinsen"
+  "Interest": "Zinsen",
+  "Interest income": "Zinseinkommen",
+  "Mode": "Modus",
+  "Auto": "Auto",
+  "Light": "Hell",
+  "Dark": "Dunkel",
+  "Mortgage vs Renting value": "Hypothek vs Mietwert"
 }

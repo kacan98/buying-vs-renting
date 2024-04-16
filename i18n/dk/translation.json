@@ -42,7 +42,7 @@
   "labelForYears": "{{rentingOrBuying}} i {{yearsNumber}} {{yearOrYears}}",
   "yearsPlural": "år",
   "yearSingular": "år",
-  "Buying/renting is better by": "{{buyingOrRenting}} er bedre med {{difference}}",
+  "Buying/renting is cheaper by": "{{buyingOrRenting}} er billigere med {{difference}}",
   "Rent": "Leje",
   "Investment returns": "Investeringsafkast",
   "Alternative investment": "Alternativ investering",
@@ -65,5 +65,11 @@
   "Language": "Sprog",
   "Select language": "Vælg sprog",
   "Monthly costs of buying": "Månedlige omkostninger ved køb",
-  "Interest": "Rente"
+  "Interest": "Rente",
+  "Interest income": "Renteindtægter",
+  "Mode": "Tilstand",
+  "Auto": "Auto",
+  "Light": "Lys",
+  "Dark": "Mørk",
+  "Mortgage vs Renting value": "Pant kontra lejeværdi"
 }
