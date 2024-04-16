@@ -20,12 +20,12 @@ export interface OptionsModalProps {
 
 export function OptionsModal(props: OptionsModalProps) {
   const { onClose, value: valueProp, open, options, title, ...other } = props;
-  const [value, setValue] = React.useState(valueProp);
+  const [value, setValue] = React.useState(valueProp || "");
   const radioGroupRef = React.useRef<HTMLElement>(null);
 
   React.useEffect(() => {
     if (!open) {
-      setValue(valueProp);
+      setValue(valueProp || "");
     }
   }, [valueProp, open]);
 

@@ -9,6 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prepare": "husky install",
+    "format": "pretty-quick",
     "format:staged": "pretty-quick --staged",
     "extract-translations": "i18next-scanner --config i18next-scanner.config.cjs"
   },
@@ -27,11 +28,14 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^14.1.0",
     "react-number-format": "^5.3.4",
-    "react-redux": "^9.1.0"
+    "react-redux": "^9.1.0",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "@types/react-slick": "^0.23.13",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",

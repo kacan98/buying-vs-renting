@@ -4,12 +4,14 @@ export interface BuyingState {
   locale?: string;
   currency?: string;
   theme: "auto" | "light" | "dark";
+  introFinished?: boolean;
 }
 
 const initialState: BuyingState = {
   locale: undefined,
   currency: undefined,
   theme: "auto",
+  introFinished: false,
 };
 
 export const settingsSlice = createSlice({
@@ -34,9 +36,13 @@ export const settingsSlice = createSlice({
     ) => {
       state.theme = action.payload;
     },
+    markIntroFinished: (state: BuyingState) => {
+      state.introFinished = true;
+    },
   },
 });
 
-export const { setLocale, setCurrency, setTheme } = settingsSlice.actions;
+export const { setLocale, setCurrency, setTheme, markIntroFinished } =
+  settingsSlice.actions;
 
 export default settingsSlice.reducer;

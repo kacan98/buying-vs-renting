@@ -1,37 +1,44 @@
-import { Box, ThemeProvider } from "@mui/material";
-import PaperWrapper from "./components/paper.tsx";
-import CalculatorInputs from "./components/inputs/fields/calculatorInputs.tsx";
-import Button from "@mui/material/Button";
-import { Settings } from "@mui/icons-material";
+import { Box, ThemeProvider, useMediaQuery } from "@mui/material";
 import { RootState } from "../store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { SettingsDialog } from "./components/settingsDialog.tsx";
-import Grid2 from "@mui/material/Unstable_Grid2";
-import { useTranslation } from "react-i18next";
 import { darkTheme, lightTheme } from "./theme.ts";
-import ResultSection from "./components/result/resultSection.tsx";
-import IntroBlock from "./components/inputs/blocks/introBlock.tsx";
+import CalculatorReport from "./components/calculatorReport.tsx";
+import InitialSetup from "./components/setupSlider/setupSlider.tsx";
+import { markIntroFinished } from "../store/settings/settings.ts";
 
 function App() {
-  const { t } = useTranslation();
   const themeSettings = useSelector((state: RootState) => state.settings.theme);
-  const [settingsOpen, setSettingsOpen] = useState(false);
   const locale = useSelector((state: RootState) => state.settings.locale);
   const currency = useSelector((state: RootState) => state.settings.currency);
+  const introFinished = useSelector(
+    (state: RootState) => state.settings.introFinished,
+  );
 
   const prefersDarkMode =
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-  if (!settingsOpen && (!locale || !currency)) setSettingsOpen(true);
   const themeMode =
     themeSettings === "auto"
       ? prefersDarkMode
         ? "dark"
         : "light"
       : themeSettings;
+
   const themeUsed = themeMode === "dark" ? darkTheme : lightTheme;
+  const isSmallScreen = useMediaQuery(themeUsed.breakpoints.down("md"));
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  if (!settingsOpen && (!locale || !currency)) {
+    setSettingsOpen(true);
+
+    //I know this is a bit weird but if we are on a small screen, we want to skip the intro
+    //and go directly to the report - it makes more sense as a flow this way...
+    if (isSmallScreen && !introFinished) dispatch(markIntroFinished());
+  }
 
   return (
     <ThemeProvider theme={themeUsed}>
@@ -40,45 +47,18 @@ function App() {
           backgroundColor: themeUsed.palette.secondary.light,
         }}
       >
-        {locale && currency && (
-          <Grid2
-            container
-            spacing={2}
-            justifyContent={"center"}
-            sx={{
-              maxWidth: "1200px",
-              margin: "0 auto",
-            }}
-          >
-            <Grid2 xs={12}>
-              <PaperWrapper>
-                <IntroBlock />
-              </PaperWrapper>
-            </Grid2>
-            <Grid2 sm={12} lg={8}>
-              <CalculatorInputs />
-            </Grid2>
-            <Grid2 sm={12} lg={4}>
-              <ResultSection />
-            </Grid2>
-            <Grid2 sm={12} mt={0}>
-              <Button
-                fullWidth
-                sx={{ mb: 2 }}
-                onClick={() => setSettingsOpen(true)}
-                variant={
-                  themeUsed.palette.mode === "dark" ? "contained" : "outlined"
-                }
-                color={
-                  themeUsed.palette.mode === "dark" ? "secondary" : "primary"
-                }
-                endIcon={<Settings />}
-              >
-                {t("Settings")}
-              </Button>
-            </Grid2>
-          </Grid2>
-        )}
+        {locale &&
+          currency &&
+          (!introFinished ? (
+            <InitialSetup
+              open={true}
+              finishSetup={() => dispatch(markIntroFinished())}
+            />
+          ) : (
+            <CalculatorReport
+              onSettingsButtonClicked={() => setSettingsOpen(true)}
+            />
+          ))}
 
         <SettingsDialog
           open={settingsOpen}

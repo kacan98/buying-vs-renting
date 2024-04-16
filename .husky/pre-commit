@@ -3,3 +3,4 @@
 
 npm run format:staged
 npm run lint -- --fix
+npm run build

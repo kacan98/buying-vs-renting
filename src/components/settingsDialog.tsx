@@ -8,6 +8,8 @@ import {
   ListItemText,
   ToggleButton,
   ToggleButtonGroup,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
@@ -20,6 +22,7 @@ import React, { useState } from "react";
 import { OptionsModal } from "./optionsModal.tsx";
 import { supportedCurrencies } from "../../store/settings/supportedLocales.ts";
 import {
+  BuyingState,
   setCurrency,
   setLocale,
   setTheme,
@@ -34,8 +37,12 @@ export interface SimpleDialogProps {
 
 export function SettingsDialog(props: SimpleDialogProps) {
   const { t, i18n } = useTranslation();
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
   const { onClose, open } = props;
-  const theme = useSelector((state: RootState) => state.settings.theme);
+  const preferredTheme = useSelector(
+    (state: RootState) => state.settings.theme,
+  );
   const [currencyDialogOpen, toggleCurrencyDialog] = useState(false);
   const [languageModalOpen, toggleLanguageDialog] = useState(false);
   const dispatch = useDispatch();
@@ -56,9 +63,9 @@ export function SettingsDialog(props: SimpleDialogProps) {
     toggleCurrencyDialog(false);
   };
 
-  const handleLanguageSelect = () => (value?: string) => {
+  const handleLanguageSelect = async (value?: string) => {
     if (value) {
-      i18n.changeLanguage(value);
+      await i18n.changeLanguage(value);
       dispatch(setLocale(value));
       onClose();
     }
@@ -100,25 +107,28 @@ export function SettingsDialog(props: SimpleDialogProps) {
       case "currency":
         toggleCurrencyDialog(true);
         break;
-      case "startOver":
-        localStorage.removeItem("state");
-        localStorage.removeItem("i18nextLng");
-        //refresh page
+      case "startOver": {
+        let state = JSON.parse(localStorage.getItem("state") || "{}");
+
+        state = {
+          settings: {
+            locale: state?.settings?.locale,
+            currency: state?.settings?.currency,
+            theme: state?.settings?.theme,
+            // We want to show the intro again only on big screens
+            introFinished: isSmallScreen,
+          } as BuyingState,
+        };
+
+        // Delete everything else
+        localStorage.setItem("state", JSON.stringify(state));
         window.location.reload();
-        break;
+      }
     }
   };
 
   return (
-    <Dialog
-      onClose={() => onClose()}
-      open={open}
-      slotProps={{
-        backdrop: {
-          sx: !currentLocale || !currency ? { backgroundColor: "#fff" } : {},
-        },
-      }}
-    >
+    <Dialog onClose={() => onClose()} open={open}>
       <DialogTitle>{t("Settings")}</DialogTitle>
       <List sx={{ pt: 0 }}>
         {settings.map(
@@ -136,7 +146,7 @@ export function SettingsDialog(props: SimpleDialogProps) {
         <ListItem>
           <ToggleButtonGroup
             color="secondary"
-            value={theme}
+            value={preferredTheme}
             exclusive
             onChange={(_, newValue) => dispatch(setTheme(newValue))}
             aria-label="Platform"
@@ -170,7 +180,7 @@ export function SettingsDialog(props: SimpleDialogProps) {
         value={currentLocale}
         title={t("Select language")}
         open={languageModalOpen}
-        onClose={handleLanguageSelect()}
+        onClose={handleLanguageSelect}
         options={supportedLanguages.map(({ code, name }) => ({
           label: name,
           value: code,
