@@ -6,11 +6,13 @@ import { RootState } from "../../store";
 export function useAlternativeInvestmentReturns() {
   const { mortgagePerMonth, deposit: mortgageDeposit } = useMortgageDetails();
   const {
-    monthlyRent,
+    monthlyRent: rent,
     alternativeInvestmentReturnPercentage,
-    initialInvestment: rentDeposit,
+    initialInvestment,
     investDifference,
   } = useSelector((state: RootState) => state.calculator.renting);
+  const rentDeposit = initialInvestment || 0;
+  const monthlyRent = rent || 0;
 
   const yearsStaying = useSelector(
     (state: RootState) => state.calculator.futurePredictions.yearsStaying,
@@ -39,7 +41,7 @@ export function useAlternativeInvestmentReturns() {
       initialInvestment: initialCash,
       investmentPerPeriod: moneyAvailablePerMonth * 12,
       numberOfPeriods: yearsStaying,
-      appreciationRate: alternativeInvestmentReturnPercentage / 100,
+      appreciationRate: (alternativeInvestmentReturnPercentage || 0) / 100,
     });
 
   returnObj.totalAtTheEnd = totalAtTheEnd;

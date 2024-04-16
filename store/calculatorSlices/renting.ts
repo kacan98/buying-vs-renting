@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface RentingState {
-  monthlyRent: number;
-  initialInvestment: number;
-  yearlyRentGrowth: number;
-  investDifference: boolean;
-  alternativeInvestmentReturnPercentage: number;
+  monthlyRent?: number;
+  initialInvestment?: number;
+  yearlyRentGrowth?: number;
+  investDifference?: boolean;
+  alternativeInvestmentReturnPercentage?: number;
 }
 
 const initialState: RentingState = {

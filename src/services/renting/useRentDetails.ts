@@ -43,10 +43,10 @@ export const useRentDetails = () => {
   const alternativeInvestment = useAlternativeInvestmentReturns();
 
   const { yearValueChangeTotals, rentTotal } = calculateRent({
-    startingMonthlyRent: monthlyRent,
-    yearlyRentGrowth: yearlyRentGrowth,
-    yearsStaying,
-    deposit: initialInvestment,
+    startingMonthlyRent: monthlyRent || 0,
+    yearlyRentGrowth: yearlyRentGrowth || 0,
+    yearsStaying: yearsStaying || 0,
+    deposit: initialInvestment || 0,
   });
 
   const yearlyValuesRenting = yearValueChangeTotals.map(
