@@ -32,7 +32,7 @@ export function calculateInvestmentReturns({
     const previousTotal = totalReturn;
     totalReturn = totalReturn * (1 + appreciationRate);
     valueAdded += totalReturn - previousTotal;
-    monthlyValues.push(totalReturn);
+    monthlyValues.push(valueAdded);
   }
 
   return {

@@ -10,7 +10,7 @@
   "Deposit percentage": "Procento zálohy",
   "Interest Rate": "Úroková sazba",
   "You would pay {amount} per month": "Platili byste {{amount}} měsíčně",
-  "Total principal paid": "Celkem zaplacený jistina",
+  "Total principal paid": "Celkem zaplacená jistina",
   "Total interest paid": "Celkem zaplacené úroky",
   "Buying And Selling Costs": "Náklady na koupi a prodej",
   "Buying costs": "Náklady na koupi",
@@ -70,5 +70,6 @@
   "Mode": "Režim",
   "Auto": "Automatický",
   "Light": "Světlý",
-  "Dark": "Tmavý"
+  "Dark": "Tmavý",
+  "Mortgage vs Renting value": "Hodnota hypotéky vs nájem"
 }

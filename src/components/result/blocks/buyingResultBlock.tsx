@@ -41,7 +41,6 @@ function BuyingResultBlock() {
     if (row === "divider") return acc;
     return acc + row.value;
   }, 0);
-  console.log(yearValueChanges);
   return (
     <BuyingOrSellingResultWrapper
       chart={<BuyingChart graphData={yearValueChanges} />}

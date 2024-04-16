@@ -199,16 +199,17 @@ export function calculateMortgageDetails(
     [] as PeriodValueChange[],
   );
 
+  let totalValue = 0;
   const yearValueChangesSummary = yearValueChanges.reduce(
     (acc, yearValueChange) => {
       let currentYear = 0;
       currentYear -= yearValueChange.interestPaid;
-      currentYear -= yearValueChange.principalPaid;
       currentYear += yearValueChange.increaseInPropertyValue;
       currentYear -= yearValueChange.ownershipCost;
       currentYear -= yearValueChange.buyingCosts;
       currentYear -= yearValueChange.sellingCosts;
-      acc.push(currentYear);
+      totalValue += currentYear;
+      acc.push(totalValue);
       return acc;
     },
     [] as number[],

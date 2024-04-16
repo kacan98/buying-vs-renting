@@ -2,23 +2,32 @@ import { LineChart } from "@mui/x-charts";
 import { useTranslation } from "react-i18next";
 import { Typography, useTheme } from "@mui/material";
 import { useMortgageDetails } from "../../../../services/buying/useMortgageDetails.ts";
+import { useRentDetails } from "../../../../services/renting/useRentDetails.ts";
 
 export function ResultChart() {
   const theme = useTheme();
 
   const { t } = useTranslation();
 
-  // const rentingData  = useRentDetails()
-  const { yearValueChangeTotals } = useMortgageDetails();
+  const { yearValueChangeTotals: mortgageYearlyValueTotals } =
+    useMortgageDetails();
+  const { yearlyValuesRenting: rentYearlyValueTotals } = useRentDetails();
 
   const mortgageData = {
     id: "mortgage",
     label: t("Mortgage"),
-    data: yearValueChangeTotals,
+    data: mortgageYearlyValueTotals.map((v) => Math.round(v)),
     color: theme.palette.primary.main,
   };
 
-  if (yearValueChangeTotals.length === 0) return <></>;
+  const rentData = {
+    id: "rent",
+    label: t("Rent"),
+    data: rentYearlyValueTotals.map((v) => Math.round(v)),
+    color: theme.palette.primary.light,
+  };
+
+  if (mortgageYearlyValueTotals.length === 0) return <></>;
 
   const customize = {
     height: 250,
@@ -26,7 +35,7 @@ export function ResultChart() {
     margin: { top: 5 },
   };
 
-  const years: number[] = yearValueChangeTotals.map((_, index) => {
+  const years: number[] = mortgageYearlyValueTotals.map((_, index) => {
     const year = new Date(
       new Date().setFullYear(new Date().getFullYear() + index),
     );
@@ -36,7 +45,7 @@ export function ResultChart() {
   return (
     <>
       <Typography variant={"caption"}>
-        {t("Monthly costs of buying")}:
+        {t("Mortgage vs Renting value")}:
       </Typography>
       <LineChart
         xAxis={[
@@ -45,7 +54,7 @@ export function ResultChart() {
             data: years,
           },
         ]}
-        series={[mortgageData]}
+        series={[mortgageData, rentData]}
         {...customize}
       />
     </>
