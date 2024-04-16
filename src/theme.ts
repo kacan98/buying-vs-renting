@@ -12,6 +12,9 @@ export const lightTheme = createTheme({
     error: {
       main: "#ee0000",
     },
+    info: {
+      main: "#000000",
+    },
   },
   typography: {
     h1: {
@@ -116,6 +119,9 @@ export const darkTheme = createTheme({
     },
     error: {
       main: "#b60f0f",
+    },
+    info: {
+      main: "#ffffff",
     },
     background: {
       default: "#121212",

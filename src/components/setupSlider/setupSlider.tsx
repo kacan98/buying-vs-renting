@@ -25,8 +25,8 @@ export default function SetupSlider({ open, finishSetup }: SimpleSliderProps) {
 
   const slides = [
     { element: <IntroBlock />, key: "IntroBlock" },
-    { element: <RentingInputs />, key: 2, title: t("Renting") },
     { element: <BuyingInputs />, key: 3, title: t("Buying") },
+    { element: <RentingInputs />, key: 2, title: t("Renting") },
   ];
   const lastSlideActive = activeSlideIndex === slides.length - 1;
   const firstSlideActive = activeSlideIndex === 0;
@@ -65,14 +65,25 @@ export default function SetupSlider({ open, finishSetup }: SimpleSliderProps) {
       </DialogContent>
       <DialogActions>
         {!firstSlideActive && (
-          <Button onClick={navigateBackward}>Previous</Button>
+          <Button color={"info"} onClick={navigateBackward}>
+            Previous
+          </Button>
         )}
         {!lastSlideActive && (
-          <Button autoFocus onClick={navigateForward}>
+          <Button
+            color={"info"}
+            variant="outlined"
+            autoFocus
+            onClick={navigateForward}
+          >
             Next
           </Button>
         )}
-        {lastSlideActive && <Button onClick={finishSetup}>See result</Button>}
+        {lastSlideActive && (
+          <Button color={"info"} variant="outlined" onClick={finishSetup}>
+            See result
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   );
