@@ -22,14 +22,14 @@ export function useMortgageDetails(): MortgageDetails {
   }: BuyingState = useSelector((state: RootState) => state.calculator.buying);
 
   return calculateMortgageDetails({
-    yearsStaying,
-    depositPercentage,
-    initialPropertyValue: propertyPrice,
-    yearlyOwnershipCost,
-    loanTerm,
-    interestRate,
-    propertyValueGrowthPercentage,
-    buyingCostsPercentage,
-    sellingCostsPercentage,
+    yearsStaying: yearsStaying || 0,
+    depositPercentage: depositPercentage || 0,
+    initialPropertyValue: propertyPrice || 0,
+    yearlyOwnershipCost: yearlyOwnershipCost || 0,
+    loanTerm: loanTerm || 0,
+    interestRate: interestRate || 0,
+    propertyValueGrowthPercentage: propertyValueGrowthPercentage || 0,
+    buyingCostsPercentage: buyingCostsPercentage || 0,
+    sellingCostsPercentage: sellingCostsPercentage || 0,
   });
 }

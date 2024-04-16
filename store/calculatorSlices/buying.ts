@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface BuyingState {
-  propertyPrice: number;
-  depositPercentage: number;
-  yearlyOwnershipCost: number;
-  loanTerm: number;
-  interestRate: number;
-  buyingCostsPercentage: number;
-  sellingCostsPercentage: number;
-  propertyValueGrowthPercentage: number;
+  propertyPrice?: number;
+  depositPercentage?: number;
+  yearlyOwnershipCost?: number;
+  loanTerm?: number;
+  interestRate?: number;
+  buyingCostsPercentage?: number;
+  sellingCostsPercentage?: number;
+  propertyValueGrowthPercentage?: number;
 }
 
 const initialState: BuyingState = {

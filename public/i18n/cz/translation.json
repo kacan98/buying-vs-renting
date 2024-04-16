@@ -56,7 +56,6 @@
   "Buying and selling costs": "Náklady na koupi a prodej",
   "Buying and selling details": "Detaily koupě a prodeje",
   "Total ownership costs": "Celkové náklady na vlastnictví",
-  "Simply ownership cost over the time of staying": "Jednoduše náklady na vlastnictví během doby pobytu",
   "Capital from selling": "Kapitál z prodeje",
   "Capital from selling details": "Detaily kapitálu z prodeje",
   "Currency": "Měna",
@@ -71,5 +70,6 @@
   "Auto": "Automatický",
   "Light": "Světlý",
   "Dark": "Tmavý",
-  "Mortgage vs Renting value": "Hodnota hypotéky vs nájem"
+  "Mortgage vs Renting value": "Hodnota hypotéky vs nájem",
+  "Buying and renting is equally expensive": "Koupě a nájem jsou stejně drahé"
 }

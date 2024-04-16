@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface FuturePredictionsState {
-  yearsStaying: number;
+  yearsStaying?: number;
 }
 
 const initialState: FuturePredictionsState = {

@@ -56,7 +56,6 @@
   "Buying and selling costs": "Købs- og salgsomkostninger",
   "Buying and selling details": "Detaljer om køb og salg",
   "Total ownership costs": "Samlede ejerskabsomkostninger",
-  "Simply ownership cost over the time of staying": "Enkle ejerskabsomkostninger over opholdstiden",
   "Capital from selling": "Kapital fra salg",
   "Capital from selling details": "Detaljer om kapital fra salg",
   "Currency": "Valuta",
@@ -71,5 +70,6 @@
   "Auto": "Auto",
   "Light": "Lys",
   "Dark": "Mørk",
-  "Mortgage vs Renting value": "Pant kontra lejeværdi"
+  "Mortgage vs Renting value": "Pant kontra lejeværdi",
+  "Buying and renting is equally expensive": "Køb og leje er lige dyrt"
 }

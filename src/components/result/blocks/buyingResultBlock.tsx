@@ -46,7 +46,7 @@ function BuyingResultBlock() {
       chart={<BuyingChart graphData={yearValueChanges} />}
       heading={t("labelForYears", {
         rentingOrBuying: t("Buying"),
-        yearsNumber: yearsStaying,
+        yearsNumber: yearsStaying || 0,
         yearOrYears: yearsStaying !== 1 ? t("yearsPlural") : t("yearSingular"),
       })}
       rows={[
@@ -86,9 +86,6 @@ function BuyingResultBlock() {
         {
           label: t("Total ownership costs"),
           value: -1 * totalOwnershipCosts,
-          tooltip: (
-            <div>{t("Simply ownership cost over the time of staying")}</div>
-          ),
         },
         {
           label: t("Capital from selling"),

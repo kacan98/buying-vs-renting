@@ -59,7 +59,7 @@ const Renting = () => {
   const monthlyDifference = mortgagePerMonth - (rentingState.monthlyRent || 0);
 
   const differenceBetweenRentAndMortgageDeposit =
-    mortgageDeposit - rentingState.initialInvestment;
+    mortgageDeposit - (rentingState.initialInvestment || 0);
 
   return (
     <>

@@ -40,7 +40,7 @@ export function useAlternativeInvestmentReturns() {
     calculateInvestmentReturns({
       initialInvestment: initialCash,
       investmentPerPeriod: moneyAvailablePerMonth * 12,
-      numberOfPeriods: yearsStaying,
+      numberOfPeriods: yearsStaying || 0,
       appreciationRate: (alternativeInvestmentReturnPercentage || 0) / 100,
     });
 

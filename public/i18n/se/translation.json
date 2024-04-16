@@ -56,7 +56,6 @@
   "Buying and selling costs": "Kostnader för köp och försäljning",
   "Buying and selling details": "Detaljer om köp och försäljning",
   "Total ownership costs": "Totala ägandekostnader",
-  "Simply ownership cost over the time of staying": "Enkla ägandekostnader över tiden för vistelsen",
   "Capital from selling": "Kapital från försäljning",
   "Capital from selling details": "Detaljer om kapital från försäljning",
   "Currency": "Valuta",
@@ -71,5 +70,6 @@
   "Auto": "Auto",
   "Light": "Ljus",
   "Dark": "Mörk",
-  "Mortgage vs Renting value": "Bolån vs Hyra värde"
+  "Mortgage vs Renting value": "Bolån vs Hyra värde",
+  "Buying and renting is equally expensive": "Köp och hyra är lika dyrt"
 }

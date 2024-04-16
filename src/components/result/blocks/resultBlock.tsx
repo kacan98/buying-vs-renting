@@ -24,12 +24,19 @@ function ResultBlock() {
         textAlign: "left",
       }}
     >
-      <Typography variant={"h3"} gutterBottom>
-        {t("Buying/renting is cheaper by", {
-          buyingOrRenting: t(buyingIsBetter ? "Buying" : "Renting"),
-          difference: formatAsCurrency(Math.abs(difference)),
-        })}
-      </Typography>
+      {difference !== 0 ? (
+        <Typography variant={"h3"} gutterBottom>
+          {t("Buying/renting is cheaper by", {
+            buyingOrRenting: t(buyingIsBetter ? "Buying" : "Renting"),
+            difference: formatAsCurrency(Math.abs(difference)),
+          })}
+        </Typography>
+      ) : (
+        <Typography variant={"h3"} gutterBottom>
+          {t("Buying and renting is equally expensive")}
+        </Typography>
+      )}
+
       <ResultChart />
     </Box>
   );

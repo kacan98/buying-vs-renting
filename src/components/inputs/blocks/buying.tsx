@@ -21,15 +21,17 @@ function Buying() {
     useCalculatorSlice("buying");
 
   const {
-    propertyPrice,
+    propertyPrice: price,
     propertyValueGrowthPercentage,
     loanTerm,
     interestRate,
     buyingCostsPercentage,
     sellingCostsPercentage,
     yearlyOwnershipCost,
-    depositPercentage,
+    depositPercentage: depositPct,
   } = buyingState;
+  const propertyPrice = price || 0;
+  const depositPercentage = depositPct || 0;
 
   const formatAsCurrency: (value: number) => string =
     useLocaleCurrencyFormatter();
@@ -50,16 +52,16 @@ function Buying() {
   const { totalPrincipalPaid, totalInterestPaid } = simulateTimePassage({
     initialPropertyValue: propertyPrice,
     depositPercentage,
-    yearlyOwnershipCost,
+    yearlyOwnershipCost: yearlyOwnershipCost || 0,
 
-    yearsStaying,
-    loanTerm,
+    yearsStaying: yearsStaying || 0,
+    loanTerm: loanTerm || 0,
 
-    interestRate,
-    loanAmount,
-    propertyValueGrowthPercentage,
-    buyingCostsPercentage,
-    sellingCostsPercentage,
+    interestRate: interestRate || 0,
+    loanAmount: loanAmount || 0,
+    propertyValueGrowthPercentage: propertyValueGrowthPercentage || 0,
+    buyingCostsPercentage: buyingCostsPercentage || 0,
+    sellingCostsPercentage: sellingCostsPercentage || 0,
 
     mortgagePerMonth,
   });

@@ -12,9 +12,10 @@ function RentingResultBlock() {
   const { yearsStaying }: FuturePredictionsState = useSelector(
     (state: RootState) => state.calculator.futurePredictions,
   );
-  const { initialInvestment: rentDeposit }: RentingState = useSelector(
+  const { initialInvestment: deposit }: RentingState = useSelector(
     (state: RootState) => state.calculator.renting,
   );
+  const rentDeposit = deposit || 0;
   const { totalRenting, rentTotal } = useRentDetails();
 
   const alternativeInvestment = useAlternativeInvestmentReturns();
@@ -23,7 +24,7 @@ function RentingResultBlock() {
     <BuyingOrSellingResultWrapper
       heading={t("labelForYears", {
         rentingOrBuying: t("Renting"),
-        yearsNumber: yearsStaying,
+        yearsNumber: yearsStaying || 0,
         yearOrYears: yearsStaying !== 1 ? t("yearsPlural") : t("yearSingular"),
       })}
       rows={[
