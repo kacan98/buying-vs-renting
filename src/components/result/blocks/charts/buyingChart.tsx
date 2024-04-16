@@ -2,8 +2,10 @@ import { LineChart } from "@mui/x-charts";
 import { PeriodValueChange } from "../../../../services/buying/buying.model.ts";
 import { useTranslation } from "react-i18next";
 import { Typography, useTheme } from "@mui/material";
+import { useMortgageDetails } from "../../../../services/buying/useMortgageDetails.ts";
 
-function BuyingChart({ graphData }: { graphData: PeriodValueChange[] }) {
+function BuyingChart() {
+  const { yearValueChanges: graphData } = useMortgageDetails();
   const theme = useTheme();
 
   const { t } = useTranslation();
@@ -82,7 +84,7 @@ function BuyingChart({ graphData }: { graphData: PeriodValueChange[] }) {
   return (
     <>
       <Typography variant={"caption"}>
-        {t("Monthly costs of buying")}:
+        {t("Yearly costs of buying")}:
       </Typography>
       <LineChart
         xAxis={[

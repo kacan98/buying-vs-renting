@@ -1,7 +1,6 @@
 import BuyingOrSellingResultWrapper, {
   ResultPanelProps,
 } from "./buyingOrSellingResultWrapper.tsx";
-import BuyingChart from "./charts/buyingChart.tsx";
 import { useMortgageDetails } from "../../../services/buying/useMortgageDetails.ts";
 import { useTranslation } from "react-i18next";
 import { FuturePredictionsState } from "../../../../store/calculatorSlices/futurePreditions.ts";
@@ -18,7 +17,6 @@ function BuyingResultBlock() {
     remainingBalance,
     totalPropertyValueIncrease,
     totalOwnershipCosts,
-    yearValueChanges,
     buyingCost,
     sellingCost,
     totalBuying,
@@ -43,7 +41,8 @@ function BuyingResultBlock() {
   }, 0);
   return (
     <BuyingOrSellingResultWrapper
-      chart={<BuyingChart graphData={yearValueChanges} />}
+      // Disabled because I find it confusing
+      // chart={<BuyingChart />}
       heading={t("labelForYears", {
         rentingOrBuying: t("Buying"),
         yearsNumber: yearsStaying || 0,

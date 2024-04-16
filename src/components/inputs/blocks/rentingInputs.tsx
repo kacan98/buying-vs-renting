@@ -17,7 +17,7 @@ import { useTranslation } from "react-i18next";
 import { PieChart } from "@mui/x-charts";
 import { useAlternativeInvestmentReturns } from "../../../services/useAlternativeInvestment.ts";
 
-const Renting = () => {
+const RentingInputs = () => {
   const theme = useTheme();
   const { t } = useTranslation();
   const { stateSlice: rentingState, createStateUpdateFc } =
@@ -164,7 +164,7 @@ const Renting = () => {
                     },
                   ]}
                   width={500}
-                  height={300}
+                  height={350}
                 />
               </Grid>
             </>
@@ -175,4 +175,4 @@ const Renting = () => {
   );
 };
 
-export default Renting;
+export default RentingInputs;

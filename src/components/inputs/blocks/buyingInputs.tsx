@@ -13,7 +13,7 @@ import { useMortgageDetails } from "../../../services/buying/useMortgageDetails.
 import { useLocaleCurrencyFormatter } from "../../../../store/settings/useLocale.ts";
 import { useTranslation } from "react-i18next";
 
-function Buying() {
+function BuyingInputs() {
   const { t } = useTranslation();
   const theme = useTheme();
   const getPercentageAdornment = usePercentageAdornment();
@@ -195,4 +195,4 @@ function Buying() {
   );
 }
 
-export default Buying;
+export default BuyingInputs;

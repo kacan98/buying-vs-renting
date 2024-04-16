@@ -37,7 +37,6 @@ function BuyingOrSellingResultWrapper({
         {heading}
       </Typography>
       {description && <Typography variant={"body1"}>{description}</Typography>}
-      {chart}
       <Stack>
         {rows.map((row, index) => {
           if (row === "divider") return <Divider key={index} />;
@@ -73,6 +72,8 @@ function BuyingOrSellingResultWrapper({
           );
         })}
       </Stack>
+      <br />
+      {chart}
     </>
   );
 }
