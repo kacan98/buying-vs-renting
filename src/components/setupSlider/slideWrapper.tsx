@@ -5,12 +5,14 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 type SlideWrapperProps = {
   children: React.ReactNode;
   title?: string;
+  description?: string;
 };
 
-function SlideWrapper({ children, title }: SlideWrapperProps) {
+function SlideWrapper({ children, title, description }: SlideWrapperProps) {
   return (
     <Box>
       {title && <Typography variant={"h3"}>{title}</Typography>}
+      {description && <Typography variant={"body1"}>{description}</Typography>}
       <Grid2 container>
         <Grid2>{children}</Grid2>
         <Grid2

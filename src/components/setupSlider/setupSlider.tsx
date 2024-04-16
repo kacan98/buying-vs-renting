@@ -23,10 +23,29 @@ export default function SetupSlider({ open, finishSetup }: SimpleSliderProps) {
   const sliderRef = useRef<Slider>(null);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
-  const slides = [
+  const slides: {
+    title?: string;
+    description?: string;
+    key: string | number;
+    element: JSX.Element;
+  }[] = [
     { element: <IntroBlock />, key: "IntroBlock" },
-    { element: <BuyingInputs />, key: 3, title: t("Buying") },
-    { element: <RentingInputs />, key: 2, title: t("Renting") },
+    {
+      element: <BuyingInputs />,
+      key: 3,
+      title: t("Buying"),
+      description: t("Please fill in the details of a property to buy", {
+        buyOrRent: "Buy",
+      }),
+    },
+    {
+      element: <RentingInputs />,
+      key: 2,
+      title: t("Renting"),
+      description: t("Please fill in the details of a property to rent", {
+        buyOrRent: "Rent",
+      }),
+    },
   ];
   const lastSlideActive = activeSlideIndex === slides.length - 1;
   const firstSlideActive = activeSlideIndex === 0;
@@ -57,7 +76,11 @@ export default function SetupSlider({ open, finishSetup }: SimpleSliderProps) {
       <DialogContent dividers>
         <Slider ref={sliderRef} {...settings}>
           {slides.map((s) => (
-            <SlideWrapper title={s.title} key={s.key}>
+            <SlideWrapper
+              title={s.title}
+              key={s.key}
+              description={s.description}
+            >
               {s.element}
             </SlideWrapper>
           ))}
