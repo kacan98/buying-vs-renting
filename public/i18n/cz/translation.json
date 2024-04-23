@@ -12,7 +12,7 @@
   "You would pay {amount} per month": "Platili byste {{amount}} měsíčně",
   "Total principal paid": "Celkem zaplacená jistina",
   "Total interest paid": "Celkem zaplacené úroky",
-  "Buying And Selling Costs": "Náklady na koupi a prodej",
+  "Buying And Selling": "Koupě a prodej",
   "Buying costs": "Náklady na koupi",
   "Selling costs": "Náklady na prodej",
   "Yearly costs": "Roční náklady",
@@ -53,7 +53,6 @@
   "Total": "Celkem",
   "Mortgage paid": "Splacená hypotéka",
   "Mortgage details": "Detaily hypotéky",
-  "Buying and selling costs": "Náklady na koupi a prodej",
   "Buying and selling details": "Detaily koupě a prodeje",
   "Total ownership costs": "Celkové náklady na vlastnictví",
   "Capital from selling": "Kapitál z prodeje",
@@ -73,5 +72,14 @@
   "Mortgage vs Renting value": "Hodnota hypotéky vs nájem",
   "Buying and renting is equally expensive": "Koupě a nájem jsou stejně drahé",
   "Please fill in the details of a property to buy": "Vyplňte prosím detaily nemovitosti k nákupu",
-  "Please fill in the details of a property to rent": "Vyplňte prosím detaily nemovitosti k pronájmu"
+  "Please fill in the details of a property to rent": "Vyplňte prosím detaily nemovitosti k pronájmu",
+  "Total mortgage amount is {mortgageAmount}": "Celková částka hypotéky je {{mortgageAmount}}",
+  "Results": "Výsledky",
+  "If you decide to purchase a property, you would pay {thisMuch} less per month": "Pokud se rozhodnete koupit nemovitost, platili byste o {{thisMuch}} méně měsíčně.",
+  "The required deposit will be lower by {thisMuch}": "Požadovaná záloha bude nižší o {{thisMuch}}.",
+  "per year": "ročně",
+  "Introduction to buying inputs": "Tato sekce obsahuje vstupy pro nákup nemovitosti. Nejspíše budete potřebovat hypotéku a pak platit náklady, které nemusíte platit jako nájemce. Musíme také vzít v úvahu, že hodnota nemovitosti se časem zvyšuje.",
+  "helperText under buying/selling costs": "Náklady na realitního makléře, daň z převodu nemovitosti, náklady na převod nemovitosti...",
+  "Introduction to renting inputs": "Tato sekce obsahuje vstupy pro pronájem nemovitosti. Nájem je o poznání jednodušší. Nájem se sice zvyšuje s časem, zároveň se ale nemusíte starat o některé náklady, které byste museli zaplatit jako vlastník. Taky se nemusíte platit zálohu za hypotéku a nemusíte se bát, že koupená nemovitost ztratí hodnotu.",
+  "mortgage intro": "Hypotéka je půjčka na koupi domů nebo bytů. Má tři důležité části: Doba trvání úvěru, Procento zálohy a Úroková sazba. Doba trvání úvěru určuje, jak dlouho musíte peníze splatit, což ovlivňuje vaše měsíční platby a další peníze (úroky), které platíte. Záloha je peníze, které zaplatíte dopředu, abyste snížili velikost úvěru - ve většině zemí je určité procento zálohy povinné. Úroková sazba je poplatek za půjčení peněz; platíte za něj každý měsíc trochu - úrok se každý měsíc snižuje, protože dlužíte méně a méně (ale měsíční platba zůstává stejná)."
 }

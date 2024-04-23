@@ -12,7 +12,7 @@
   "You would pay {amount} per month": "Ai plăti {{amount}} pe lună",
   "Total principal paid": "Total principal plătit",
   "Total interest paid": "Total dobânzi plătite",
-  "Buying And Selling Costs": "Costuri de cumpărare și vânzare",
+  "Buying And Selling": "Cumpărare și vânzare",
   "Buying costs": "Costuri de cumpărare",
   "Selling costs": "Costuri de vânzare",
   "Yearly costs": "Costuri anuale",
@@ -53,7 +53,6 @@
   "Total": "Total",
   "Mortgage paid": "Ipotecă plătită",
   "Mortgage details": "Detalii ipotecă",
-  "Buying and selling costs": "Costuri de cumpărare și vânzare",
   "Buying and selling details": "Detalii despre cumpărare și vânzare",
   "Total ownership costs": "Costuri totale de proprietate",
   "Capital from selling": "Capital din vânzare",
@@ -73,5 +72,14 @@
   "Mortgage vs Renting value": "Valoarea ipotecii vs închiriere",
   "Buying and renting is equally expensive": "Cumpărarea și închirierea sunt la fel de scumpe",
   "Please fill in the details of a property to buy": "Vă rugăm să completați detaliile unei proprietăți de cumpărat",
-  "Please fill in the details of a property to rent": "Vă rugăm să completați detaliile unei proprietăți de închiriat"
+  "Please fill in the details of a property to rent": "Vă rugăm să completați detaliile unei proprietăți de închiriat",
+  "Total mortgage amount is {mortgageAmount}": "Valoarea totală a ipotecii este {{mortgageAmount}}",
+  "Results": "Rezultate",
+  "If you decide to purchase a property, you would pay {thisMuch} less per month": "Dacă decizi să cumperi o proprietate, ai plăti {{thisMuch}} mai puțin pe lună.",
+  "The required deposit will be lower by {thisMuch}": "Depozitul necesar va fi mai mic cu {{thisMuch}}.",
+  "per year": "pe an",
+  "Introduction to buying inputs": "Această secțiune include intrări pentru cumpărarea unei proprietăți. Cel mai probabil vei avea nevoie de o ipotecă și apoi vei plăti cheltuieli pe care nu trebuie să le plătești ca chiriaș. De asemenea, trebuie să luăm în considerare că valoarea proprietății crește în timp.",
+  "helperText under buying/selling costs": "Costuri ale unui agent imobiliar, impozit pe transferul proprietății, costuri de transfer al proprietății...",
+  "Introduction to renting inputs": "Această secțiune include intrări pentru închirierea unei proprietăți. Închirierea este mult mai simplă. Chiria crește în timp, dar nu trebuie să plătești unele cheltuieli pe care ar trebui să le plătești ca proprietar. De asemenea, nu trebuie să plătești un depozit pentru o ipotecă și nu trebuie să-ți faci griji că proprietatea își va pierde valoarea.",
+  "mortgage intro": "O ipotecă este un împrumut pentru cumpărarea de case sau apartamente. Are trei părți importante: Durata împrumutului, Procentul depozitului și Rata dobânzii. Durata împrumutului decide cât timp ai la dispoziție pentru a plăti înapoi banii, afectând plățile tale lunare și banii suplimentari (dobânda) pe care îi plătești. Depozitul este suma pe care o plătești în avans pentru a face împrumutul mai mic - în cele mai multe țări un anumit procent de depozit este obligatoriu. Rata dobânzii este o taxă pentru împrumutul de bani; plătești o mică parte din ea în fiecare lună - dobânda scade în fiecare lună pe măsură ce datorezi tot mai puțin (dar plata lunară rămâne aceeași)."
 }

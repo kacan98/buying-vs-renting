@@ -12,7 +12,7 @@
   "You would pay {amount} per month": "Sie würden {{amount}} pro Monat zahlen",
   "Total principal paid": "Gesamte gezahlte Hauptsumme",
   "Total interest paid": "Gesamte gezahlte Zinsen",
-  "Buying And Selling Costs": "Kauf- und Verkaufskosten",
+  "Buying And Selling": "Kaufen und Verkaufen",
   "Buying costs": "Kaufkosten",
   "Selling costs": "Verkaufskosten",
   "Yearly costs": "Jährliche Kosten",
@@ -53,7 +53,6 @@
   "Total": "Gesamt",
   "Mortgage paid": "Hypothek bezahlt",
   "Mortgage details": "Hypothekendetails",
-  "Buying and selling costs": "Kauf- und Verkaufskosten",
   "Buying and selling details": "Details zu Kauf und Verkauf",
   "Total ownership costs": "Gesamte Besitzkosten",
   "Capital from selling": "Kapital aus dem Verkauf",
@@ -73,5 +72,14 @@
   "Mortgage vs Renting value": "Hypothek vs Mietwert",
   "Buying and renting is equally expensive": "Kaufen und Mieten ist gleich teuer",
   "Please fill in the details of a property to buy": "Bitte füllen Sie die Details einer Immobilie zum Kauf aus",
-  "Please fill in the details of a property to rent": "Bitte füllen Sie die Details einer Immobilie zum Mieten aus"
+  "Please fill in the details of a property to rent": "Bitte füllen Sie die Details einer Immobilie zum Mieten aus",
+  "Total mortgage amount is {mortgageAmount}": "Die gesamte Hypothekensumme beträgt {{mortgageAmount}}",
+  "Results": "Ergebnisse",
+  "If you decide to purchase a property, you would pay {thisMuch} less per month": "Wenn Sie sich entscheiden, eine Immobilie zu kaufen, würden Sie monatlich {{thisMuch}} weniger zahlen.",
+  "The required deposit will be lower by {thisMuch}": "Die erforderliche Anzahlung wird um {{thisMuch}} niedriger sein.",
+  "per year": "pro Jahr",
+  "Introduction to buying inputs": "Dieser Abschnitt enthält Eingaben zum Kauf einer Immobilie. Sie benötigen höchstwahrscheinlich eine Hypothek und müssen dann Ausgaben tätigen, die Sie als Mieter nicht tätigen müssen. Wir müssen auch berücksichtigen, dass der Wert der Immobilie im Laufe der Zeit steigt.",
+  "helperText under buying/selling costs": "Kosten eines Immobilienmaklers, Grunderwerbsteuer, Grunderwerbskosten...",
+  "Introduction to renting inputs": "Dieser Abschnitt enthält Eingaben zum Mieten einer Immobilie. Das Mieten ist viel einfacher. Die Miete steigt im Laufe der Zeit, aber Sie müssen nicht für einige Ausgaben bezahlen, die Sie als Eigentümer bezahlen müssten. Sie müssen auch keine Anzahlung für eine Hypothek leisten und müssen sich keine Sorgen darüber machen, dass der Wert der Immobilie sinkt.",
+  "mortgage intro": "Eine Hypothek ist ein Darlehen zum Kauf von Häusern oder Wohnungen. Es hat drei wichtige Teile: die Kreditlaufzeit, den Anzahlungsprozentsatz und den Zinssatz. Die Kreditlaufzeit bestimmt, wie lange Sie das Geld zurückzahlen müssen, was sich auf Ihre monatlichen Zahlungen und das zusätzliche Geld (Zinsen) auswirkt, das Sie zahlen. Die Anzahlung ist das Geld, das Sie im Voraus zahlen, um das Darlehen zu verkleinern. - in den meisten Ländern ist ein bestimmter Anzahlungsprozentsatz obligatorisch. Der Zinssatz ist eine Gebühr für das Ausleihen von Geld; Sie zahlen jeden Monat ein wenig davon - die Zinsen reduzieren sich jeden Monat, da Sie immer weniger schulden (aber die monatliche Zahlung bleibt gleich)."
 }

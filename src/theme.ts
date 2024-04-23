@@ -25,8 +25,8 @@ export const lightTheme = createTheme({
     fontSize: 16,
     fontFamily: "Jost, sans-serif",
     h2: {
-      fontSize: "6rem",
-      fontWeight: 500,
+      fontSize: "3rem",
+      fontWeight: 800,
     },
     h3: {
       fontSize: "2rem",

@@ -63,51 +63,37 @@ const RentingInputs = () => {
 
   return (
     <>
+      <Typography variant="body1" mb={2}>
+        {t(`Introduction to renting inputs`)}
+      </Typography>
       <NumberFields inputs={inputs} />
       {(monthlyDifference > 0 ||
         differenceBetweenRentAndMortgageDeposit > 0) && (
         <>
           <FormControlLabel
-            control={
-              <Checkbox value={rentingState.investDifference} defaultChecked />
-            }
-            onChange={(_, checked) => dispatch(toggleInvestDifference(checked))}
+            control={<Checkbox checked={rentingState.investDifference} />}
+            onChange={(_, checked) => {
+              console.log(checked);
+              dispatch(toggleInvestDifference(checked));
+            }}
             label={t("Invest the difference between buying and renting?")}
           />
           {rentingState.investDifference && (
             <>
-              <Typography variant="h6">
-                {t("Investing the difference")}
-              </Typography>
-              {monthlyDifference > 0 && (
-                <Typography variant={"body1"}>
-                  {t(
-                    "If you decide to purchase a property, your monthly payments would be paying this much more per month",
-                  )}
-                  <Typography
-                    variant="body1"
-                    component="span"
-                    fontWeight="bold"
-                    p={1}
-                  >
-                    {formatAsCurrency(monthlyDifference)}
-                  </Typography>
-                </Typography>
-              )}
-              {differenceBetweenRentAndMortgageDeposit > 0 && (
-                <Typography variant={"body1"}>
-                  {t("The required deposit will be lower by")}
-                  <Typography
-                    variant="body1"
-                    component="span"
-                    fontWeight="bold"
-                    p={1}
-                  >
-                    {formatAsCurrency(differenceBetweenRentAndMortgageDeposit)}
-                  </Typography>
-                </Typography>
-              )}
               <Typography variant={"body1"}>
+                {differenceBetweenRentAndMortgageDeposit > 0 &&
+                  t("The required deposit will be lower by {thisMuch}", {
+                    thisMuch: formatAsCurrency(
+                      differenceBetweenRentAndMortgageDeposit,
+                    ),
+                  })}{" "}
+                {monthlyDifference > 0 &&
+                  t(
+                    "If you decide to purchase a property, you would pay {thisMuch} less per month",
+                    {
+                      thisMuch: formatAsCurrency(monthlyDifference),
+                    },
+                  )}{" "}
                 {t("You can invest this money instead")}
               </Typography>
               <br />

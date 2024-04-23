@@ -70,7 +70,7 @@ function BuyingResultBlock() {
           ),
         },
         {
-          label: t("Buying and selling costs"),
+          label: t("Buying and selling"),
           value: -1 * (buyingCost + sellingCost),
           tooltip: (
             <BuyingOrSellingResultWrapper

@@ -62,11 +62,12 @@ export default function SetupSlider({ open, finishSetup }: SimpleSliderProps) {
   };
 
   const navigateForward = () => {
+    sliderRef.current?.slickGoTo(activeSlideIndex + 1);
     setActiveSlideIndex((c) => c + 1);
-    sliderRef.current?.slickNext();
   };
 
   const navigateBackward = () => {
+    sliderRef.current?.slickGoTo(activeSlideIndex - 1);
     setActiveSlideIndex((c) => c - 1);
     sliderRef.current?.slickPrev();
   };

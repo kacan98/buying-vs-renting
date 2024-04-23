@@ -50,6 +50,7 @@ export default function CurrencyInput(props: TextFieldProps) {
       InputProps={{
         inputComponent: NumericFormatCustom as never,
         inputProps: { currency },
+        ...props.InputProps,
       }}
     />
   );

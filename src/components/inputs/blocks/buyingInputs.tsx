@@ -74,6 +74,9 @@ function BuyingInputs() {
         textAlign: "left",
       }}
     >
+      <Typography variant="body1">
+        {t(`Introduction to buying inputs`)}
+      </Typography>
       <NumberFields
         inputs={[
           {
@@ -91,6 +94,7 @@ function BuyingInputs() {
         ]}
       />
       <Typography variant="h4">{t("Mortgage")}</Typography>
+      <Typography variant="body1">{t("mortgage intro")}</Typography>
       <NumberFields
         inputs={[
           {
@@ -98,14 +102,11 @@ function BuyingInputs() {
             value: loanTerm,
             onChange: createStateUpdateFc("loanTerm"),
             InputProps: getInputProps({
-              endAdornment: "years",
+              endAdornment: t("years"),
             }),
           },
           {
             label: t("Deposit percentage"),
-            helperText: formatAsCurrency(
-              propertyPrice * (depositPercentage / 100),
-            ),
             value: depositPercentage,
             onChange: createStateUpdateFc("depositPercentage"),
             InputProps: getPercentageAdornment(),
@@ -118,7 +119,13 @@ function BuyingInputs() {
           },
         ]}
       />
-      <Typography variant="body1">
+      <Typography variant="h4" textAlign={"center"} fontWeight={600}>
+        {t("Total mortgage amount is {mortgageAmount}", {
+          mortgageAmount: formatAsCurrency(
+            propertyPrice * (1 - depositPercentage / 100),
+          ),
+        })}
+        {". "}
         {t(`You would pay {amount} per month`, {
           amount: formatAsCurrency(mortgagePerMonth),
         })}
@@ -159,7 +166,10 @@ function BuyingInputs() {
           />
         )}
       </Grid>
-      <Typography variant="h4">{t("Buying And Selling Costs")}</Typography>
+      <Typography variant="h4">{t("Buying And Selling")}</Typography>
+      <Typography variant="body1">
+        {t("helperText under buying/selling costs")}
+      </Typography>
       <NumberFields
         inputs={[
           {
@@ -178,13 +188,17 @@ function BuyingInputs() {
           },
         ]}
       />
-      <Typography variant="h4">{t("Yearly costs")}</Typography>
+      <Typography variant="h4">{t("Ownership costs")}</Typography>
+      <Typography variant="body1">
+        {t("helperText under ownership costs")}
+      </Typography>
       <NumberFields
         inputs={[
           {
             label: t("Ownership costs"),
-            helperText: t("helperText under ownership costs"),
-            InputProps: getPercentageAdornment(true),
+            InputProps: getInputProps({
+              endAdornment: t("per year"),
+            }),
             value: yearlyOwnershipCost,
             onChange: createStateUpdateFc("yearlyOwnershipCost"),
             formatAsCurrency: true,
